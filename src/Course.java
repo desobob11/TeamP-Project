@@ -6,7 +6,6 @@ public class Course {
 	private int withdrawPrice;
 	private boolean ownedStatus;
 	private int courseLevel;
-	private int courseID;
 	
 		public String getFaculty() {
 		return faculty;
@@ -30,10 +29,6 @@ public class Course {
 		
 		public int getCourseLevel() {
 			return courseLevel;
-		}
-		
-		public int getCourseID() {
-			return courseID;
 		}
 		
 		public boolean setOwnedStatus(boolean check) {
