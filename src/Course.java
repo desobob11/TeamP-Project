@@ -1,5 +1,5 @@
 
-public class Course {
+public class Course extends Tile {
 	private String faculty;
 	private int buyPrice;
 	private int sellPrice;
@@ -36,7 +36,9 @@ public class Course {
 			return ownedStatus;
 		}
 		
-		
+		public int getTileId() {
+			return this.getTileId();
+		}
 		
 }
 
