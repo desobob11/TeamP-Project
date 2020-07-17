@@ -6,11 +6,21 @@ public class Course extends Tile {
 	private int withdrawPrice;
 	private boolean ownedStatus;
 	private int courseLevel;
+	private Student ownedBy = null;
 	
 		public String getFaculty() {
 		return faculty;
 		}
 	
+		public Student getOwner() {
+			return ownedBy;
+		}
+		
+		public Student setOwner(Student that) {
+			ownedBy = that;
+			return ownedBy;
+		}
+		
 		public int getBuyPrice() {
 			return buyPrice;
 		}
@@ -39,6 +49,7 @@ public class Course extends Tile {
 		public int getTileId() {
 			return this.getTileId();
 		}
+		
 		
 }
 
