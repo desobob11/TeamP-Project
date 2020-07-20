@@ -56,6 +56,18 @@ public class Course extends Tile {
 		return ownedStatus;
 	}
 	
+	public int addCourseLevel() {
+		if (this.courseLevel < 3) {
+			this.courseLevel++;
+			return 1;
+		}
+		return -1;
+	}
+	
+	public void resetCourseLevel() {
+		this.courseLevel = 1;
+	}
+	
 	public int getTileId() {
 		return this.getTileId();
 	}
