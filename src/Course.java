@@ -9,7 +9,7 @@ public class Course extends Tile {
 	private Student ownedBy = null;
 	
 		public String getFaculty() {
-		return faculty;
+			return faculty;
 		}
 	
 		public Student getOwner() {
