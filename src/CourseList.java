@@ -32,6 +32,7 @@ public class CourseList {
 	public void initializeUnbuyableTiles() {
 		Community community1 = new Community(2);
 		Chance chance1 = new Chance(7);
+		Probation probation = new Probation(10);
 	}
 	
 	public boolean inCourseList(Course aCourse) {
