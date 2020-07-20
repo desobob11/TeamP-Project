@@ -30,7 +30,7 @@ public class CourseList {
 		coursesOwned.add(course1);
 		
 		
-		Course course16 = new Course(16, "ENGG 201", "ENGG", 1, 1, 1);
+		Course course16 = new Course(16, "ENGG 201", "ENGG", 1, 14656, 1);
 		coursesOwned.add(course16);
 		Course course17 = new Course(17, "ENGG 311", "ENGG", 1, 1, 1);
 		coursesOwned.add(course17);
