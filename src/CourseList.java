@@ -27,10 +27,12 @@ public class CourseList {
 	
 	public void initializeCourses() {
 		Course course1 = new Course(1, "SOCI 201", "Arts", 500, 300, 50);
+		coursesOwned.add(course1);
 	}
 	
 	public void initializeUnbuyableTiles() {
 		Community community1 = new Community(2);
+		unbuyableTiles.add(community1);
 		Chance chance1 = new Chance(7);
 	}
 	
