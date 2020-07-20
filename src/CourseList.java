@@ -26,11 +26,12 @@ public class CourseList {
 	}
 	
 	public void initializeCourses() {
-		
+		Course course1 = new Course(1, "SOCI 201", "Arts", 500, 300, 50);
 	}
 	
 	public void initializeUnbuyableTiles() {
-		
+		Community community1 = new Community(2);
+		Chance chance1 = new Chance(7);
 	}
 	
 	public boolean inCourseList(Course aCourse) {
