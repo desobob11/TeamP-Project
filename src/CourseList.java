@@ -28,13 +28,28 @@ public class CourseList {
 	public void initializeCourses() {
 		Course course1 = new Course(1, "SOCI 201", "Arts", 500, 300, 50);
 		coursesOwned.add(course1);
+		
+		
+		Course course16 = new Course(16, "ENGG 201", "ENGG", 1, 1, 1);
+		coursesOwned.add(course16);
+		Course course17 = new Course(17, "ENGG 311", "ENGG", 1, 1, 1);
+		coursesOwned.add(course17);
+		Course course19 =  new Course(19, "ENGG 599", "ENGG", 1, 1,1 );
+		coursesOwned.add(course19);
 	}
 	
 	public void initializeUnbuyableTiles() {
 		Community community1 = new Community(2);
 		unbuyableTiles.add(community1);
 		Chance chance1 = new Chance(7);
-		Probation probation = new Probation(10);
+		unbuyableTiles.add(chance1);
+		Probation probation = new Probation(5);
+		unbuyableTiles.add(probation);
+		Parking parking1 = new Parking(10);
+		unbuyableTiles.add(parking1);
+		Parking parking2 = new Parking(15);
+		unbuyableTiles.add(parking2);
+		
 	}
 	
 	public boolean inCourseList(Course aCourse) {
