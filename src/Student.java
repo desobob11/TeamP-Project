@@ -144,6 +144,21 @@ public class Student {
 		return -1;
 	}
 	
+	public int upgradeFacultyLevel(String faculty) {
+		if (this.ownsFaculty.get(faculty)) {
+			ArrayList<Course> coursesOfFaculty = this.coursesOwnedOfFaculty.get(faculty);
+			if (this.playerMoney >= coursesOfFaculty.get(0).getUpgradeCost()) {
+				playerMoney -= coursesOfFaculty.get(0).getUpgradeCost();
+				for (Course course: coursesOfFaculty) {
+					course.addCourseLevel();
+				}
+				return 1;
+			}
+			return -2;
+		}
+		return -1;
+	}
+	
 	public void moveForward(int spaces, int boardSize) {
 		playerPosition += spaces;
 		playerPosition %= boardSize;
