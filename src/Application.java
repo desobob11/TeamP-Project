@@ -4,4 +4,91 @@ public class Application {
 	int numStudents;
 	ArrayList<Student> students;
 	CourseList courseList;
+	TextVisualizer UI = new TextVisualizer();
+	Dice dice = new Dice();
+	
+	public Application(int numStudents) {
+		this.numStudents = numStudents;
+		students = new ArrayList<Student>();
+		courseList = new CourseList();
+	}
+	
+	private int purchaseCourse(Student student, Course aCourse) {
+		int purchaseResult = student.purchaseCourse(aCourse);
+		
+		if (purchaseResult == -2) {
+			UI.insufficientMoneyError();
+		}
+		else if (purchaseResult == 1) {
+			courseList.addToCoursesOwned(aCourse);
+		}
+		return purchaseResult;
+	}
+	
+	private Tile rollDice(Student student) {
+		int roll = dice.rollDice();
+		student.moveForward(roll, courseList.getBoardSize());
+		return courseList.getCourseAt(student.getPlayerPosition());
+	}
+	
+	private void courseWalkthrough(Student student) {
+		UI.displayCourseOptions();
+	}
+	
+	private void removeStudentFromGame(Student student) {
+		for (Course course: student.getCoursesOwned()) {
+			courseList.removeFromCoursesOwned(course);
+		}
+		UI.removePlayerFromUI(student);
+		student = null;
+	}
+	
+	private boolean sellCourse(Student student) {
+		Course courseToSell = UI.sellCourseMenu(student);
+		if (courseToSell != null) {	
+			student.sellCourse(courseToSell);
+			courseList.removeFromCoursesOwned(courseToSell);
+			return true;
+		}
+		return false;
+	}
+	
+	private void sellCourseMenu(Student student) {
+		while (!sellCourse(student)) {
+			
+		}
+	}
+	
+	private void tutorialPayment(Student student, Course courseOn) {
+		UI.displayCourseOwnedMenu(student, courseOn.getOwner());
+		int amountOwed = courseOn.getTutorialPriceOwed();
+		int withdrawalResult = student.withdrawMoney(amountOwed);
+		if (withdrawalResult == 1) {
+			courseOn.getOwner().depositMoney(amountOwed);
+			UI.displayTutorialPaidScreen(student, courseOn.getOwner());
+		}
+		else if (withdrawalResult == -1) {
+			UI.displayBankruptcyScreen(student);
+			removeStudentFromGame(student);
+		}
+		else {
+			UI.displayMustMortgageScreen(student);
+			sellCourseMenu(student);
+			tutorialPayment(student, courseOn);
+		}
+	}
+	
+	private void completeTurn(Student student) {
+		UI.rollDiceMenu();
+		Tile landingTile = rollDice(student);
+		if (landingTile instanceof Course) {
+			Course courseOn = (Course) landingTile;
+			if (courseOn.getOwnedStatus()) {
+				tutorialPayment(student, courseOn);
+			}
+			else {
+				
+			}
+		}
+	}
 }
