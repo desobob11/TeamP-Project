@@ -26,34 +26,73 @@ public class CourseList {
 	}
 	
 	public void initializeCourses() {
-		Course course1 = new Course(1, "SOCI 201", "Arts", 500, 300, 50);
-		coursesOwned.add(course1);
-		
-		
-		Course course10 = new Course(16, "ENGG 201", "ENGG", 1, 14656, 1);
-		coursesOwned.add(course10);
-		Course course11 = new Course(17, "ENGG 311", "ENGG", 1, 1, 1);
-		coursesOwned.add(course11);
-		Course course12 =  new Course(19, "ENGG 599", "ENGG", 1, 1,1 );
-		coursesOwned.add(course12);
+		Course course1 = new Course(1, "SOCI 201", "Arts", 150, 50, 50);
+        coursesOwned.add(course1);
+        
+        Course course2 = new Course(2, "POLI 201", "Arts", 175, 60, 55);
+        coursesOwned.add(course2);
+        
+        Course course3 = new Course(3, "PSYC 201", "Arts", 200, 70, 60);
+        coursesOwned.add(course3);
+        
+        Course course4 = new Course(4, "CPSC 231", "Sciences", 250, 80, 65);
+        coursesOwned.add(course4);   
+        
+        Course course5 = new Course(5, "CPSC 219", "Sciences", 275, 90, 70);
+        coursesOwned.add(course5);
+        
+        Course course6 = new Course(6, "CPSC 233", "Sciences", 300, 100, 75);
+        coursesOwned.add(course6);
+        
+        Course course7 = new Course(7, "STAT 213","Business", 350, 110, 80);
+        coursesOwned.add(course7);
+        
+        Course course8 = new Course(8, "ENMG 301", "Business", 375, 120, 85);
+        coursesOwned.add(course8);
+        
+        Course course9 = new Course(9, "MGMT 311", "Business", 400, 130, 90);
+        coursesOwned.add(course9);
+        
+        Course course10 = new Course(10, "ENGG 599", "Engineering", 450, 140, 100);
+        coursesOwned.add(course10);
+        
+        Course course11 = new Course(11, "ENMG 301", "Engineering", 475, 150, 110);
+        coursesOwned.add(course11);
+        
+        Course course12 = new Course(12, "MGMT 311", "Engineering", 500, 160, 120);
+        coursesOwned.add(course12);
 	}
 	
 	public void initializeUnbuyableTiles() {
-		Community community1 = new Community(2);
-		unbuyableTiles.add(community1);
-		Chance chance1 = new Chance(7);
-		unbuyableTiles.add(chance1);
-		Probation probation = new Probation(5);
-		unbuyableTiles.add(probation);
-		Parking parking1 = new Parking(10);
-		unbuyableTiles.add(parking1);
-		Parking parking2 = new Parking(15);
+		Chance chance1 = new Chance(2);
+        unbuyableTiles.add(chance1);
+        
+        Community community1 = new Community(7);
+        unbuyableTiles.add(community1);
+        
+        Chance chance2 = new Chance(13);
+        unbuyableTiles.add(chance2);
+        
+        Community community2 = new Community(17);
+        unbuyableTiles.add(community2);
+        
+        Probation probation = new Probation(5);
+        unbuyableTiles.add(probation);
+        
+        Parking parking1 = new Parking(10);
+        unbuyableTiles.add(parking1);
+		
+        Parking parking2 = new Parking(15);
 		unbuyableTiles.add(parking2);
 		
 	}
 	
 	public int getBoardSize() {
 		return boardSize;
+	}
+	
+	public Tile getTileAt(int position) {
+		return board.get(position);
 	}
 	
 	public Course getCourseAt(int position) {

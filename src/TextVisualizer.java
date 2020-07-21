@@ -39,4 +39,8 @@ public class TextVisualizer {
 	public Course sellCourseMenu(Student student) {
 		return student.getCoursesOwned().get(0);
 	}
+	
+	public String courseStartMenu(Student student) {
+		return "Roll";
+	}
 }

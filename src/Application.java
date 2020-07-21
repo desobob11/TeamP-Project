@@ -28,7 +28,7 @@ public class Application {
 	private Tile rollDice(Student student) {
 		int roll = dice.rollDice();
 		student.moveForward(roll, courseList.getBoardSize());
-		return courseList.getCourseAt(student.getPlayerPosition());
+		return courseList.getTileAt(student.getPlayerPosition());
 	}
 	
 	private void courseWalkthrough(Student student) {
