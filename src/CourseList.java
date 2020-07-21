@@ -52,6 +52,14 @@ public class CourseList {
 		
 	}
 	
+	public int getBoardSize() {
+		return boardSize;
+	}
+	
+	public Course getCourseAt(int position) {
+		return courseList.get(position);
+	}
+	
 	public boolean inCourseList(Course aCourse) {
 		return (courseList.contains(aCourse) ? true: false);
 	}
@@ -75,6 +83,7 @@ public class CourseList {
 		if (inCourseList(aCourse)) {
 			if (inCoursesOwned(aCourse)) {
 				coursesOwned.remove(aCourse);
+				aCourse.setOwner(null);
 			}
 			return -2;
 		}
