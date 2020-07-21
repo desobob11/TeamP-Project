@@ -6,6 +6,8 @@ public class Course extends Tile {
 	private int tutorialPrice;
 	private boolean ownedStatus;
 	private int courseLevel;
+	private int facultyUpgradeCost;
+	private int initialFacultyUpgradeCost;
 	private Student ownedBy = null;
 	
 	public Course(int tileID, String tileName, String faculty, int buyPrice, int sellPrice, int tutorialPrice) {
@@ -16,6 +18,27 @@ public class Course extends Tile {
 		this.tutorialPrice = tutorialPrice;
 		this.ownedStatus = false;
 		this.courseLevel = 1;
+		
+		initializeUpgradeCost();
+	}
+	
+	public void initializeUpgradeCost() {
+		if (this.faculty == "Arts") {
+			this.facultyUpgradeCost = 150;
+			this.initialFacultyUpgradeCost = 150;
+		}
+		else if (this.faculty == "Sciences") {
+			this.facultyUpgradeCost = 210;
+			this.initialFacultyUpgradeCost = 210;
+		}
+		else if (this.faculty == "Business") {
+			this.facultyUpgradeCost = 270;
+			this.initialFacultyUpgradeCost = 270;
+		}
+		else if (this.faculty == "Engineering") {
+			this.facultyUpgradeCost = 330;
+			this.initialFacultyUpgradeCost = 330;
+		}
 	}
 	
 	public String getFaculty() {
@@ -55,13 +78,20 @@ public class Course extends Tile {
 		return courseLevel;
 	}
 	
+	public int getUpgradeCost() {
+		return facultyUpgradeCost;
+	}
+	
 	public boolean setOwnedStatus(boolean check) {
 		this.ownedStatus = check;
 		return ownedStatus;
 	}
 	
 	public int addCourseLevel() {
-		if (this.courseLevel < 3) {
+		if (this.courseLevel < 4) {
+			if (this.courseLevel != 1) {
+				this.facultyUpgradeCost *= 1.3;
+			}
 			this.courseLevel++;
 			return 1;
 		}
@@ -70,10 +100,11 @@ public class Course extends Tile {
 	
 	public void resetCourseLevel() {
 		this.courseLevel = 1;
+		this.facultyUpgradeCost = initialFacultyUpgradeCost;
 	}
 	
-	public int getTileId() {
-		return this.getTileId();
+	public int getTileID() {
+		return super.getTileID();
 	}
 		
 		
