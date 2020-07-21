@@ -39,8 +39,12 @@ public class Course extends Tile {
 		return sellPrice;
 	}
 	
-	public int getTutorialPrice() {
+	private int getTutorialPrice() {
 		return tutorialPrice;
+	}
+	
+	public int getTutorialPriceOwed() {
+		return getTutorialPrice() * courseLevel;
 	}
 	
 	public boolean getOwnedStatus() {
