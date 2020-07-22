@@ -86,7 +86,7 @@ public class Application {
 				if (buyAttempt == 1) {
 					;
 				}
-				else if (buyAttempt == -1) {
+				else if (buyAttempt == -2) {
 					UI.displayMustMortgageScreen(student);
 					sellCourseMenu(student);
 					purchaseMenu(student, courseOn);
@@ -98,7 +98,6 @@ public class Application {
 		}
 	}
 	
-	private communityOption
 	
 	private void completeTurn(Student student) {
 		boolean initialChoice = UI.turnMainMenu(student);
