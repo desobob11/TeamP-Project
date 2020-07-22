@@ -40,7 +40,8 @@ public class Application {
 			courseList.removeFromCoursesOwned(course);
 		}
 		UI.removePlayerFromUI(student);
-		student = null;
+		student.studentOut();
+		UI.updateBoard(student);
 	}
 	
 	private boolean sellCourse(Student student) {
