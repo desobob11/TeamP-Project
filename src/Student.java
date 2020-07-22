@@ -98,19 +98,28 @@ public class Student {
 		return -1;
 	}
 	
-	public boolean isBankrupt(int money) {
+	public int getAssetsValue() {
 		int mortgageValue = 0;
 		
 		for (Course courseOwned: coursesOwned) {
 			mortgageValue += courseOwned.getSellPrice();
 		}
 		
-		return (mortgageValue + playerMoney < money ? true : false);
+		return mortgageValue;
+	}
+	
+	public int getNetWorth() {
+		return getAssetsValue() + playerMoney;
+	}
+	
+	public boolean isBankrupt(int money) {
+		return (getNetWorth() < money ? true : false);
 	}
 	
 	public int purchaseCourse(Course aCourse) {
 		if (!aCourse.getOwnedStatus()) {
-			if (withdrawMoney(aCourse.getBuyPrice()) == 1) {
+			int withdrawResult = withdrawMoney(aCourse.getBuyPrice());
+			if (withdrawResult == 1) {
 				aCourse.setOwnedStatus(true);
 				aCourse.setOwner(this);
 				this.addCourse(aCourse);
@@ -124,13 +133,11 @@ public class Student {
 					for (Course course: courseOfFaculty) {
 						course.addCourseLevel();
 					}
-				}
-				
-				return 1;
+				}				
 			}
-			return -2;
+			return withdrawResult;
 		}
-		return -1;
+		return -3;
 	}
 	
 	public int sellCourse(Course aCourse) {
