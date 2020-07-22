@@ -40,7 +40,8 @@ public class Application {
 			courseList.removeFromCoursesOwned(course);
 		}
 		UI.removePlayerFromUI(student);
-		student = null;
+		student.studentOut();
+		UI.updateBoard(student);
 	}
 	
 	private boolean sellCourse(Student student) {
@@ -86,7 +87,7 @@ public class Application {
 				if (buyAttempt == 1) {
 					;
 				}
-				else if (buyAttempt == -1) {
+				else if (buyAttempt == -2) {
 					UI.displayMustMortgageScreen(student);
 					sellCourseMenu(student);
 					purchaseMenu(student, courseOn);
@@ -98,7 +99,6 @@ public class Application {
 		}
 	}
 	
-	private communityOption
 	
 	private void completeTurn(Student student) {
 		boolean initialChoice = UI.turnMainMenu(student);

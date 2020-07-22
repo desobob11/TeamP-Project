@@ -171,6 +171,14 @@ public class Student {
 		return -1;
 	}
 	
+	public void studentOut() {
+		for (Course course: getCoursesOwned()) {
+			coursesOwned.remove(course);
+		}
+		previousPlayerPosition = playerPosition;
+		playerPosition = -1;
+	}
+	
 	public void moveForward(int spaces, int boardSize) {
 		previousPlayerPosition = playerPosition;
 		playerPosition += spaces;

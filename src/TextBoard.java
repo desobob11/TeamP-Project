@@ -59,10 +59,12 @@ public class TextBoard {
  			String toModify = boardList[position[student.getPreviousPlayerPosition()][0]][position[student.getPreviousPlayerPosition()][1]];
 			String modified = toModify.substring(0, student.getPlayerNumber() - 1) + "_" + toModify.substring(student.getPlayerNumber());
 			boardList[position[student.getPreviousPlayerPosition()][0]][position[student.getPreviousPlayerPosition()][1]] = modified;
- 	
- 			toModify = boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]];
- 			modified = toModify.substring(0, student.getPlayerNumber() - 1) + student.getPlayerNumber() + toModify.substring(student.getPlayerNumber());
- 			boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]] = modified;
+			
+			if (student.getPlayerPosition() != -1) {
+	 			toModify = boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]];
+	 			modified = toModify.substring(0, student.getPlayerNumber() - 1) + student.getPlayerNumber() + toModify.substring(student.getPlayerNumber());
+	 			boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]] = modified;
+			}
 
  	}
  		
