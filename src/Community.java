@@ -1,15 +1,40 @@
+import java.util.ArrayList;
 
 public class Community extends Tile {
-	String[] communityOptions = {
+	private String[] communityOptions = {
             "Your good grades have been rewarded, you collect 400$ from scholarships",
             "It's your lucky day you find 50$ on the ground",
             "Grants have been doubled everyone collect 200$",
             "Someone hits your car on campus, luckily there were cameras collect 225$",
-            "Tuition increased everyone pay 250$",
-            "Your student loans have caught up with you, pay $400",
-            "Whoops! You slipped on black ice and a 100 fell out of your pocket"};
+            "Your student loans have caught up with you, pay $400"};
 	
 	public Community(int position) {
 		super(position, "Community");
+	}
+	
+	public String[] getCommunityOptions() {
+		return communityOptions;
+	}
+	
+	public int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents) {
+		switch (selection) {
+		case 1:
+			studentOn.depositMoney(400);
+			return 1;
+		case 2:
+			studentOn.depositMoney(50);
+			return 1;
+		case 3:
+			for (Student student: allStudents) {
+				student.depositMoney(200);
+			}
+			return 1;
+		case 4:
+			studentOn.depositMoney(225);
+			return 1;
+		case 5:
+			return studentOn.withdrawMoney(400);
+		}
+		return 1;
 	}
 }

@@ -78,17 +78,62 @@ public class Application {
 		}
 	}
 	
+	private void purchaseMenu(Student student, Course courseOn) {
+		if (student.getNetWorth() >= courseOn.getBuyPrice()) {
+			boolean wantsToBuy = UI.displayPurchaseScreen();
+			if (wantsToBuy) {
+				int buyAttempt = student.purchaseCourse(courseOn);
+				if (buyAttempt == 1) {
+					;
+				}
+				else if (buyAttempt == -1) {
+					UI.displayMustMortgageScreen(student);
+					sellCourseMenu(student);
+					purchaseMenu(student, courseOn);
+				}
+			}
+		}
+		else {
+			UI.displayInsufficientAssets(student);
+		}
+	}
+	
+	private communityOption
+	
 	private void completeTurn(Student student) {
-		UI.rollDiceMenu();
-		Tile landingTile = rollDice(student);
-		if (landingTile instanceof Course) {
-			Course courseOn = (Course) landingTile;
-			if (courseOn.getOwnedStatus()) {
-				tutorialPayment(student, courseOn);
+		boolean initialChoice = UI.turnMainMenu(student);
+		if (initialChoice == true) {
+			UI.rollDiceMenu();
+			Tile landingTile = rollDice(student);
+			if (landingTile instanceof Course) {
+				Course courseOn = (Course) landingTile;
+				if (courseOn.getOwnedStatus()) {
+					tutorialPayment(student, courseOn);
+				}
+				else {
+					purchaseMenu(student, courseOn);
+				}
 			}
-			else {
-				
+			else if (landingTile instanceof Community) {
+				Community communityOn = (Community) landingTile;
+				int randCommunity = new Random().nextInt(communityOn.getCommunityOptions().length);
+				UI.displayCommunityOption(communityOn, randCommunity);
+				int communityOptionResult = communityOn.performCommunityOption(randCommunity, student, students);
+				if (communityOptionResult == 1) {
+					;
+				}
+				else if (communityOptionResult == -2) {
+					UI.displayMustMortgageScreen(student);
+					sellCourseMenu(student);
+				}
+				else if (communityOptionResult == -1) {
+					removeStudentFromGame(student);
+				}
 			}
+		}
+		else {
+			sellCourseMenu(student);
+			completeTurn(student);
 		}
 	}
 }

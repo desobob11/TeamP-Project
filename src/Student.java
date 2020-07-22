@@ -4,6 +4,7 @@ public class Student {
 	private int playerNumber;
 	private int playerMoney;
 	private int playerPosition = 0;
+	private int previousPlayerPosition = 0;
 	private ArrayList<Course> coursesOwned;
 	private HashMap<String, ArrayList<Course>> coursesOwnedOfFaculty;
 	private HashMap<String, Boolean> ownsFaculty;
@@ -63,6 +64,10 @@ public class Student {
 		return playerPosition;
 	}
 	
+	public int getPreviousPlayerPosition() {
+		return previousPlayerPosition;
+	}
+	
 	public ArrayList<Course> getCoursesOwned() {
 		return coursesOwned;
 	}
@@ -98,19 +103,28 @@ public class Student {
 		return -1;
 	}
 	
-	public boolean isBankrupt(int money) {
+	public int getAssetsValue() {
 		int mortgageValue = 0;
 		
 		for (Course courseOwned: coursesOwned) {
 			mortgageValue += courseOwned.getSellPrice();
 		}
 		
-		return (mortgageValue + playerMoney < money ? true : false);
+		return mortgageValue;
+	}
+	
+	public int getNetWorth() {
+		return getAssetsValue() + playerMoney;
+	}
+	
+	public boolean isBankrupt(int money) {
+		return (getNetWorth() < money ? true : false);
 	}
 	
 	public int purchaseCourse(Course aCourse) {
 		if (!aCourse.getOwnedStatus()) {
-			if (withdrawMoney(aCourse.getBuyPrice()) == 1) {
+			int withdrawResult = withdrawMoney(aCourse.getBuyPrice());
+			if (withdrawResult == 1) {
 				aCourse.setOwnedStatus(true);
 				aCourse.setOwner(this);
 				this.addCourse(aCourse);
@@ -124,13 +138,11 @@ public class Student {
 					for (Course course: courseOfFaculty) {
 						course.addCourseLevel();
 					}
-				}
-				
-				return 1;
+				}				
 			}
-			return -2;
+			return withdrawResult;
 		}
-		return -1;
+		return -3;
 	}
 	
 	public int sellCourse(Course aCourse) {
@@ -160,6 +172,7 @@ public class Student {
 	}
 	
 	public void moveForward(int spaces, int boardSize) {
+		previousPlayerPosition = playerPosition;
 		playerPosition += spaces;
 		playerPosition %= boardSize;
 	}

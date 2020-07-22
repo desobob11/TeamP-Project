@@ -43,4 +43,20 @@ public class TextVisualizer {
 	public String courseStartMenu(Student student) {
 		return "Roll";
 	}
+	
+	public boolean displayPurchaseScreen() {
+		return true;
+	}
+	
+	public void displayInsufficientAssets(Student student) {
+		
+	}
+	
+	public boolean turnMainMenu(Student student) {
+		return true;
+	}
+	
+	public void displayCommunityOption(Community communityOn, int communityOption) {
+		
+	}
 }
