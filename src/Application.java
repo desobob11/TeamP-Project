@@ -98,6 +98,8 @@ public class Application {
 		}
 	}
 	
+	private communityOption
+	
 	private void completeTurn(Student student) {
 		boolean initialChoice = UI.turnMainMenu(student);
 		if (initialChoice == true) {
