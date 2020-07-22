@@ -7,7 +7,6 @@ public class TextVisualizer {
 	
 	
 	public TextVisualizer() {
-		
 	}
 	
 	public void showRoll(int roll) {
@@ -36,7 +35,7 @@ public class TextVisualizer {
 	}
 	
 	public void displayBankruptcyScreen(Student student) {
-		System.out.println("You are bakrupt! Nothing can help you now, you're exprelled from the University");
+		System.out.println(student.getPlayerNumber() +" is bakrupt! No money, no education, you're expelled!");
 	}
 	
 	public void removePlayerFromUI(Student student) {
@@ -44,11 +43,11 @@ public class TextVisualizer {
 	}
 	
 	public void displayMustMortgageScreen(Student student) {
-		System.out.println("You don't have enough available assets, you'll need to mortgage some courses");
+		System.out.println(student.getPlayerNumber() + "does not have enough available assets, please mortgage some courses");
 	}
 	
 	public Course sellCourseMenu(Student student) {
-		System.out.println("Please choose any courses you wish to sell");
+		System.out.println(student.getPlayerNumber() + ", please choose a course to sell");
 		return student.getCoursesOwned().get(0);
 	}
 	
@@ -62,7 +61,7 @@ public class TextVisualizer {
 	}
 	
 	public void displayInsufficientAssets(Student student) {
-		System.out.println("You have insufficient assets to purchase your desired course");
+		System.out.println(student.getPlayerNumber() + "has insufficient assets to purchase the desired course");
 	}
 	
 	public boolean turnMainMenu(Student student) {
