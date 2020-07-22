@@ -4,6 +4,7 @@ public class Student {
 	private int playerNumber;
 	private int playerMoney;
 	private int playerPosition = 0;
+	private int previousPlayerPosition = 0;
 	private ArrayList<Course> coursesOwned;
 	private HashMap<String, ArrayList<Course>> coursesOwnedOfFaculty;
 	private HashMap<String, Boolean> ownsFaculty;
@@ -61,6 +62,10 @@ public class Student {
 	
 	public int getPlayerPosition() {
 		return playerPosition;
+	}
+	
+	public int getPreviousPlayerPosition() {
+		return previousPlayerPosition;
 	}
 	
 	public ArrayList<Course> getCoursesOwned() {
@@ -167,6 +172,7 @@ public class Student {
 	}
 	
 	public void moveForward(int spaces, int boardSize) {
+		previousPlayerPosition = playerPosition;
 		playerPosition += spaces;
 		playerPosition %= boardSize;
 	}
