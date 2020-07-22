@@ -16,8 +16,18 @@ public class Main {
 		list.add(p2);
 		list.add(p3);
 		list.add(p4);
-		board.updateBoard(list);
-		System.out.println(board.stringConverter());
+		p1.moveForward(20, 20);
+		board.updateBoard(p1);
+		System.out.println(board.stringConverter() + "\n");
+		p2.moveForward(25, 20);
+		board.updateBoard(p2);
+		System.out.println(board.stringConverter() + "\n");
+		p3.moveForward(2, 20);
+		board.updateBoard(p3);
+		System.out.println(board.stringConverter() + "\n");
+		p3.moveForward(3, 20);
+		board.updateBoard(p3);
+		System.out.println(board.stringConverter() + "\n");
 		
 		
 		

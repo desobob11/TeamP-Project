@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class TextBoard {
 	private String[][] boardList = new String[6][6];
-	private int[][] position = {{0,0}, {0,1}, {0,2}, {0,3}, {0,4}, {0,5}, {1,0}, {1,5}, {2,0}, {2,5}, {3,0}, {3,5}, {4,0}, {4,5}, {5,0}, {5,1}, {5,2}, {5,3}, {5,4}, {5,5}};
+	private int[][] position = {{0,0}, {0,1}, {0,2}, {0,3}, {0,4}, {0,5}, {1,5}, {2,5}, {3,5}, {4,5}, {5,5}, {5,4}, {5,3}, {5,2}, {5,1}, {5,0}, {4,0}, {3,0}, {2,0}, {1,0}};
 	public TextBoard() {
 		boardList[0][0] = "____";
 		boardList[0][1] = "____";
@@ -56,19 +56,15 @@ public class TextBoard {
  	}
 
  	public void updateBoard(Student student) {
- 			String toModify = boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]];
- 			String modified = toModify.substring(0, student.getPlayerNumber() - 1) + student.getPlayerNumber() + toModify.substring(student.getPlayerNumber());
+ 			String toModify = boardList[position[student.getPreviousPlayerPosition()][0]][position[student.getPreviousPlayerPosition()][1]];
+			String modified = toModify.substring(0, student.getPlayerNumber() - 1) + "_" + toModify.substring(student.getPlayerNumber());
+			boardList[position[student.getPreviousPlayerPosition()][0]][position[student.getPreviousPlayerPosition()][1]] = modified;
+ 	
+ 			toModify = boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]];
+ 			modified = toModify.substring(0, student.getPlayerNumber() - 1) + student.getPlayerNumber() + toModify.substring(student.getPlayerNumber());
  			boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]] = modified;
- 			
- 			
- 			
- 			
- 			
 
  	}
- 		
- 		
- 		
  		
  		
  }

@@ -1,11 +1,15 @@
 
 public class TextVisualizer {
+	
+	private TextBoard board = new TextBoard();
+	
+	
 	public TextVisualizer() {
 		
 	}
 	
 	public void insufficientMoneyError() {
-		
+
 	}
 	
 	public void rollDiceMenu() {
@@ -59,4 +63,16 @@ public class TextVisualizer {
 	public void displayCommunityOption(Community communityOn, int communityOption) {
 		
 	}
+
+	public void getBoard() {
+		System.out.println(board.stringConverter());
+		
+	}
+
+	public void updateBoard(Student student) {
+		board.updateBoard(student);
+	}
+
 }
+	
+	
