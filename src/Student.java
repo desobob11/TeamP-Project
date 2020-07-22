@@ -184,12 +184,18 @@ public class Student {
 		int spacesToParking1 = Math.abs(parking1Pos - playerPosition);
 		int spacesToParking2 = Math.abs(parking2Pos - playerPosition);
 		
+		previousPlayerPosition = playerPosition;
 		if (spacesToParking1 < spacesToParking2) {
 			playerPosition = parking1Pos;
 		}
 		else {
 			playerPosition = parking2Pos;
 		}
+	}
+	
+	public void moveToProbation(int probationPos) {
+		previousPlayerPosition = playerPosition;
+		playerPosition = probationPos;
 	}
 	
 	public void moveForward(int spaces, int boardSize) {
