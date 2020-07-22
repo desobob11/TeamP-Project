@@ -65,7 +65,7 @@ public class Application {
 		int withdrawalResult = student.withdrawMoney(amountOwed);
 		if (withdrawalResult == 1) {
 			courseOn.getOwner().depositMoney(amountOwed);
-			UI.displayTutorialPaidScreen(student, courseOn.getOwner());
+			UI.displayTutorialPaidScreen(student, courseOn.getOwner(), amountOwed);
 		} else if (withdrawalResult == -1) {
 			UI.displayBankruptcyScreen(student);
 			removeStudentFromGame(student);
@@ -97,8 +97,9 @@ public class Application {
 	private void completeTurn(Student student) {
 		boolean initialChoice = UI.turnMainMenu(student);
 		if (initialChoice == true) {
-			UI.rollDiceMenu();
+			UI.rollDiceMenu(student);
 			Tile landingTile = rollDice(student);
+			
 			if (landingTile instanceof Course) {
 				Course courseOn = courseList.getCourseAt(landingTile.getTileID());
 				if (courseOn.getOwnedStatus()) {
@@ -134,6 +135,8 @@ public class Application {
 				} else if (chanceOptionResult == -1) {
 					removeStudentFromGame(student);
 				}
+			} else if (landingTile instanceof Parking) {
+				
 			}
 		} else {
 			sellCourseMenu(student);
