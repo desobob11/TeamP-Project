@@ -64,6 +64,8 @@ public class CourseList {
 	}
 	
 	public void initializeUnbuyableTiles() {
+		
+		
 		Chance chance1 = new Chance(2);
         unbuyableTiles.add(chance1);
         
