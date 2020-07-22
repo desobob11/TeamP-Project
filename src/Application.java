@@ -78,17 +78,47 @@ public class Application {
 		}
 	}
 	
-	private void completeTurn(Student student) {
-		UI.rollDiceMenu();
-		Tile landingTile = rollDice(student);
-		if (landingTile instanceof Course) {
-			Course courseOn = (Course) landingTile;
-			if (courseOn.getOwnedStatus()) {
-				tutorialPayment(student, courseOn);
+	private void purchaseMenu(Student student, Course courseOn) {
+		if (student.getNetWorth() >= courseOn.getBuyPrice()) {
+			boolean wantsToBuy = UI.displayPurchaseScreen();
+			if (wantsToBuy) {
+				int buyAttempt = student.purchaseCourse(courseOn);
+				if (buyAttempt == 1) {
+					;
+				}
+				else if (buyAttempt == -1) {
+					UI.displayMustMortgageScreen(student);
+					sellCourseMenu(student);
+					purchaseMenu(student, courseOn);
+				}
 			}
-			else {
+		}
+		else {
+			UI.displayInsufficientAssets(student);
+		}
+	}
+	
+	private void completeTurn(Student student) {
+		boolean initialChoice = UI.turnMainMenu(student);
+		if (initialChoice == true) {
+			UI.rollDiceMenu();
+			Tile landingTile = rollDice(student);
+			if (landingTile instanceof Course) {
+				Course courseOn = (Course) landingTile;
+				if (courseOn.getOwnedStatus()) {
+					tutorialPayment(student, courseOn);
+				}
+				else {
+					purchaseMenu(student, courseOn);
+				}
+			}
+			else if (landingTile instanceof Community) {
 				
 			}
+		}
+		else {
+			sellCourseMenu(student);
+			completeTurn(student);
 		}
 	}
 }
