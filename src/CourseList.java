@@ -4,7 +4,11 @@ public class CourseList {
 	private ArrayList<Tile> board;
 	private ArrayList<Course> courseList;
 	private ArrayList<Course> coursesOwned;
-	private ArrayList<Tile> unbuyableTiles;
+	private ArrayList<Chance> chanceTiles;
+	private ArrayList<Community> communityTiles;
+	private ArrayList<Parking> parkingTiles;
+	private Probation probationTile;
+	private ArrayList<Integer> parkingPositions;
 	int boardSize = 20;
 	
 	public CourseList() {
@@ -12,7 +16,11 @@ public class CourseList {
 		initializeUnbuyableTiles();
 		ArrayList<Tile> allTiles = new ArrayList<Tile>();
 		allTiles.addAll(courseList);
-		allTiles.addAll(unbuyableTiles);
+		allTiles.addAll(chanceTiles);
+		allTiles.addAll(communityTiles);
+		allTiles.addAll(parkingTiles);
+		allTiles.add(probationTile);
+		
 		sortByTilePosition(allTiles);
 	}
 	
@@ -21,7 +29,10 @@ public class CourseList {
 		initializeUnbuyableTiles();
 		ArrayList<Tile> allTiles = new ArrayList<Tile>();
 		allTiles.addAll(courseList);
-		allTiles.addAll(unbuyableTiles);
+		allTiles.addAll(chanceTiles);
+		allTiles.addAll(communityTiles);
+		allTiles.addAll(parkingTiles);
+		allTiles.add(probationTile);
 		sortByTilePosition(allTiles);
 	}
 	
@@ -64,29 +75,31 @@ public class CourseList {
 	}
 	
 	public void initializeUnbuyableTiles() {
+		int parking1Pos  = 10;
+		int parking2Pos  = 15;
+		int probationPos = 5;
 		
+        probationTile = new Probation(probationPos);
+        
+        Parking parking1 = new Parking(parking1Pos);
+        parkingTiles.add(parking1);
+        parkingPositions.add(parking1Pos);
+		
+        Parking parking2 = new Parking(parking2Pos);
+		parkingTiles.add(parking2);
+		parkingPositions.add(parking2Pos);
 		
 		Chance chance1 = new Chance(2);
-        unbuyableTiles.add(chance1);
+        chanceTiles.add(chance1);
         
         Community community1 = new Community(7);
-        unbuyableTiles.add(community1);
+        communityTiles.add(community1);
         
         Chance chance2 = new Chance(13);
-        unbuyableTiles.add(chance2);
+        chanceTiles.add(chance2);
         
         Community community2 = new Community(17);
-        unbuyableTiles.add(community2);
-        
-        Probation probation = new Probation(5);
-        unbuyableTiles.add(probation);
-        
-        Parking parking1 = new Parking(10);
-        unbuyableTiles.add(parking1);
-		
-        Parking parking2 = new Parking(15);
-		unbuyableTiles.add(parking2);
-		
+        communityTiles.add(community2);
 	}
 	
 	public int getBoardSize() {
@@ -98,7 +111,51 @@ public class CourseList {
 	}
 	
 	public Course getCourseAt(int position) {
-		return courseList.get(position);
+		for (Course course: courseList) {
+			if (course.getTileID() == position) {
+				return course;
+			}
+		}
+		return null;
+	}
+	
+	public Probation getProbationAt(int position) {
+		return probationTile;
+	}
+	
+	public Chance getChanceAt(int position) {
+		for (Chance chance: chanceTiles) {
+			if (chance.getTileID() == position) {
+				return chance;
+			}
+		}
+		return null;
+	}
+	
+	public Community getCommunityAt(int position) {
+		for (Community community: communityTiles) {
+			if (community.getTileID() == position) {
+				return community;
+			}
+		}
+		return null;
+	}
+	
+	public Parking getParkingAt(int position) {
+		for (Parking parking: parkingTiles) {
+			if (parking.getTileID() == position) {
+				return parking;
+			}
+		}
+		return null;
+	}
+	
+	public ArrayList<Integer> getParkingPositions() {
+		return parkingPositions;
+	}
+	
+	public int getProbationPosition() {
+		return probationTile.getTileID();
 	}
 	
 	public boolean inCourseList(Course aCourse) {

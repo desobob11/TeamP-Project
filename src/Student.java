@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.Math;
 
 public class Student {
 	private int playerNumber;
@@ -177,6 +178,18 @@ public class Student {
 		}
 		previousPlayerPosition = playerPosition;
 		playerPosition = -1;
+	}
+	
+	public void moveToClosestParking(int parking1Pos, int parking2Pos) {
+		int spacesToParking1 = Math.abs(parking1Pos - playerPosition);
+		int spacesToParking2 = Math.abs(parking2Pos - playerPosition);
+		
+		if (spacesToParking1 < spacesToParking2) {
+			playerPosition = parking1Pos;
+		}
+		else {
+			playerPosition = parking2Pos;
+		}
 	}
 	
 	public void moveForward(int spaces, int boardSize) {

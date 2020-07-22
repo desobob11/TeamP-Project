@@ -6,60 +6,59 @@ public class Application {
 	CourseList courseList;
 	TextVisualizer UI = new TextVisualizer();
 	Dice dice = new Dice();
-	
+
 	public Application(int numStudents) {
 		this.numStudents = numStudents;
 		students = new ArrayList<Student>();
 		courseList = new CourseList();
 	}
-	
+
 	private int purchaseCourse(Student student, Course aCourse) {
 		int purchaseResult = student.purchaseCourse(aCourse);
-		
+
 		if (purchaseResult == -2) {
 			UI.insufficientMoneyError();
-		}
-		else if (purchaseResult == 1) {
+		} else if (purchaseResult == 1) {
 			courseList.addToCoursesOwned(aCourse);
 		}
 		return purchaseResult;
 	}
-	
+
 	private Tile rollDice(Student student) {
 		int roll = dice.rollDice();
 		student.moveForward(roll, courseList.getBoardSize());
 		return courseList.getTileAt(student.getPlayerPosition());
 	}
-	
+
 	private void courseWalkthrough(Student student) {
 		UI.displayCourseOptions();
 	}
-	
+
 	private void removeStudentFromGame(Student student) {
-		for (Course course: student.getCoursesOwned()) {
+		for (Course course : student.getCoursesOwned()) {
 			courseList.removeFromCoursesOwned(course);
 		}
 		UI.removePlayerFromUI(student);
 		student.studentOut();
 		UI.updateBoard(student);
 	}
-	
+
 	private boolean sellCourse(Student student) {
 		Course courseToSell = UI.sellCourseMenu(student);
-		if (courseToSell != null) {	
+		if (courseToSell != null) {
 			student.sellCourse(courseToSell);
 			courseList.removeFromCoursesOwned(courseToSell);
 			return true;
 		}
 		return false;
 	}
-	
+
 	private void sellCourseMenu(Student student) {
 		while (!sellCourse(student)) {
-			
+
 		}
 	}
-	
+
 	private void tutorialPayment(Student student, Course courseOn) {
 		UI.displayCourseOwnedMenu(student, courseOn.getOwner());
 		int amountOwed = courseOn.getTutorialPriceOwed();
@@ -67,18 +66,16 @@ public class Application {
 		if (withdrawalResult == 1) {
 			courseOn.getOwner().depositMoney(amountOwed);
 			UI.displayTutorialPaidScreen(student, courseOn.getOwner());
-		}
-		else if (withdrawalResult == -1) {
+		} else if (withdrawalResult == -1) {
 			UI.displayBankruptcyScreen(student);
 			removeStudentFromGame(student);
-		}
-		else {
+		} else {
 			UI.displayMustMortgageScreen(student);
 			sellCourseMenu(student);
 			tutorialPayment(student, courseOn);
 		}
 	}
-	
+
 	private void purchaseMenu(Student student, Course courseOn) {
 		if (student.getNetWorth() >= courseOn.getBuyPrice()) {
 			boolean wantsToBuy = UI.displayPurchaseScreen();
@@ -86,52 +83,59 @@ public class Application {
 				int buyAttempt = student.purchaseCourse(courseOn);
 				if (buyAttempt == 1) {
 					;
-				}
-				else if (buyAttempt == -2) {
+				} else if (buyAttempt == -2) {
 					UI.displayMustMortgageScreen(student);
 					sellCourseMenu(student);
 					purchaseMenu(student, courseOn);
 				}
 			}
-		}
-		else {
+		} else {
 			UI.displayInsufficientAssets(student);
 		}
 	}
-	
-	
+
 	private void completeTurn(Student student) {
 		boolean initialChoice = UI.turnMainMenu(student);
 		if (initialChoice == true) {
 			UI.rollDiceMenu();
 			Tile landingTile = rollDice(student);
 			if (landingTile instanceof Course) {
-				Course courseOn = (Course) landingTile;
+				Course courseOn = courseList.getCourseAt(landingTile.getTileID());
 				if (courseOn.getOwnedStatus()) {
 					tutorialPayment(student, courseOn);
-				}
-				else {
+				} else {
 					purchaseMenu(student, courseOn);
 				}
-			}
-			else if (landingTile instanceof Community) {
-				Community communityOn = (Community) landingTile;
+			} else if (landingTile instanceof Community) {
+				Community communityOn = courseList.getCommunityAt(landingTile.getTileID());
 				int randCommunity = new Random().nextInt(communityOn.getCommunityOptions().length);
 				UI.displayCommunityOption(communityOn, randCommunity);
 				int communityOptionResult = communityOn.performCommunityOption(randCommunity, student, students);
 				if (communityOptionResult == 1) {
 					;
-				}
-				else if (communityOptionResult == -2) {
+				} else if (communityOptionResult == -2) {
 					UI.displayMustMortgageScreen(student);
 					sellCourseMenu(student);
+				} else if (communityOptionResult == -1) {
+					removeStudentFromGame(student);
 				}
-				else if (communityOptionResult == -1) {
+			} else if (landingTile instanceof Chance) {
+				Chance chanceOn = courseList.getChanceAt(landingTile.getTileID());
+				int randChance = new Random().nextInt(chanceOn.getChanceOptions().length);
+				UI.displayChanceOption(chanceOn, randChance);
+				ArrayList<Integer> parkingPositions = courseList.getParkingPositions();
+				int chanceOptionResult = chanceOn.performChanceOption(randChance, student, students,
+						parkingPositions.get(0), parkingPositions.get(1), courseList.getProbationPosition());
+				if (chanceOptionResult == 1) {
+					;
+				} else if (chanceOptionResult == -2) {
+					UI.displayMustMortgageScreen(student);
+					sellCourseMenu(student);
+				} else if (chanceOptionResult == -1) {
 					removeStudentFromGame(student);
 				}
 			}
-		}
-		else {
+		} else {
 			sellCourseMenu(student);
 			completeTurn(student);
 		}
