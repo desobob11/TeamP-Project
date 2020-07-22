@@ -33,7 +33,7 @@ public class Main {
 		//text.displayTutorialPaidScreen(p1, p2, courses.coursesOwned().getCourseAt(1));
 		text.removePlayerFromUI(p1);
 		System.out.println(p1.getPlayerMoney());
-		
-		
+		//displayTutorialPaidScreen(p1, p2, course6);
+		text.rollDiceMenu(p1);
 	}
 }

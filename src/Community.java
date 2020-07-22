@@ -15,7 +15,7 @@ public class Community extends Tile {
 	public String[] getCommunityOptions() {
 		return communityOptions;
 	}
-	
+		
 	public int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents) {
 		switch (selection) {
 		case 1:

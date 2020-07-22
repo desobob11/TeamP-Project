@@ -15,4 +15,10 @@ public class Chance extends Tile {
 	public Chance(int position) {
 		super(position, "Chance");
 	}
+
+	public String[] getChanceOptions() {
+		return chanceOptions;
+	}
+
+
 }
