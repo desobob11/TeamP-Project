@@ -8,6 +8,7 @@ public class CourseList {
 	private ArrayList<Community> communityTiles;
 	private ArrayList<Parking> parkingTiles;
 	private Probation probationTile;
+	private Go goTile;
 	private ArrayList<Integer> parkingPositions;
 	int boardSize = 20;
 	
@@ -20,6 +21,7 @@ public class CourseList {
 		allTiles.addAll(communityTiles);
 		allTiles.addAll(parkingTiles);
 		allTiles.add(probationTile);
+		allTiles.add(goTile);
 		
 		sortByTilePosition(allTiles);
 	}
@@ -33,6 +35,7 @@ public class CourseList {
 		allTiles.addAll(communityTiles);
 		allTiles.addAll(parkingTiles);
 		allTiles.add(probationTile);
+		allTiles.add(goTile);s
 		sortByTilePosition(allTiles);
 	}
 	
@@ -80,6 +83,8 @@ public class CourseList {
 		int probationPos = 5;
 		
         probationTile = new Probation(probationPos);
+        
+        goTile = new Go();
         
         Parking parking1 = new Parking(parking1Pos);
         parkingTiles.add(parking1);

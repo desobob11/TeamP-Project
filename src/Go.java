@@ -8,14 +8,8 @@ public class Go extends Tile {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void depositGoAmmount(Student student) {
+		student.depositMoney(landDeposit);
+	}
 	
 }
