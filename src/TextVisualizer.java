@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 public class TextVisualizer {
 	
 	private TextBoard board = new TextBoard();
@@ -8,32 +8,37 @@ public class TextVisualizer {
 		
 	}
 	
-	public void insufficientMoneyError() {
-
+	public void showRoll(int roll) {
+		
 	}
 	
-	public void rollDiceMenu() {
-		
+	
+	public void insufficientMoneyError() {
+		System.out.println(insufficientMoneyError());
+	}
+	
+	public void rollDiceMenu(Student student) {
+		System.out.println(student.getPlayerNumber() + "rolls a : " + Application.rollDice(student).getTileName());
 	}
 	
 	public void displayCourseOptions() {
-		
 	}
 	
 	public void displayCourseOwnedMenu(Student ower, Student owner) {
-		
+		System.out.println(owner.getCoursesOwned());
 	}
 	
-	public void displayTutorialPaidScreen(Student ower, Student owner) {
-		
+	public void displayTutorialPaidScreen(Student ower, Student owner, Course tutorial) {
+		System.out.println(ower.getPlayerNumber() + "pays " + owner.getPlayerNumber() + tutorial.getTutorialPriceOwed());
 	}
 	
 	public void displayBankruptcyScreen(Student student) {
-		
+		System.out.println()
 	}
 	
 	public void removePlayerFromUI(Student student) {
-		
+		System.out.println(student.getPlayerNumber() + " has been removed from the game");p
+		student = null;
 	}
 	
 	public void displayMustMortgageScreen(Student student) {
@@ -61,10 +66,10 @@ public class TextVisualizer {
 	}
 	
 	public void displayCommunityOption(Community communityOn, int communityOption) {
-		
+		System.out.println("")
 	}
 
-	public void getBoard() {
+	public void displayBoard() {
 		System.out.println(board.stringConverter());
 		
 	}

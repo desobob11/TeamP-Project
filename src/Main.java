@@ -28,8 +28,11 @@ public class Main {
 		p3.moveForward(3, 20);
 		board.updateBoard(p3);
 		System.out.println(board.stringConverter() + "\n");
-		
-		
+		TextVisualizer text = new TextVisualizer();
+		//CourseList courses = new CourseList();
+		//text.displayTutorialPaidScreen(p1, p2, courses.coursesOwned().getCourseAt(1));
+		text.removePlayerFromUI(p1);
+		System.out.println(p1.getPlayerMoney());
 		
 		
 	}
