@@ -55,4 +55,8 @@ public class TextVisualizer {
 	public boolean turnMainMenu(Student student) {
 		return true;
 	}
+	
+	public void displayCommunityOption(Community communityOn, int communityOption) {
+		
+	}
 }
