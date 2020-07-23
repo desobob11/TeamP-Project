@@ -119,6 +119,14 @@ public class Student {
 		return getAssetsValue() + playerMoney;
 	}
 	
+	public int getDurationInProbation() {
+		return durationInProbation;
+	}
+	
+	public boolean doesStudentOwnProperty() {
+		return (coursesOwned.size() == 0 ? false : true);
+	}
+	
 	public boolean isBankrupt(int money) {
 		return (getNetWorth() < money ? true : false);
 	}
@@ -174,9 +182,7 @@ public class Student {
 	}
 	
 	public void studentOut() {
-		for (Course course: getCoursesOwned()) {
-			coursesOwned.remove(course);
-		}
+		coursesOwned.removeAll(coursesOwned);
 		previousPlayerPosition = playerPosition;
 		playerPosition = -1;
 	}
@@ -199,6 +205,7 @@ public class Student {
 	public void moveToProbation(int probationPos) {
 		previousPlayerPosition = playerPosition;
 		playerPosition = probationPos;
+		inJail = true;
 	}
 	
 	public void moveForward(int spaces, int boardSize) {
