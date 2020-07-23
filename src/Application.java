@@ -173,11 +173,15 @@ public class Application {
 					int randCommunity = new Random().nextInt(communityOn.getCommunityOptions().length);
 					UI.displayCommunityOption(communityOn, randCommunity);
 					communityMenu(student, communityOn, randCommunity);
+					UI.updateBoard(student);
+					UI.displayBoard();
 				} else if (landingTile instanceof Chance) {
 					Chance chanceOn = courseList.getChanceAt(landingTile.getTileID());
 					int randChance = new Random().nextInt(chanceOn.getChanceOptions().length);
 					UI.displayChanceOption(chanceOn, randChance);
 					chanceMenu(student, chanceOn, randChance);
+					UI.updateBoard(student);
+					UI.displayBoard();
 				} else if (landingTile instanceof Parking) {
 					Parking parkingOn = courseList.getParkingAt(landingTile.getTileID());
 					parkingMenu(student, parkingOn);
