@@ -10,4 +10,10 @@ public class Probation extends Tile {
 		super(position, "Probation");
 		this.probationCost = probationCost;
 	}
+	
+	public int probationPayment(Student student) {
+		student.goToJail();
+		student.incrementTurnsInProbation();
+		return student.withdrawMoney(probationCost);
+	}
 }
