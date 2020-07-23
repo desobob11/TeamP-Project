@@ -14,4 +14,8 @@ public class Parking extends Tile {
 	public int payParkingFee(Student student) {
 		return student.withdrawMoney(parkingCost);
 	}
+	
+	public int getParkingCost() {
+		return parkingCost;
+	}
 }
