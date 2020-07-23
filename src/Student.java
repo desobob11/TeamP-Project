@@ -1,6 +1,15 @@
 import java.util.*;
 import java.lang.Math;
 
+/**
+ * Student - this class is the actual player of the game, and it handles
+ * everything related to student actions and corresponding changes to their
+ * attributes.
+ * 
+ * @author Arnuv Mayank
+ *
+ */
+
 public class Student {
 	private int playerNumber;
 	private int playerMoney;
@@ -12,17 +21,15 @@ public class Student {
 	private boolean inJail = false;
 	private int durationInProbation = 0;
 
-	
 	public Student() {
 		coursesOwned = new ArrayList<Course>();
 		initializeCoursesOwnedOfFaculty();
 		initializeOwnsFaculty();
 	}
-	
-	public Student(int playerNumber, int playerMoney)
-	{
+
+	public Student(int playerNumber, int playerMoney) {
 		coursesOwned = new ArrayList<Course>();
-		if (playerNumber > 0 && playerNumber < 5) {	
+		if (playerNumber > 0 && playerNumber < 5) {
 			this.playerNumber = playerNumber;
 		}
 		if (playerMoney > 0) {
@@ -31,21 +38,21 @@ public class Student {
 		initializeCoursesOwnedOfFaculty();
 		initializeOwnsFaculty();
 	}
-	
+
 	private void initializeCoursesOwnedOfFaculty() {
 		coursesOwnedOfFaculty = new HashMap<String, ArrayList<Course>>();
-		
+
 		ArrayList<Course> artsCoursesOwned = new ArrayList<Course>();
 		ArrayList<Course> sciencesCoursesOwned = new ArrayList<Course>();
 		ArrayList<Course> businessCoursesOwned = new ArrayList<Course>();
 		ArrayList<Course> engineeringCoursesOwned = new ArrayList<Course>();
-		
+
 		coursesOwnedOfFaculty.put("Arts", artsCoursesOwned);
 		coursesOwnedOfFaculty.put("Sciences", sciencesCoursesOwned);
 		coursesOwnedOfFaculty.put("Business", businessCoursesOwned);
 		coursesOwnedOfFaculty.put("Engineering", engineeringCoursesOwned);
 	}
-	
+
 	private void initializeOwnsFaculty() {
 		ownsFaculty = new HashMap<String, Boolean>();
 		ownsFaculty.put("Arts", false);
@@ -53,50 +60,49 @@ public class Student {
 		ownsFaculty.put("Business", false);
 		ownsFaculty.put("Engineering", false);
 	}
-	
+
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
-	
+
 	public int getPlayerMoney() {
 		return playerMoney;
 	}
-	
+
 	public int getPlayerPosition() {
 		return playerPosition;
 	}
-	
+
 	public int getPreviousPlayerPosition() {
 		return previousPlayerPosition;
 	}
-	
+
 	public ArrayList<Course> getCoursesOwned() {
 		return coursesOwned;
 	}
-	
+
 	public boolean doesStudentOwnCourse(Course aCourse) {
 		return (coursesOwned.contains(aCourse) ? true : false);
 	}
-	
+
 	private void addCourse(Course aCourse) {
 		this.coursesOwned.add(aCourse);
 	}
-	
+
 	private boolean removeCourse(Course aCourse) {
 		return this.coursesOwned.remove(aCourse);
 	}
-	
+
 	public int withdrawMoney(int money) {
 		if (money <= playerMoney) {
 			playerMoney -= money;
 			return 1;
-		}
-		else if (!isBankrupt(money)) {
+		} else if (!isBankrupt(money)) {
 			return -2;
 		}
 		return -1;
 	}
-	
+
 	public int depositMoney(int money) {
 		if (money >= 0) {
 			playerMoney += money;
@@ -104,33 +110,33 @@ public class Student {
 		}
 		return -1;
 	}
-	
+
 	public int getAssetsValue() {
 		int mortgageValue = 0;
-		
-		for (Course courseOwned: coursesOwned) {
+
+		for (Course courseOwned : coursesOwned) {
 			mortgageValue += courseOwned.getSellPrice();
 		}
-		
+
 		return mortgageValue;
 	}
-	
+
 	public int getNetWorth() {
 		return getAssetsValue() + playerMoney;
 	}
-	
+
 	public int getDurationInProbation() {
 		return durationInProbation;
 	}
-	
+
 	public boolean doesStudentOwnProperty() {
 		return (coursesOwned.size() == 0 ? false : true);
 	}
-	
+
 	public boolean isBankrupt(int money) {
 		return (getNetWorth() < money ? true : false);
 	}
-	
+
 	public int purchaseCourse(Course aCourse) {
 		if (!aCourse.getOwnedStatus()) {
 			int withdrawResult = withdrawMoney(aCourse.getBuyPrice());
@@ -138,23 +144,23 @@ public class Student {
 				aCourse.setOwnedStatus(true);
 				aCourse.setOwner(this);
 				this.addCourse(aCourse);
-				
+
 				String courseFaculty = aCourse.getFaculty();
 				ArrayList<Course> courseOfFaculty = coursesOwnedOfFaculty.get(courseFaculty);
 				courseOfFaculty.add(aCourse);
 				coursesOwnedOfFaculty.put(courseFaculty, courseOfFaculty);
 				if (courseOfFaculty.size() == 3) {
 					ownsFaculty.put(courseFaculty, true);
-					for (Course course: courseOfFaculty) {
+					for (Course course : courseOfFaculty) {
 						course.addCourseLevel();
 					}
-				}				
+				}
 			}
 			return withdrawResult;
 		}
 		return -3;
 	}
-	
+
 	public int sellCourse(Course aCourse) {
 		if (this.doesStudentOwnCourse(aCourse)) {
 			aCourse.setOwnedStatus(false);
@@ -165,13 +171,13 @@ public class Student {
 		}
 		return -1;
 	}
-	
+
 	public int upgradeFacultyLevel(String faculty) {
 		if (this.ownsFaculty.get(faculty)) {
 			ArrayList<Course> coursesOfFaculty = this.coursesOwnedOfFaculty.get(faculty);
 			if (this.playerMoney >= coursesOfFaculty.get(0).getUpgradeCost()) {
 				playerMoney -= coursesOfFaculty.get(0).getUpgradeCost();
-				for (Course course: coursesOfFaculty) {
+				for (Course course : coursesOfFaculty) {
 					course.addCourseLevel();
 				}
 				return 1;
@@ -180,50 +186,49 @@ public class Student {
 		}
 		return -1;
 	}
-	
+
 	public void studentOut() {
 		coursesOwned.removeAll(coursesOwned);
 		previousPlayerPosition = playerPosition;
 		playerPosition = -1;
 	}
-	
+
 	public int moveToClosestParking(int parking1Pos, int parking2Pos) {
 		int spacesToParking1 = Math.abs(parking1Pos - playerPosition);
 		int spacesToParking2 = Math.abs(parking2Pos - playerPosition);
-		
+
 		previousPlayerPosition = playerPosition;
 		if (spacesToParking1 < spacesToParking2) {
 			playerPosition = parking1Pos;
 			return 0;
-		}
-		else {
+		} else {
 			playerPosition = parking2Pos;
 			return 1;
 		}
 	}
-	
+
 	public void moveToProbation(int probationPos) {
 		previousPlayerPosition = playerPosition;
 		playerPosition = probationPos;
 		inJail = true;
 	}
-	
+
 	public void moveForward(int spaces, int boardSize) {
 		previousPlayerPosition = playerPosition;
 		playerPosition += spaces;
 		playerPosition %= boardSize;
 	}
-	
+
 	public boolean isInJail() {
 		return inJail;
 	}
-	
+
 	public void goToJail() {
 		inJail = true;
 	}
-	
+
 	public void incrementTurnsInProbation() {
-		if (inJail) {	
+		if (inJail) {
 			durationInProbation++;
 			if (durationInProbation > 2) {
 				durationInProbation = 0;
