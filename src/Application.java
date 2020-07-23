@@ -21,12 +21,14 @@ public class Application {
 		} else if (purchaseResult == 1) {
 			courseList.addToCoursesOwned(aCourse);
 		}
+				
 		return purchaseResult;
 	}
 
 	private Tile rollDice(Student student) {
 		int roll = dice.rollDice();
 		student.moveForward(roll, courseList.getBoardSize());
+		UI.showRoll(roll);
 		return courseList.getTileAt(student.getPlayerPosition());
 	}
 
@@ -79,7 +81,7 @@ public class Application {
 
 	private void purchaseMenu(Student student, Course courseOn) {
 		if (student.getNetWorth() >= courseOn.getBuyPrice()) {
-			boolean wantsToBuy = UI.displayPurchaseScreen();
+			boolean wantsToBuy = UI.displayPurchaseScreen(courseOn);
 			if (wantsToBuy) {
 				int buyAttempt = purchaseCourse(student, courseOn);
 				if (buyAttempt == 1) {
@@ -150,12 +152,14 @@ public class Application {
 	
 	private void completeTurn(Student student) {
 		UI.displayBoard();
-		if (student.isInJail()) {
+		UI.displayStudentStats(student);
+		if (!student.isInJail()) {
 			UI.turnMainMenu(student);
 			boolean initialChoice = UI.chooseToSell();
 			if (initialChoice == true) {
 				UI.rollDiceMenu(student);
 				Tile landingTile = rollDice(student);
+				UI.updateBoard(student);
 				UI.displayBoard();
 				if (landingTile instanceof Course) {
 					Course courseOn = courseList.getCourseAt(landingTile.getTileID());
@@ -193,7 +197,10 @@ public class Application {
 			Probation probationOn = courseList.getProbation();
 			probationMenu(student, probationOn);
 		}
-		UI.displayBoard();
+		
+		UI.displayStudentStats(student);
+		UI.displayTurnComplete();
+		UI.continuePlaying();
 	}
 	
 	public void run() {
@@ -204,7 +211,9 @@ public class Application {
 		
 		for (int i = 1; i <= numStudents; i++) {
 			students.add(new Student(i, startingMoney));
+			UI.updateBoard(students.get(i - 1));
 		}
+		
 		
 		while (students.size() != 1) {
 			student = students.get(turn);
@@ -218,6 +227,6 @@ public class Application {
 			turn++;	
 			turn %= numStudents;
 		}
-		
+		UI.closeScanner();
 	}
 }
