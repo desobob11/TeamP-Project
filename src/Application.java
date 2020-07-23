@@ -2,13 +2,13 @@ import java.util.*;
 
 public class Application {
 	int numStudents;
+	static int startingMoney = 2000;
 	ArrayList<Student> students;
 	CourseList courseList;
 	TextVisualizer UI = new TextVisualizer();
 	Dice dice = new Dice();
 
-	public Application(int numStudents) {
-		this.numStudents = numStudents;
+	public Application() {
 		students = new ArrayList<Student>();
 		courseList = new CourseList();
 	}
@@ -38,6 +38,7 @@ public class Application {
 		for (Course course : student.getCoursesOwned()) {
 			courseList.removeFromCoursesOwned(course);
 		}
+		students.remove(student);
 		UI.removePlayerFromUI(student);
 		student.studentOut();
 		UI.updateBoard(student);
@@ -60,8 +61,8 @@ public class Application {
 	}
 
 	private void tutorialPayment(Student student, Course courseOn) {
-		UI.displayCourseOwnedMenu(student, courseOn.getOwner());
 		int amountOwed = courseOn.getTutorialPriceOwed();
+		UI.displayCourseOwnedMenu(student, courseOn.getOwner(), amountOwed);
 		int withdrawalResult = student.withdrawMoney(amountOwed);
 		if (withdrawalResult == 1) {
 			courseOn.getOwner().depositMoney(amountOwed);
@@ -84,9 +85,10 @@ public class Application {
 				if (buyAttempt == 1) {
 					;
 				} else if (buyAttempt == -2) {
-					UI.displayMustMortgageScreen(student);
-					sellCourseMenu(student);
-					purchaseMenu(student, courseOn);
+					if (UI.chooseToSell()) {
+						sellCourseMenu(student);
+						purchaseMenu(student, courseOn);
+					}
 				}
 			}
 		} else {
@@ -126,7 +128,6 @@ public class Application {
 		if (parkingFeeResult == 1) {
 			;
 		} else if (parkingFeeResult == -2) {
-			UI.displayMustMortgageScreen(student);
 			sellCourseMenu(student);
 			parkingMenu(student, parkingOn);
 		} else if (parkingFeeResult == -1) {
@@ -146,14 +147,16 @@ public class Application {
 			removeStudentFromGame(student);
 		}
 	}
-
+	
 	private void completeTurn(Student student) {
+		UI.displayBoard();
 		if (student.isInJail()) {
-			boolean initialChoice = UI.turnMainMenu(student);
+			UI.turnMainMenu(student);
+			boolean initialChoice = UI.chooseToSell();
 			if (initialChoice == true) {
 				UI.rollDiceMenu(student);
 				Tile landingTile = rollDice(student);
-
+				UI.displayBoard();
 				if (landingTile instanceof Course) {
 					Course courseOn = courseList.getCourseAt(landingTile.getTileID());
 					if (courseOn.getOwnedStatus()) {
@@ -190,5 +193,31 @@ public class Application {
 			Probation probationOn = courseList.getProbation();
 			probationMenu(student, probationOn);
 		}
+		UI.displayBoard();
+	}
+	
+	public void run() {
+		numStudents = UI.askForNumPlayers();
+		students = new ArrayList<Student>();
+		Student student;
+		int turn = 0;
+		
+		for (int i = 1; i <= numStudents; i++) {
+			students.add(new Student(i, startingMoney));
+		}
+		
+		while (students.size() != 1) {
+			student = students.get(turn);
+			completeTurn(student);
+			if (student.getPlayerPosition() == -1) {
+				students.remove(student);
+				numStudents--;
+				turn--;
+			}
+			
+			turn++;	
+			turn %= numStudents;
+		}
+		
 	}
 }
