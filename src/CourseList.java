@@ -9,7 +9,6 @@ public class CourseList {
 	private ArrayList<Parking> parkingTiles;
 	private Probation probationTile;
 	private Go goTile;
-	private ArrayList<Integer> parkingPositions;
 	int boardSize = 20;
 	
 	public CourseList() {
@@ -87,11 +86,9 @@ public class CourseList {
         
         Parking parking1 = new Parking(parking1Pos);
         parkingTiles.add(parking1);
-        parkingPositions.add(parking1Pos);
 		
         Parking parking2 = new Parking(parking2Pos);
 		parkingTiles.add(parking2);
-		parkingPositions.add(parking2Pos);
 		
 		Chance chance1 = new Chance(2);
         chanceTiles.add(chance1);
@@ -123,8 +120,12 @@ public class CourseList {
 		return null;
 	}
 	
-	public Probation getProbationAt(int position) {
+	public Probation getProbation() {
 		return probationTile;
+	}
+	
+	public Go getGo() {
+		return goTile;
 	}
 	
 	public Chance getChanceAt(int position) {
@@ -154,12 +155,16 @@ public class CourseList {
 		return null;
 	}
 	
-	public ArrayList<Integer> getParkingPositions() {
-		return parkingPositions;
+	public int getParkingPosition(int parkingNumber) {
+		return parkingTiles.get(parkingNumber - 1).getTileID();
 	}
 	
 	public int getProbationPosition() {
 		return probationTile.getTileID();
+	}
+	
+	public ArrayList<Parking> getParkingTiles() {
+		return parkingTiles;
 	}
 	
 	public boolean inCourseList(Course aCourse) {

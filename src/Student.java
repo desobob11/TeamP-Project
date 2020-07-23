@@ -9,6 +9,8 @@ public class Student {
 	private ArrayList<Course> coursesOwned;
 	private HashMap<String, ArrayList<Course>> coursesOwnedOfFaculty;
 	private HashMap<String, Boolean> ownsFaculty;
+	private boolean inJail = false;
+	private int durationInProbation = 0;
 
 
 	
@@ -180,21 +182,47 @@ public class Student {
 		playerPosition = -1;
 	}
 	
-	public void moveToClosestParking(int parking1Pos, int parking2Pos) {
+	public int moveToClosestParking(int parking1Pos, int parking2Pos) {
 		int spacesToParking1 = Math.abs(parking1Pos - playerPosition);
 		int spacesToParking2 = Math.abs(parking2Pos - playerPosition);
 		
+		previousPlayerPosition = playerPosition;
 		if (spacesToParking1 < spacesToParking2) {
 			playerPosition = parking1Pos;
+			return 0;
 		}
 		else {
 			playerPosition = parking2Pos;
+			return 1;
 		}
+	}
+	
+	public void moveToProbation(int probationPos) {
+		previousPlayerPosition = playerPosition;
+		playerPosition = probationPos;
 	}
 	
 	public void moveForward(int spaces, int boardSize) {
 		previousPlayerPosition = playerPosition;
 		playerPosition += spaces;
 		playerPosition %= boardSize;
+	}
+	
+	public boolean isInJail() {
+		return inJail;
+	}
+	
+	public void goToJail() {
+		inJail = true;
+	}
+	
+	public void incrementTurnsInProbation() {
+		if (inJail) {	
+			durationInProbation++;
+			if (durationInProbation > 2) {
+				durationInProbation = 0;
+				inJail = false;
+			}
+		}
 	}
 }

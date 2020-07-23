@@ -65,7 +65,7 @@ public class Application {
 		int withdrawalResult = student.withdrawMoney(amountOwed);
 		if (withdrawalResult == 1) {
 			courseOn.getOwner().depositMoney(amountOwed);
-			UI.displayTutorialPaidScreen(student, courseOn.getOwner());
+			UI.displayTutorialPaidScreen(student, courseOn.getOwner(), amountOwed);
 		} else if (withdrawalResult == -1) {
 			UI.displayBankruptcyScreen(student);
 			removeStudentFromGame(student);
@@ -80,7 +80,7 @@ public class Application {
 		if (student.getNetWorth() >= courseOn.getBuyPrice()) {
 			boolean wantsToBuy = UI.displayPurchaseScreen();
 			if (wantsToBuy) {
-				int buyAttempt = student.purchaseCourse(courseOn);
+				int buyAttempt = purchaseCourse(student, courseOn);
 				if (buyAttempt == 1) {
 					;
 				} else if (buyAttempt == -2) {
@@ -94,50 +94,101 @@ public class Application {
 		}
 	}
 
+	private void communityMenu(Student student, Community communityOn, int randCommunity) {
+		int communityOptionResult = communityOn.performCommunityOption(randCommunity, student, students);
+		if (communityOptionResult == 1) {
+			;
+		} else if (communityOptionResult == -2) {
+			UI.displayMustMortgageScreen(student);
+			sellCourseMenu(student);
+			communityMenu(student, communityOn, randCommunity);
+		} else if (communityOptionResult == -1) {
+			removeStudentFromGame(student);
+		}
+	}
+
+	private void chanceMenu(Student student, Chance chanceOn, int randChance) {
+		int chanceOptionResult = chanceOn.performChanceOption(randChance, student, students,
+				courseList.getParkingTiles(), courseList.getProbation());
+		if (chanceOptionResult == 1) {
+			;
+		} else if (chanceOptionResult == -2) {
+			UI.displayMustMortgageScreen(student);
+			sellCourseMenu(student);
+			chanceMenu(student, chanceOn, randChance);
+		} else if (chanceOptionResult == -1) {
+			removeStudentFromGame(student);
+		}
+	}
+
+	private void parkingMenu(Student student, Parking parkingOn) {
+		int parkingFeeResult = parkingOn.payParkingFee(student);
+		if (parkingFeeResult == 1) {
+			;
+		} else if (parkingFeeResult == -2) {
+			UI.displayMustMortgageScreen(student);
+			sellCourseMenu(student);
+			parkingMenu(student, parkingOn);
+		} else if (parkingFeeResult == -1) {
+			removeStudentFromGame(student);
+		}
+	}
+
+	private void probationMenu(Student student, Probation probationOn) {
+		int probationResult = probationOn.probationPayment(student);
+		if (probationResult == 1) {
+			;
+		} else if (probationResult == -2) {
+			UI.displayMustMortgageScreen(student);
+			sellCourseMenu(student);
+			probationMenu(student, probationOn);
+		} else if (probationResult == -1) {
+			removeStudentFromGame(student);
+		}
+	}
+
 	private void completeTurn(Student student) {
-		boolean initialChoice = UI.turnMainMenu(student);
-		if (initialChoice == true) {
-			UI.rollDiceMenu();
-			Tile landingTile = rollDice(student);
-			if (landingTile instanceof Course) {
-				Course courseOn = courseList.getCourseAt(landingTile.getTileID());
-				if (courseOn.getOwnedStatus()) {
-					tutorialPayment(student, courseOn);
-				} else {
-					purchaseMenu(student, courseOn);
+		if (student.isInJail()) {
+			boolean initialChoice = UI.turnMainMenu(student);
+			if (initialChoice == true) {
+				UI.rollDiceMenu(student);
+				Tile landingTile = rollDice(student);
+
+				if (landingTile instanceof Course) {
+					Course courseOn = courseList.getCourseAt(landingTile.getTileID());
+					if (courseOn.getOwnedStatus()) {
+						tutorialPayment(student, courseOn);
+					} else {
+						purchaseMenu(student, courseOn);
+					}
+				} else if (landingTile instanceof Community) {
+					Community communityOn = courseList.getCommunityAt(landingTile.getTileID());
+					int randCommunity = new Random().nextInt(communityOn.getCommunityOptions().length);
+					UI.displayCommunityOption(communityOn, randCommunity);
+					communityMenu(student, communityOn, randCommunity);
+				} else if (landingTile instanceof Chance) {
+					Chance chanceOn = courseList.getChanceAt(landingTile.getTileID());
+					int randChance = new Random().nextInt(chanceOn.getChanceOptions().length);
+					UI.displayChanceOption(chanceOn, randChance);
+					chanceMenu(student, chanceOn, randChance);
+				} else if (landingTile instanceof Parking) {
+					Parking parkingOn = courseList.getParkingAt(landingTile.getTileID());
+					parkingMenu(student, parkingOn);
+				} else if (landingTile instanceof Probation) {
+					Probation probationOn = courseList.getProbation();
+					probationMenu(student, probationOn);
+				} else if (landingTile instanceof Go) {
+					Go goOn = courseList.getGo();
+					goOn.depositGoAmmount(student);
 				}
-			} else if (landingTile instanceof Community) {
-				Community communityOn = courseList.getCommunityAt(landingTile.getTileID());
-				int randCommunity = new Random().nextInt(communityOn.getCommunityOptions().length);
-				UI.displayCommunityOption(communityOn, randCommunity);
-				int communityOptionResult = communityOn.performCommunityOption(randCommunity, student, students);
-				if (communityOptionResult == 1) {
-					;
-				} else if (communityOptionResult == -2) {
-					UI.displayMustMortgageScreen(student);
-					sellCourseMenu(student);
-				} else if (communityOptionResult == -1) {
-					removeStudentFromGame(student);
-				}
-			} else if (landingTile instanceof Chance) {
-				Chance chanceOn = courseList.getChanceAt(landingTile.getTileID());
-				int randChance = new Random().nextInt(chanceOn.getChanceOptions().length);
-				UI.displayChanceOption(chanceOn, randChance);
-				ArrayList<Integer> parkingPositions = courseList.getParkingPositions();
-				int chanceOptionResult = chanceOn.performChanceOption(randChance, student, students,
-						parkingPositions.get(0), parkingPositions.get(1), courseList.getProbationPosition());
-				if (chanceOptionResult == 1) {
-					;
-				} else if (chanceOptionResult == -2) {
-					UI.displayMustMortgageScreen(student);
-					sellCourseMenu(student);
-				} else if (chanceOptionResult == -1) {
-					removeStudentFromGame(student);
-				}
+			} else {
+				sellCourseMenu(student);
+				completeTurn(student);
 			}
 		} else {
-			sellCourseMenu(student);
-			completeTurn(student);
+			UI.displayStillInJail(student);
+			Probation probationOn = courseList.getProbation();
+			probationMenu(student, probationOn);
 		}
 	}
 }
