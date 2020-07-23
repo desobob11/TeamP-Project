@@ -35,7 +35,7 @@ public class TextVisualizer {
 	}
 	
 	public void displayBankruptcyScreen(Student student) {
-		System.out.println(student.getPlayerNumber() +" is bakrupt! No money, no education, you're expelled!");
+		System.out.println(student.getPlayerNumber() +" is bankrupt! No money, no education, you're expelled!");
 	}
 	
 	public void removePlayerFromUI(Student student) {

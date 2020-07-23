@@ -22,7 +22,6 @@ public class CourseList {
 		allTiles.addAll(parkingTiles);
 		allTiles.add(probationTile);
 		allTiles.add(goTile);
-		
 		sortByTilePosition(allTiles);
 	}
 	
@@ -35,7 +34,7 @@ public class CourseList {
 		allTiles.addAll(communityTiles);
 		allTiles.addAll(parkingTiles);
 		allTiles.add(probationTile);
-		allTiles.add(goTile);s
+		allTiles.add(goTile);
 		sortByTilePosition(allTiles);
 	}
 	
