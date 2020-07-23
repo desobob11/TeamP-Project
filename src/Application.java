@@ -1,5 +1,13 @@
 import java.util.*;
 
+/**
+ * This is the class that has all of the game's ruleset/logic. It takes from all
+ * the classes previously built, as well as the UI, and makes the entire game
+ * happen
+ * 
+ * @author Arnuv Mayank
+ *
+ */
 public class Application {
 	int numStudents;
 	static int startingMoney = 1000;
@@ -21,7 +29,7 @@ public class Application {
 		} else if (purchaseResult == 1) {
 			courseList.addToCoursesOwned(aCourse);
 		}
-				
+
 		return purchaseResult;
 	}
 
@@ -56,8 +64,7 @@ public class Application {
 				return true;
 			}
 			return false;
-		}
-		else {
+		} else {
 			UI.displayNoProperty();
 			return false;
 		}
@@ -158,7 +165,7 @@ public class Application {
 			removeStudentFromGame(student);
 		}
 	}
-	
+
 	private void completeTurn(Student student, int counter) {
 		UI.displayBoard();
 		UI.displayStudentStats(student);
@@ -213,28 +220,27 @@ public class Application {
 			Probation probationOn = courseList.getProbation();
 			probationMenu(student, probationOn, 1);
 		}
-		
-		for (Student aStudent: students) {
+
+		for (Student aStudent : students) {
 			UI.displayStudentStats(aStudent);
 		}
-		if (counter == 1) {	
+		if (counter == 1) {
 			UI.displayTurnComplete();
 			UI.continuePlaying();
 		}
 	}
-	
+
 	public void run() {
 		numStudents = UI.askForNumPlayers();
 		students = new ArrayList<Student>();
 		Student student;
 		int turn = 0;
-		
+
 		for (int i = 1; i <= numStudents; i++) {
 			students.add(new Student(i, startingMoney));
 			UI.updateBoard(students.get(i - 1));
 		}
-		
-		
+
 		while (students.size() != 1) {
 			student = students.get(turn);
 			completeTurn(student, 1);
@@ -243,8 +249,8 @@ public class Application {
 				numStudents--;
 				turn--;
 			}
-			
-			turn++;	
+
+			turn++;
 			turn %= numStudents;
 		}
 		UI.closeScanner();
