@@ -18,21 +18,21 @@ public class Community extends Tile {
 		
 	public int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents) {
 		switch (selection) {
-		case 1:
+		case 0:
 			studentOn.depositMoney(400);
 			return 1;
-		case 2:
+		case 1:
 			studentOn.depositMoney(50);
 			return 1;
-		case 3:
+		case 2:
 			for (Student student: allStudents) {
 				student.depositMoney(200);
 			}
 			return 1;
-		case 4:
+		case 3:
 			studentOn.depositMoney(225);
 			return 1;
-		case 5:
+		case 4:
 			return studentOn.withdrawMoney(400);
 		}
 		return 1;
