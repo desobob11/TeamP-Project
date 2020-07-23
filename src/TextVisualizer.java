@@ -43,20 +43,21 @@ public class TextVisualizer {
 	}
 
 	public void removePlayerFromUI(Student student) {
-		System.out.println(student.getPlayerNumber() + " has been removed from the game");
+		System.out.println("Student " + student.getPlayerNumber() + " has been removed from the game");
 	}
 
 	public void displayMustMortgageScreen(Student student) {
 		System.out.println("Student " + student.getPlayerNumber()
-				+ "does not have enough available assets, please mortgage some courses");
+				+ " does not have enough available assets, please mortgage some courses");
 	}
 
 	public Course sellCourseMenu(Student student) {
 		displayStudentCoursesOwned(student);
-		System.out.println("Student " + student.getPlayerNumber() + ", please choose a course to sell, or -1 to exit: ");
+		System.out
+				.println("Student " + student.getPlayerNumber() + ", please choose a course to sell, or -1 to exit: ");
 		int userinp = Integer.parseInt(input.nextLine());
 
-		return student.getCoursesOwned().get(userinp - 1);
+		return (userinp != -1 ? student.getCoursesOwned().get(userinp - 1) : null);
 	}
 
 	public boolean displayPurchaseScreen(Course theCourse) {
@@ -69,21 +70,32 @@ public class TextVisualizer {
 		return false;
 	}
 
-	public void displayInsufficientAssets(Student student) {
-		System.out.println(student.getPlayerNumber() + "has insufficient assets to purchase the desired course");
+	public void displayNoProperty() {
+		System.out.println("You have no property to sell. ");
+	}
+	
+	public void displayInsufficientAssets(Student student, Course theCourse) {
+		System.out.println("Student " + student.getPlayerNumber()
+				+ " has insufficient assets to purchase the following course: " + theCourse.getTileName());
 	}
 
 	public void turnMainMenu(Student student) {
 		System.out.println("It is now Student " + student.getPlayerNumber() + "'s turn");
 	}
 
-	public boolean chooseToSell() {
-		System.out.println("Would you like to sell some courses (1) or proceed with your turn (2) ");
-		String userinp = input.nextLine();
-
-		if (userinp.equals("2")) {
-			return true;
-		} else {
+	public boolean chooseToSell(boolean ownsProperty) {
+		if (ownsProperty) { 	
+			System.out.println("Would you like to sell some courses (1) or proceed with your turn (2) ");
+			String userinp = input.nextLine();
+	
+			if (userinp.equals("1")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		else {
+			System.out.println("You have no courses to sell. ");
 			return false;
 		}
 	}
@@ -103,6 +115,16 @@ public class TextVisualizer {
 
 	public void displayChanceOption(Chance chanceOn, int chanceOption) {
 		System.out.println("You have landed on a chance tile!" + "\n" + chanceOn.getChanceOptions()[chanceOption]);
+	}
+
+	public void displayInProbation(Student student, Probation probation) {
+		System.out
+				.println("You have landed in probation. You are now stuck for " + (3 - student.getDurationInProbation())
+						+ " turn(s) and owe $" + probation.getProbationCost() + " every turn.");
+	}
+	
+	public void displayInParking(Student student, Parking parking) {
+		System.out.println("You have landed in parking. You owe $" + parking.getParkingCost());
 	}
 
 	public void displayStillInJail(Student student) {
@@ -139,10 +161,14 @@ public class TextVisualizer {
 	public void displayTurnComplete() {
 		System.out.println("Turn complete\n\n");
 	}
-	
+
 	public void continuePlaying() {
 		System.out.println("Enter anything to continue: ");
 		input.nextLine();
+	}
+	
+	public void displayWinner(Student student) {
+		System.out.println("Student " + student.getPlayerNumber() + " is the winner!");
 	}
 	
 	public void closeScanner() {
