@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * This is a Community Tile that randomly chooses something for the student to do.
+ * @author Arnuv Mayank and Victor Manuel Campos Goitia Campos
+ *
+ */
+
 public class Community extends Tile {
 	private String[] communityOptions = {
             "Your good grades have been rewarded, you collect 400$ from scholarships",
