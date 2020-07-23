@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * This is a Chance Tile that randomly chooses something for the student to do.
+ * @author Arnuv Mayank and Victor Manuel Campos Goitia Campos
+ *
+ */
+
 public class Chance extends Tile {
 	String[] chanceOptions = { "SU Donation: Pay $100", "Grants have been doubled everyone collect $300",
 			"Your offered a ride from your friend, move to the nearest free parking",
