@@ -18,21 +18,21 @@ public class Chance extends Tile {
 	public int performChanceOption(int selection, Student studentOn, ArrayList<Student> allStudents,
 			ArrayList<Parking> parkingTiles, Probation probationTile) {
 		switch (selection) {
-		case 1:
+		case 0:
 			return studentOn.withdrawMoney(100);
-		case 2:
+		case 1:
 			for (Student student : allStudents) {
 				student.depositMoney(300);
 			}
 			return 1;
-		case 3:
+		case 2:
 			int tileToMoveTo = studentOn.moveToClosestParking(parkingTiles.get(0).getTileID(), parkingTiles.get(1).getTileID());
 			return parkingTiles.get(tileToMoveTo).payParkingFee(studentOn);
-		case 4:
+		case 3:
 			return studentOn.withdrawMoney(250);
-		case 5:
+		case 4:
 			return studentOn.withdrawMoney(150);
-		case 6:
+		case 5:
 			studentOn.moveToProbation(probationTile.getTileID());
 			return 1;
 		}
