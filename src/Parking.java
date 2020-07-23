@@ -10,4 +10,8 @@ public class Parking extends Tile {
 		super(position, "Parking");
 		this.parkingCost = parkingCost;
 	}
+	
+	public int payParkingFee(Student student) {
+		return student.withdrawMoney(parkingCost);
+	}
 }
