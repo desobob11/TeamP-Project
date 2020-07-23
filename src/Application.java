@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Application {
 	int numStudents;
-	static int startingMoney = 2000;
+	static int startingMoney = 1000;
 	ArrayList<Student> students;
 	CourseList courseList;
 	TextVisualizer UI = new TextVisualizer();
@@ -47,18 +47,25 @@ public class Application {
 	}
 
 	private boolean sellCourse(Student student) {
-		Course courseToSell = UI.sellCourseMenu(student);
-		if (courseToSell != null) {
-			student.sellCourse(courseToSell);
-			courseList.removeFromCoursesOwned(courseToSell);
-			return true;
+		boolean ownsProperty = student.doesStudentOwnProperty();
+		if (ownsProperty) {
+			Course courseToSell = UI.sellCourseMenu(student);
+			if (Objects.nonNull(courseToSell)) {
+				student.sellCourse(courseToSell);
+				courseList.removeFromCoursesOwned(courseToSell);
+				return true;
+			}
+			return false;
 		}
-		return false;
+		else {
+			UI.displayNoProperty();
+			return false;
+		}
 	}
 
 	private void sellCourseMenu(Student student) {
-		while (!sellCourse(student)) {
-
+		while (sellCourse(student)) {
+			;
 		}
 	}
 
@@ -87,14 +94,14 @@ public class Application {
 				if (buyAttempt == 1) {
 					;
 				} else if (buyAttempt == -2) {
-					if (UI.chooseToSell()) {
+					if (UI.chooseToSell(true)) {
 						sellCourseMenu(student);
 						purchaseMenu(student, courseOn);
 					}
 				}
 			}
 		} else {
-			UI.displayInsufficientAssets(student);
+			UI.displayInsufficientAssets(student, courseOn);
 		}
 	}
 
@@ -126,6 +133,7 @@ public class Application {
 	}
 
 	private void parkingMenu(Student student, Parking parkingOn) {
+		UI.displayInParking(student, parkingOn);
 		int parkingFeeResult = parkingOn.payParkingFee(student);
 		if (parkingFeeResult == 1) {
 			;
@@ -137,26 +145,28 @@ public class Application {
 		}
 	}
 
-	private void probationMenu(Student student, Probation probationOn) {
-		int probationResult = probationOn.probationPayment(student);
+	private void probationMenu(Student student, Probation probationOn, int counter) {
+		UI.displayInProbation(student, probationOn);
+		int probationResult = probationOn.probationPayment(student, counter);
 		if (probationResult == 1) {
 			;
 		} else if (probationResult == -2) {
 			UI.displayMustMortgageScreen(student);
 			sellCourseMenu(student);
-			probationMenu(student, probationOn);
+			probationMenu(student, probationOn, 2);
 		} else if (probationResult == -1) {
 			removeStudentFromGame(student);
 		}
 	}
 	
-	private void completeTurn(Student student) {
+	private void completeTurn(Student student, int counter) {
 		UI.displayBoard();
 		UI.displayStudentStats(student);
 		if (!student.isInJail()) {
 			UI.turnMainMenu(student);
-			boolean initialChoice = UI.chooseToSell();
-			if (initialChoice == true) {
+			boolean ownsProperty = student.doesStudentOwnProperty();
+			boolean initialChoice = UI.chooseToSell(ownsProperty);
+			if (!initialChoice) {
 				UI.rollDiceMenu(student);
 				Tile landingTile = rollDice(student);
 				UI.updateBoard(student);
@@ -164,7 +174,9 @@ public class Application {
 				if (landingTile instanceof Course) {
 					Course courseOn = courseList.getCourseAt(landingTile.getTileID());
 					if (courseOn.getOwnedStatus()) {
-						tutorialPayment(student, courseOn);
+						if (!student.doesStudentOwnCourse(courseOn)) {
+							tutorialPayment(student, courseOn);
+						}
 					} else {
 						purchaseMenu(student, courseOn);
 					}
@@ -187,24 +199,28 @@ public class Application {
 					parkingMenu(student, parkingOn);
 				} else if (landingTile instanceof Probation) {
 					Probation probationOn = courseList.getProbation();
-					probationMenu(student, probationOn);
+					probationMenu(student, probationOn, 1);
 				} else if (landingTile instanceof Go) {
 					Go goOn = courseList.getGo();
 					goOn.depositGoAmmount(student);
 				}
 			} else {
 				sellCourseMenu(student);
-				completeTurn(student);
+				completeTurn(student, 2);
 			}
 		} else {
 			UI.displayStillInJail(student);
 			Probation probationOn = courseList.getProbation();
-			probationMenu(student, probationOn);
+			probationMenu(student, probationOn, 1);
 		}
 		
-		UI.displayStudentStats(student);
-		UI.displayTurnComplete();
-		UI.continuePlaying();
+		for (Student aStudent: students) {
+			UI.displayStudentStats(aStudent);
+		}
+		if (counter == 1) {	
+			UI.displayTurnComplete();
+			UI.continuePlaying();
+		}
 	}
 	
 	public void run() {
@@ -221,7 +237,7 @@ public class Application {
 		
 		while (students.size() != 1) {
 			student = students.get(turn);
-			completeTurn(student);
+			completeTurn(student, 1);
 			if (student.getPlayerPosition() == -1) {
 				students.remove(student);
 				numStudents--;
@@ -232,5 +248,6 @@ public class Application {
 			turn %= numStudents;
 		}
 		UI.closeScanner();
+		UI.displayWinner(students.get(0));
 	}
 }
