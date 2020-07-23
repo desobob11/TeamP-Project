@@ -1,3 +1,8 @@
+/**
+ * This is a parking tile, which forces the student to pay a fixed fee and ends their turn.
+ * @author Arnuv Mayank and Desmond O'Brien
+ *
+ */
 
 public class Parking extends Tile {
 	private int parkingCost = 250;
