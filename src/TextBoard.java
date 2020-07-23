@@ -1,10 +1,23 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+/**
+ * This is the text visualization of the board. It uses a 6x6 array to create
+ * the board, and 4 underscores to represent the tiles. The 4 underscores are
+ * the 4 slots for the 4 potential students to occupy. Each student is
+ * represented by their player number, and they always occupy their
+ * corresponding underscore when on a tile. When a student is out of the game,
+ * their number is removed from the board entirely.
+ * 
+ * @author Desmond O'Brien
+ *
+ */
 public class TextBoard {
 	private String[][] boardList = new String[6][6];
-	private int[][] position = {{0,0}, {0,1}, {0,2}, {0,3}, {0,4}, {0,5}, {1,5}, {2,5}, {3,5}, {4,5}, {5,5}, {5,4}, {5,3}, {5,2}, {5,1}, {5,0}, {4,0}, {3,0}, {2,0}, {1,0}};
+	private int[][] position = { { 0, 0 }, { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 }, { 1, 5 }, { 2, 5 },
+			{ 3, 5 }, { 4, 5 }, { 5, 5 }, { 5, 4 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 0 }, { 4, 0 }, { 3, 0 },
+			{ 2, 0 }, { 1, 0 } };
+
 	public TextBoard() {
 		boardList[0][0] = "____";
 		boardList[0][1] = "____";
@@ -44,36 +57,27 @@ public class TextBoard {
 		boardList[5][5] = "____";
 	}
 
-
- 	public String stringConverter() {
- 		String a = Arrays.deepToString(boardList).replace("], ", "]\n");
-		String formattedString = a
-			    .replace(",", "")
-			    .replace("[", "")
-			    .replace("]", "")
-			    .trim(); 		
+	public String stringConverter() {
+		String a = Arrays.deepToString(boardList).replace("], ", "]\n");
+		String formattedString = a.replace(",", "").replace("[", "").replace("]", "").trim();
 		return formattedString;
- 	}
+	}
 
- 	public void updateBoard(Student student) {
- 			String toModify = boardList[position[student.getPreviousPlayerPosition()][0]][position[student.getPreviousPlayerPosition()][1]];
-			String modified = toModify.substring(0, student.getPlayerNumber() - 1) + "_" + toModify.substring(student.getPlayerNumber());
-			boardList[position[student.getPreviousPlayerPosition()][0]][position[student.getPreviousPlayerPosition()][1]] = modified;
-			
-			if (student.getPlayerPosition() != -1) {
-	 			toModify = boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]];
-	 			modified = toModify.substring(0, student.getPlayerNumber() - 1) + student.getPlayerNumber() + toModify.substring(student.getPlayerNumber());
-	 			boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]] = modified;
-			}
+	public void updateBoard(Student student) {
+		String toModify = boardList[position[student.getPreviousPlayerPosition()][0]][position[student
+				.getPreviousPlayerPosition()][1]];
+		String modified = toModify.substring(0, student.getPlayerNumber() - 1) + "_"
+				+ toModify.substring(student.getPlayerNumber());
+		boardList[position[student.getPreviousPlayerPosition()][0]][position[student
+				.getPreviousPlayerPosition()][1]] = modified;
 
- 	}
- 		
- 		
- }
+		if (student.getPlayerPosition() != -1) {
+			toModify = boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]];
+			modified = toModify.substring(0, student.getPlayerNumber() - 1) + student.getPlayerNumber()
+					+ toModify.substring(student.getPlayerNumber());
+			boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]] = modified;
+		}
 
+	}
 
-
-
-
-
-
+}
