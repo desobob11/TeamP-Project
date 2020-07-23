@@ -3,6 +3,7 @@ import java.util.*;
 public class TextVisualizer {
 
 	private TextBoard board = new TextBoard();
+	private Scanner input = new Scanner(System.in);
 
 	public TextVisualizer() {
 	}
@@ -15,11 +16,13 @@ public class TextVisualizer {
 		System.out.println("You do not have the required funds to purchase that course!");
 	}
 
+	public void displayPurchasedScreen(Course theCourse) {
+		System.out.println("Congratulations! You have purchased the following course: " + theCourse.getTileName());
+	}
+
 	public void rollDiceMenu(Student student) {
 		System.out.println("Enter any character to roll the die");
-		Scanner input = new Scanner(System.in);
 		input.nextLine();
-		input.close();
 	}
 
 	public void displayCourseOptions() {
@@ -27,12 +30,12 @@ public class TextVisualizer {
 
 	public void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed) {
 		System.out.println("Student " + ower.getPlayerNumber() + " has landed on Student " + owner.getPlayerNumber()
-				+ "'s course and owes them $" + amountOwed + "for a tutorial.");
+				+ "'s course and owes them $" + amountOwed + " for a tutorial.");
 	}
 
 	public void displayTutorialPaidScreen(Student ower, Student owner, int amountOwed) {
-		System.out.println("Student " + ower.getPlayerNumber() + "has paid Student" + owner.getPlayerNumber() + " $"
-				+ amountOwed + "for the tutorial.");
+		System.out.println("Student " + ower.getPlayerNumber() + " has paid Student " + owner.getPlayerNumber() + " $"
+				+ amountOwed + " for the tutorial.");
 	}
 
 	public void displayBankruptcyScreen(Student student) {
@@ -49,25 +52,18 @@ public class TextVisualizer {
 	}
 
 	public Course sellCourseMenu(Student student) {
-		Scanner input = new Scanner(System.in);
-
 		displayStudentCoursesOwned(student);
-		System.out.println(student.getPlayerNumber() + ", please choose a course to sell, or -1 to exit: ");
+		System.out.println("Student " + student.getPlayerNumber() + ", please choose a course to sell, or -1 to exit: ");
 		int userinp = Integer.parseInt(input.nextLine());
-		input.close();
 
-		return student.getCoursesOwned().get(userinp);
+		return student.getCoursesOwned().get(userinp - 1);
 	}
 
-	public boolean displayPurchaseScreen() {
-		Scanner input = new Scanner(System.in);
-
-		System.out.println("Would you like to purchase this course? [y/n] ");
+	public boolean displayPurchaseScreen(Course theCourse) {
+		System.out.println("Would you like to purchase the following course: " + theCourse.getTileName() + " for $"
+				+ theCourse.getBuyPrice() + " [y/n] ");
 		String a = input.nextLine();
-
-		input.close();
-
-		if (a == "y") {
+		if (a.equals("y")) {
 			return true;
 		}
 		return false;
@@ -78,18 +74,14 @@ public class TextVisualizer {
 	}
 
 	public void turnMainMenu(Student student) {
-		System.out.println("It is now" + student.getPlayerNumber() + "'s turn");
+		System.out.println("It is now Student " + student.getPlayerNumber() + "'s turn");
 	}
 
 	public boolean chooseToSell() {
-		Scanner input = new Scanner(System.in);
-
 		System.out.println("Would you like to sell some courses (1) or proceed with your turn (2) ");
 		String userinp = input.nextLine();
 
-		input.close();
-
-		if (userinp.equals("1")) {
+		if (userinp.equals("2")) {
 			return true;
 		} else {
 			return false;
@@ -110,19 +102,19 @@ public class TextVisualizer {
 	}
 
 	public void displayChanceOption(Chance chanceOn, int chanceOption) {
-		System.out.println("You have landed on a community tile!" + "\n" + chanceOn.getChanceOptions()[chanceOption]);
+		System.out.println("You have landed on a chance tile!" + "\n" + chanceOn.getChanceOptions()[chanceOption]);
 	}
 
 	public void displayStillInJail(Student student) {
-		System.out.println("Player " + student.getPlayerNumber() + " is still in jail and cannot move.");
+		System.out.println("Student " + student.getPlayerNumber() + " is still in jail and cannot move.");
 	}
 
 	public void displayStudentCoursesOwned(Student student) {
 		ArrayList<Course> coursesOwned = student.getCoursesOwned();
 
 		System.out.println("Courses owned: ");
-		for (int i = 1; i <= coursesOwned.size(); i++) {
-			System.out.println(i + ") " + coursesOwned.get(i).getTileName());
+		for (int i = 0; i < coursesOwned.size(); i++) {
+			System.out.println((i + 1) + ") " + coursesOwned.get(i).getTileName());
 		}
 	}
 
@@ -134,14 +126,26 @@ public class TextVisualizer {
 		System.out.println("Student " + student.getPlayerNumber() + "'s assets: ");
 		displayStudentMoney(student);
 		displayStudentCoursesOwned(student);
+		System.out.println();
 	}
-	
-	public int askForNumPlayers() { 
-		Scanner input = new Scanner(System.in);
-		
+
+	public int askForNumPlayers() {
 		System.out.println("How many players will be in this game? ");
 		int userinp = Integer.parseInt(input.nextLine());
-		
+
 		return userinp;
+	}
+
+	public void displayTurnComplete() {
+		System.out.println("Turn complete\n\n");
+	}
+	
+	public void continuePlaying() {
+		System.out.println("Enter anything to continue: ");
+		input.nextLine();
+	}
+	
+	public void closeScanner() {
+		input.close();
 	}
 }
