@@ -12,7 +12,6 @@ public class Student {
 	private boolean inJail = false;
 	private int durationInProbation = 0;
 
-
 	
 	public Student() {
 		coursesOwned = new ArrayList<Course>();
