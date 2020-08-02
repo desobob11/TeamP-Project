@@ -157,8 +157,10 @@ public class Course extends Tile {
 		if (this.getOwnedStatus()) {
 			if (!this.getOwner().equals(student)) {
 				return tutorialPayment(student, UI);
+			} else {
+				UI.displayAlreadyOwned(student, this);
+				return 1;
 			}
-			return 1;
 		} else {
 			return purchaseMenu(student, UI, courseList);
 		}
