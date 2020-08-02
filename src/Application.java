@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class Application {
 	int numStudents;
-	static int startingMoney = 1000;
+	final int startingMoney = 1000;
 	ArrayList<Student> students;
 	CourseList courseList;
 	TextVisualizer UI = new TextVisualizer();
@@ -38,10 +38,6 @@ public class Application {
 		student.moveForward(roll, courseList.getBoardSize());
 		UI.showRoll(roll);
 		return courseList.getTileAt(student.getPlayerPosition());
-	}
-
-	private void courseWalkthrough(Student student) {
-		UI.displayCourseOptions();
 	}
 
 	private void removeStudentFromGame(Student student) {
