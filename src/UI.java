@@ -19,6 +19,7 @@ public interface UI {
 	void displayBoard();
 	void updateBoard(Student student);
 	void displayChanceOption(Chance chanceOn, int chanceOption);
+	void displayLandedInProbation(Student student);
 	void displayInProbation(Student student, Probation probation);
 	void displayInParking(Student student, Parking parking);
 	void displayStillInJail(Student student);
