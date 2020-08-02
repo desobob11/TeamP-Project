@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Tile - this represents a piece on the board. There will never be an instance
  * of Tile itself, but rather one of its many children.
@@ -8,6 +10,7 @@
 public abstract class Tile {
 	private int tileID;
 	private String tileName;
+	private boolean performedTileAction = false;
 
 	public Tile() {
 
@@ -26,4 +29,14 @@ public abstract class Tile {
 		return tileName;
 	}
 
+	public boolean getPerformedTileAction() {
+		return performedTileAction;
+	}
+	
+	public void setPerformedTileAction(boolean performedTileAction) {
+		this.performedTileAction = performedTileAction;
+	}
+	
+	public abstract int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList);
+	
 }
