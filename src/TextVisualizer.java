@@ -120,9 +120,13 @@ public class TextVisualizer implements UI {
 		System.out.println("You have landed on a chance tile!" + "\n" + chanceOn.getChanceOptions()[chanceOption]);
 	}
 
+	public void displayLandedInProbation(Student student) {
+		System.out.println("You have landed in probation");
+	}
+	
 	public void displayInProbation(Student student, Probation probation) {
 		System.out
-				.println("You have landed in probation. You are now stuck for " + (3 - student.getDurationInProbation())
+				.println("You are stuck for " + (3 - student.getDurationInProbation())
 						+ " turn(s) and owe $" + probation.getProbationCost() + " every turn.");
 	}
 	
