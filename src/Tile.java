@@ -5,7 +5,7 @@
  * @author Desmond O'Brien and Arnuv Mayank
  *
  */
-public class Tile {
+public abstract class Tile {
 	private int tileID;
 	private String tileName;
 
