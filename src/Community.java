@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This is a Community Tile that randomly chooses something for the student to do.
@@ -13,6 +14,8 @@ public class Community extends Tile {
             "Grants have been doubled everyone collect 200$",
             "Someone hits your car on campus, luckily there were cameras collect 225$",
             "Your student loans have caught up with you, pay $400"};
+	
+	private int randCommunity;
 	
 	public Community(int position) {
 		super(position, "Community");
@@ -42,5 +45,14 @@ public class Community extends Tile {
 			return studentOn.withdrawMoney(400);
 		}
 		return 1;
+	}
+	
+	@Override
+	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
+		if (this.getPerformedTileAction()) {
+			randCommunity = new Random().nextInt(this.getCommunityOptions().length);
+		}
+		UI.displayCommunityOption(this, randCommunity);
+		return this.performCommunityOption(randCommunity, student, students);
 	}
 }

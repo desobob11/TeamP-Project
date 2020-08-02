@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * This is the Go tile, the simplest child of Tile. It simply gives the student
@@ -14,8 +15,14 @@ public class Go extends Tile {
 		super(0, "Go");
 	}
 
-	public void depositGoAmmount(Student student) {
+	
+	
+	@Override
+	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
+		// TODO Auto-generated method stub
+		UI.displayOnGo(landDeposit);
 		student.depositMoney(landDeposit);
+		return 1;
 	}
 
 }

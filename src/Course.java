@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * This is the course class, the most important child of Tile. It handles
  * everything related to course modification, ownership, etc. Student is what
@@ -112,4 +114,55 @@ public class Course extends Tile {
 		return super.getTileID();
 	}
 
+	private int purchaseCourse(Student student, UI UI, CourseList courseList) {
+		int purchaseResult = student.purchaseCourse(this);
+
+		if (purchaseResult == -2) {
+			UI.insufficientMoneyError();
+		} else if (purchaseResult == 1) {
+			courseList.addToCoursesOwned(this);
+		}
+
+		return purchaseResult;
+	}
+	
+	private int purchaseMenu(Student student, UI UI, CourseList courseList) {
+		if (student.getNetWorth() >= this.getBuyPrice()) {
+			boolean wantsToBuy = UI.displayPurchaseScreen(this);
+			if (wantsToBuy) {
+				return purchaseCourse(student, UI, courseList);
+			}
+			return 1;
+		} else {
+			UI.displayInsufficientAssets(student, this);
+			return 1;
+		}
+	}
+	
+	private int tutorialPayment(Student student, UI UI) {
+		int amountOwed = this.getTutorialPriceOwed();
+		UI.displayCourseOwnedMenu(student, this.getOwner(), amountOwed);
+		int withdrawalResult = student.withdrawMoney(amountOwed);
+		if (withdrawalResult == 1) {
+			this.getOwner().depositMoney(amountOwed);
+			UI.displayTutorialPaidScreen(student, this.getOwner(), amountOwed);
+		}
+		
+		return withdrawalResult;
+	}
+	
+	@Override
+	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
+		// TODO Auto-generated method stub
+		if (this.getOwnedStatus()) {
+			if (!this.getOwner().equals(student)) {
+				return tutorialPayment(student, UI);
+			} else {
+				UI.displayAlreadyOwned(student, this);
+				return 1;
+			}
+		} else {
+			return purchaseMenu(student, UI, courseList);
+		}
+	}
 }

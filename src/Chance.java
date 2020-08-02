@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This is a Chance Tile that randomly chooses something for the student to do.
@@ -13,6 +14,8 @@ public class Chance extends Tile {
 			"You withdrew from a course, past the deadline! Pay $150",
 			"You have been caught for cheating, move to academic probation", };
 
+	private int randChance;
+	
 	public Chance(int position) {
 		super(position, "Chance");
 	}
@@ -43,6 +46,15 @@ public class Chance extends Tile {
 			return 1;
 		}
 		return 1;
+	}
+
+	@Override
+	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
+		if (this.getPerformedTileAction()) {
+			randChance = new Random().nextInt(this.getChanceOptions().length);
+		}
+		UI.displayChanceOption(this, randChance);
+		return this.performChanceOption(randChance, student, students, courseList.getParkingTiles(), courseList.getProbation());
 	}
 
 }

@@ -165,7 +165,9 @@ public class Student {
 		if (this.doesStudentOwnCourse(aCourse)) {
 			aCourse.setOwnedStatus(false);
 			aCourse.setOwner(null);
-			aCourse.resetCourseLevel();
+			for (Course course: this.coursesOwnedOfFaculty.get(aCourse.getFaculty())) {
+				course.resetCourseLevel();
+			}
 			depositMoney(aCourse.getSellPrice());
 			return (removeCourse(aCourse) ? -2 : 0);
 		}

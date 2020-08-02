@@ -6,7 +6,7 @@ import java.util.*;
  *
  */
 
-public class TextVisualizer {
+public class TextVisualizer implements UI {
 
 	private TextBoard board = new TextBoard();
 	private Scanner input = new Scanner(System.in);
@@ -31,9 +31,10 @@ public class TextVisualizer {
 		input.nextLine();
 	}
 
-	public void displayCourseOptions() {
+	public void displayAlreadyOwned(Student student, Course theCourse) {
+		System.out.println("You already own " + theCourse.getTileName());
 	}
-
+	
 	public void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed) {
 		System.out.println("Student " + ower.getPlayerNumber() + " has landed on Student " + owner.getPlayerNumber()
 				+ "'s course and owes them $" + amountOwed + " for a tutorial.");
@@ -123,9 +124,13 @@ public class TextVisualizer {
 		System.out.println("You have landed on a chance tile!" + "\n" + chanceOn.getChanceOptions()[chanceOption]);
 	}
 
+	public void displayLandedInProbation(Student student) {
+		System.out.println("You have landed in probation");
+	}
+	
 	public void displayInProbation(Student student, Probation probation) {
 		System.out
-				.println("You have landed in probation. You are now stuck for " + (3 - student.getDurationInProbation())
+				.println("You are stuck for " + (3 - student.getDurationInProbation())
 						+ " turn(s) and owe $" + probation.getProbationCost() + " every turn.");
 	}
 	
@@ -155,6 +160,10 @@ public class TextVisualizer {
 		displayStudentMoney(student);
 		displayStudentCoursesOwned(student);
 		System.out.println();
+	}
+	
+	public void displayOnGo(int goAmount) {
+		System.out.println("You have landed on Go! Collect $" + goAmount);
 	}
 
 	public int askForNumPlayers() {
