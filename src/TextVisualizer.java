@@ -31,6 +31,10 @@ public class TextVisualizer implements UI {
 		input.nextLine();
 	}
 
+	public void displayAlreadyOwned(Student student, Course theCourse) {
+		System.out.println("You already own " + theCourse.getTileName());
+	}
+	
 	public void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed) {
 		System.out.println("Student " + ower.getPlayerNumber() + " has landed on Student " + owner.getPlayerNumber()
 				+ "'s course and owes them $" + amountOwed + " for a tutorial.");
@@ -156,6 +160,10 @@ public class TextVisualizer implements UI {
 		displayStudentMoney(student);
 		displayStudentCoursesOwned(student);
 		System.out.println();
+	}
+	
+	public void displayOnGo(int goAmount) {
+		System.out.println("You have landed on Go! Collect $" + goAmount);
 	}
 
 	public int askForNumPlayers() {

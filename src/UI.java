@@ -4,6 +4,7 @@ public interface UI {
 	void insufficientMoneyError();
 	void displayPurchasedScreen(Course theCourse);
 	void rollDiceMenu(Student student);
+	void displayAlreadyOwned(Student student, Course theCourse);
 	void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed);
 	void displayTutorialPaidScreen(Student ower, Student owner, int amountOwed);
 	void displayBankruptcyScreen(Student student);
@@ -26,6 +27,7 @@ public interface UI {
 	void displayStudentCoursesOwned(Student student);
 	void displayStudentMoney(Student student);
 	void displayStudentStats(Student student);
+	void displayOnGo(int goAmount);
 	int askForNumPlayers();
 	void displayTurnComplete();
 	void continuePlaying();
