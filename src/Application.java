@@ -56,6 +56,7 @@ public class Application {
 
 	private void removeStudentFromGame(Student student) {
 		for (Course course : student.getCoursesOwned()) {
+			course.resetCourseLevel();
 			courseList.removeFromCoursesOwned(course);
 		}
 		students.remove(student);
