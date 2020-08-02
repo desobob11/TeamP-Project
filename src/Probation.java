@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * This is a probation tile, which traps the user in probation for 3 turns and forces them to pay $250 per turn.
  * @author Arnuv Mayank
@@ -16,9 +18,9 @@ public class Probation extends Tile {
 		this.probationCost = probationCost;
 	}
 	
-	public int probationPayment(Student student, int counter) {
+	public int probationPayment(Student student) {
 		student.goToJail();
-		if (counter == 1) {	
+		if (!this.getPerformedTileAction()) {	
 			student.incrementTurnsInProbation();
 		}
 		return student.withdrawMoney(probationCost);
@@ -26,5 +28,18 @@ public class Probation extends Tile {
 	
 	public int getProbationCost() {
 		return probationCost;
+	}
+
+	@Override
+	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
+		// TODO Auto-generated method stub
+		if (student.isInJail()) {
+			UI.displayStillInJail(student);
+		} else {
+			UI.displayLandedInProbation(student);
+		}
+		UI.displayInProbation(student, this);
+		
+		return this.probationPayment(student);
 	}
 }
