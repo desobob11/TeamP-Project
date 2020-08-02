@@ -21,6 +21,19 @@ public class Application {
 		courseList = new CourseList();
 	}
 
+	public CourseList getCourseList() {
+		return courseList;
+	}
+	
+	public UI getUI() {
+		return UI;
+	}
+	
+	public ArrayList<Student> getStudents() {
+		return students;
+	}
+	
+	/*
 	private int purchaseCourse(Student student, Course aCourse) {
 		int purchaseResult = student.purchaseCourse(aCourse);
 
@@ -32,6 +45,7 @@ public class Application {
 
 		return purchaseResult;
 	}
+	*/
 
 	private Tile rollDice(Student student) {
 		int roll = dice.rollDice();
@@ -71,7 +85,14 @@ public class Application {
 			;
 		}
 	}
-
+	
+	private void displayStudentStats() {
+		for (Student aStudent : students) {
+			UI.displayStudentStats(aStudent);
+		}
+	}
+	
+	/*
 	private void tutorialPayment(Student student, Course courseOn) {
 		int amountOwed = courseOn.getTutorialPriceOwed();
 		UI.displayCourseOwnedMenu(student, courseOn.getOwner(), amountOwed);
@@ -161,69 +182,43 @@ public class Application {
 			removeStudentFromGame(student);
 		}
 	}
+	*/
 
 	private void completeTurn(Student student, int counter) {
 		UI.displayBoard();
 		UI.displayStudentStats(student);
-		if (!student.isInJail()) {
-			UI.turnMainMenu(student);
-			boolean ownsProperty = student.doesStudentOwnProperty();
-			boolean initialChoice = UI.chooseToSell(ownsProperty);
-			if (!initialChoice) {
+		Tile landingTile = courseList.getTileAt(student.getPlayerPosition());
+		UI.turnMainMenu(student);
+		boolean ownsProperty = student.doesStudentOwnProperty();
+		boolean initialChoice = UI.chooseToSell(ownsProperty); 
+		if (!initialChoice) {
+			if (!student.isInJail()) {
 				UI.rollDiceMenu(student);
-				Tile landingTile = rollDice(student);
+				landingTile = rollDice(student);
 				UI.updateBoard(student);
 				UI.displayBoard();
-				if (landingTile instanceof Course) {
-					Course courseOn = courseList.getCourseAt(landingTile.getTileID());
-					if (courseOn.getOwnedStatus()) {
-						if (!student.doesStudentOwnCourse(courseOn)) {
-							tutorialPayment(student, courseOn);
-						}
-					} else {
-						purchaseMenu(student, courseOn);
-					}
-				} else if (landingTile instanceof Community) {
-					Community communityOn = courseList.getCommunityAt(landingTile.getTileID());
-					int randCommunity = new Random().nextInt(communityOn.getCommunityOptions().length);
-					UI.displayCommunityOption(communityOn, randCommunity);
-					communityMenu(student, communityOn, randCommunity);
-					UI.updateBoard(student);
-					UI.displayBoard();
-				} else if (landingTile instanceof Chance) {
-					Chance chanceOn = courseList.getChanceAt(landingTile.getTileID());
-					int randChance = new Random().nextInt(chanceOn.getChanceOptions().length);
-					UI.displayChanceOption(chanceOn, randChance);
-					chanceMenu(student, chanceOn, randChance);
-					UI.updateBoard(student);
-					UI.displayBoard();
-				} else if (landingTile instanceof Parking) {
-					Parking parkingOn = courseList.getParkingAt(landingTile.getTileID());
-					parkingMenu(student, parkingOn);
-				} else if (landingTile instanceof Probation) {
-					Probation probationOn = courseList.getProbation();
-					probationMenu(student, probationOn, 1);
-				} else if (landingTile instanceof Go) {
-					Go goOn = courseList.getGo();
-					goOn.depositGoAmmount(student);
-				}
-			} else {
+			}
+			int tileActionResult = landingTile.performTileAction(student, students, UI, courseList);
+			landingTile.setPerformedTileAction(true);
+			while (tileActionResult == -2) {
+				UI.displayMustMortgageScreen(student);
 				sellCourseMenu(student);
-				completeTurn(student, 2);
+				tileActionResult = landingTile.performTileAction(student, students, UI, courseList);
+			}
+			if (tileActionResult == -1) {
+				removeStudentFromGame(student);
 			}
 		} else {
-			UI.displayStillInJail(student);
-			Probation probationOn = courseList.getProbation();
-			probationMenu(student, probationOn, 1);
+			sellCourseMenu(student);
+			completeTurn(student, 2);
 		}
 
-		for (Student aStudent : students) {
-			UI.displayStudentStats(aStudent);
-		}
 		if (counter == 1) {
+			displayStudentStats();
 			UI.displayTurnComplete();
 			UI.continuePlaying();
 		}
+		landingTile.setPerformedTileAction(false);
 	}
 
 	public void run() {
