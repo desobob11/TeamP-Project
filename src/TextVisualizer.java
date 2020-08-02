@@ -6,7 +6,7 @@ import java.util.*;
  *
  */
 
-public class TextVisualizer {
+public class TextVisualizer implements UI {
 
 	private TextBoard board = new TextBoard();
 	private Scanner input = new Scanner(System.in);
@@ -29,9 +29,6 @@ public class TextVisualizer {
 	public void rollDiceMenu(Student student) {
 		System.out.println("Enter any character to roll the die");
 		input.nextLine();
-	}
-
-	public void displayCourseOptions() {
 	}
 
 	public void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed) {
