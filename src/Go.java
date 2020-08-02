@@ -15,9 +15,12 @@ public class Go extends Tile {
 		super(0, "Go");
 	}
 
+	
+	
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
 		// TODO Auto-generated method stub
+		UI.displayOnGo(landDeposit);
 		student.depositMoney(landDeposit);
 		return 1;
 	}
