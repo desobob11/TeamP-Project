@@ -87,6 +87,18 @@ public class Application {
 		}
 	}
 	
+	private void upgradeLevelMenu(Student student, ArrayList<ArrayList<Course>> upgradableFaculties) {
+		String faculty = UI.upgradeFacultyMenu(upgradableFaculties);
+		int upgradeResult = student.upgradeFacultyLevel(faculty);
+		if (upgradeResult == 1) {
+			UI.displaySuccessfulUpgrade(faculty);
+		} else if (upgradeResult == -2) {
+			UI.displayMustMortgageScreen(student);
+			sellCourseMenu(student);
+			this.upgradeLevelMenu(student, student.getUpgradableFaculties());
+		}
+	}
+	
 	private void displayStudentStats() {
 		for (Student aStudent : students) {
 			UI.displayStudentStats(aStudent);
@@ -191,8 +203,9 @@ public class Application {
 		Tile landingTile = courseList.getTileAt(student.getPlayerPosition());
 		UI.turnMainMenu(student);
 		boolean ownsProperty = student.doesStudentOwnProperty();
-		boolean initialChoice = UI.chooseToSell(ownsProperty); 
-		if (!initialChoice) {
+		ArrayList<ArrayList<Course>> upgradableFaculties = student.getUpgradableFaculties();
+		int initialChoice = UI.initialOptions(ownsProperty, upgradableFaculties); 
+		if (initialChoice == 1) {
 			if (!student.isInJail()) {
 				UI.rollDiceMenu(student);
 				landingTile = rollDice(student);
@@ -209,8 +222,12 @@ public class Application {
 			if (tileActionResult == -1) {
 				removeStudentFromGame(student);
 			}
-		} else {
+			UI.updateBoard(student);
+		} else if (initialChoice == 2) {
 			sellCourseMenu(student);
+			completeTurn(student, 2);
+		} else {
+			upgradeLevelMenu(student, upgradableFaculties);
 			completeTurn(student, 2);
 		}
 

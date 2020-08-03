@@ -49,7 +49,7 @@ public class Community extends Tile {
 	
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
-		if (this.getPerformedTileAction()) {
+		if (!this.getPerformedTileAction()) {
 			randCommunity = new Random().nextInt(this.getCommunityOptions().length);
 		}
 		UI.displayCommunityOption(this, randCommunity);

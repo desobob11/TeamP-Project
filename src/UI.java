@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public interface UI {
 	void showRoll(int roll);
@@ -7,15 +8,17 @@ public interface UI {
 	void displayAlreadyOwned(Student student, Course theCourse);
 	void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed);
 	void displayTutorialPaidScreen(Student ower, Student owner, int amountOwed);
+	void displaySuccessfulUpgrade(String faculty);
 	void displayBankruptcyScreen(Student student);
 	void removePlayerFromUI(Student student);
 	void displayMustMortgageScreen(Student student);
 	Course sellCourseMenu(Student student);
+	String upgradeFacultyMenu(ArrayList<ArrayList<Course>> upgradableFaculties);
 	boolean displayPurchaseScreen(Course theCourse);
 	void displayNoProperty();
 	void displayInsufficientAssets(Student student, Course theCourse);
 	void turnMainMenu(Student student);
-	boolean chooseToSell(boolean ownsProperty);
+	int initialOptions(boolean ownsProperty, ArrayList<ArrayList<Course>> upgradableFaculties);
 	void displayCommunityOption(Community communityOn, int communityOption);
 	void displayBoard();
 	void updateBoard(Student student);

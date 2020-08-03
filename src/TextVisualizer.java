@@ -45,6 +45,10 @@ public class TextVisualizer implements UI {
 				+ amountOwed + " for the tutorial.");
 	}
 
+	public void displaySuccessfulUpgrade(String faculty) {
+		System.out.println("The " + faculty + " faculty was successfully upgraded.");
+	}
+	
 	public void displayBankruptcyScreen(Student student) {
 		System.out.println(student.getPlayerNumber() + " is bankrupt! No money, no education, you're expelled!");
 	}
@@ -58,6 +62,15 @@ public class TextVisualizer implements UI {
 				+ " does not have enough available assets, please mortgage some courses");
 	}
 
+	public String upgradeFacultyMenu(ArrayList<ArrayList<Course>> upgradableFaculties) {
+		System.out.println("Which faculty would you like to upgrade? Enter -1 if you don't want to upgrade any: ");
+		for (int i = 0; i < upgradableFaculties.size(); i++) {
+			System.out.println(i + ") " + upgradableFaculties.get(i).get(0).getFaculty());
+		}
+		int userinp = Integer.parseInt(input.nextLine());
+		return upgradableFaculties.get(userinp).get(0).getFaculty();
+	}
+	
 	public Course sellCourseMenu(Student student) {
 		displayStudentCoursesOwned(student);
 		System.out
@@ -90,20 +103,19 @@ public class TextVisualizer implements UI {
 		System.out.println("It is now Student " + student.getPlayerNumber() + "'s turn");
 	}
 
-	public boolean chooseToSell(boolean ownsProperty) {
+	public int initialOptions(boolean ownsProperty, ArrayList<ArrayList<Course>> upgradableFaculties) {
 		if (ownsProperty) { 	
-			System.out.println("Would you like to sell some courses (1) or proceed with your turn (2) ");
-			String userinp = input.nextLine();
-	
-			if (userinp.equals("1")) {
-				return true;
+			if (upgradableFaculties.size() != 0) {
+				System.out.println("Would you like to proceed with your turn (1), sell some courses (2), or upgrade a faculty (3)?");
 			} else {
-				return false;
+				System.out.println("Would you like to proceed with your turn (1) or sell some courses (2)?");
 			}
+			String userinp = input.nextLine();
+			return Integer.parseInt(userinp);
 		}
 		else {
 			System.out.println("You have no courses to sell. ");
-			return false;
+			return 1;
 		}
 	}
 

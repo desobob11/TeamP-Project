@@ -50,7 +50,7 @@ public class Chance extends Tile {
 
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
-		if (this.getPerformedTileAction()) {
+		if (!this.getPerformedTileAction()) {
 			randChance = new Random().nextInt(this.getChanceOptions().length);
 		}
 		UI.displayChanceOption(this, randChance);
