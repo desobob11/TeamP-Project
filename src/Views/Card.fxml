@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="584.0" prefWidth="571.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="MainMenu">
+   <children>
+      <Button fx:id="startButton" layoutX="399.0" layoutY="396.0" mnemonicParsing="false" onAction="#startGame" text="Start!" />
+      <ChoiceBox fx:id="playersChoiceBox" layoutX="205.0" layoutY="396.0" prefWidth="150.0" />
+      <Button fx:id="quitButton" layoutX="260.0" layoutY="507.0" mnemonicParsing="false" onAction="#quitGame" text="Quit" />
+      <Label fx:id="numOfPlayersLabel" layoutX="82.0" layoutY="400.0" text="Number of Players:" />
+      <ImageView fx:id="titleImage" fitHeight="245.0" fitWidth="345.0" layoutX="113.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/Universopoly.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
