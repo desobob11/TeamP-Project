@@ -87,6 +87,18 @@ public class Application {
 		}
 	}
 	
+	private void upgradeLevelMenu(Student student) {
+		String faculty = student.studentUpgradeFaculty(UI);
+		int upgradeResult = student.upgradeFacultyLevel(faculty);
+		if (upgradeResult == 1) {
+			UI.displaySuccessfulUpgrade(faculty);
+		} else if (upgradeResult == -2) {
+			UI.displayMustMortgageScreen(student);
+			student.studentSellCourse(UI, courseList);
+			this.upgradeLevelMenu(student);
+		}
+	}
+	
 	private void displayStudentStats() {
 		for (Student aStudent : students) {
 			UI.displayStudentStats(aStudent);
@@ -190,9 +202,8 @@ public class Application {
 		UI.displayStudentStats(student);
 		Tile landingTile = courseList.getTileAt(student.getPlayerPosition());
 		UI.turnMainMenu(student);
-		boolean ownsProperty = student.doesStudentOwnProperty();
-		boolean initialChoice = UI.chooseToSell(ownsProperty); 
-		if (!initialChoice) {
+		int initialChoice = student.studentInitialOption(UI); 
+		if (initialChoice == 1) {
 			if (!student.isInJail()) {
 				UI.rollDiceMenu(student);
 				landingTile = rollDice(student);
@@ -203,14 +214,18 @@ public class Application {
 			landingTile.setPerformedTileAction(true);
 			while (tileActionResult == -2) {
 				UI.displayMustMortgageScreen(student);
-				sellCourseMenu(student);
+				student.studentSellCourse(UI, courseList);
 				tileActionResult = landingTile.performTileAction(student, students, UI, courseList);
 			}
 			if (tileActionResult == -1) {
 				removeStudentFromGame(student);
 			}
+			UI.updateBoard(student);
+		} else if (initialChoice == 2) {
+			student.studentSellCourse(UI, courseList);
+			completeTurn(student, 2);
 		} else {
-			sellCourseMenu(student);
+			upgradeLevelMenu(student);
 			completeTurn(student, 2);
 		}
 
@@ -229,7 +244,11 @@ public class Application {
 		int turn = 0;
 
 		for (int i = 1; i <= numStudents; i++) {
-			students.add(new Student(i, startingMoney));
+			if (UI.isStudentHuman()) {	
+				students.add(new HumanStudent(i, startingMoney));
+			} else {
+				students.add(new ComputerStudent(i, startingMoney));
+			}
 			UI.updateBoard(students.get(i - 1));
 		}
 

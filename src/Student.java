@@ -10,7 +10,7 @@ import java.lang.Math;
  *
  */
 
-public class Student {
+public abstract class Student {
 	private int playerNumber;
 	private int playerMoney;
 	private int playerPosition = 0;
@@ -132,6 +132,17 @@ public class Student {
 	public boolean doesStudentOwnProperty() {
 		return (coursesOwned.size() == 0 ? false : true);
 	}
+	
+	public ArrayList<ArrayList<Course>> getUpgradableFaculties() {
+		ArrayList<ArrayList<Course>> upgradableFaculties = new ArrayList<ArrayList<Course>>();
+		for (String faculty : ownsFaculty.keySet()) {
+			ArrayList<Course> coursesOwnedOfAFaculty = this.coursesOwnedOfFaculty.get(faculty);
+			if (ownsFaculty.get(faculty) && this.getNetWorth() >= coursesOwnedOfAFaculty.get(0).getUpgradeCost() && !coursesOwnedOfAFaculty.get(0).isMaxUpgraded()) {
+				upgradableFaculties.add(coursesOwnedOfAFaculty);
+			}
+		}
+		return upgradableFaculties;
+	}
 
 	public boolean isBankrupt(int money) {
 		return (getNetWorth() < money ? true : false);
@@ -168,25 +179,28 @@ public class Student {
 			for (Course course: this.coursesOwnedOfFaculty.get(aCourse.getFaculty())) {
 				course.resetCourseLevel();
 			}
+			this.ownsFaculty.put(aCourse.getFaculty(), false);
 			depositMoney(aCourse.getSellPrice());
-			return (removeCourse(aCourse) ? -2 : 0);
+			return (removeCourse(aCourse) ? -1 : 1);
 		}
-		return -1;
+		return -3;
 	}
 
 	public int upgradeFacultyLevel(String faculty) {
 		if (this.ownsFaculty.get(faculty)) {
 			ArrayList<Course> coursesOfFaculty = this.coursesOwnedOfFaculty.get(faculty);
-			if (this.playerMoney >= coursesOfFaculty.get(0).getUpgradeCost()) {
-				playerMoney -= coursesOfFaculty.get(0).getUpgradeCost();
-				for (Course course : coursesOfFaculty) {
-					course.addCourseLevel();
+			if (!coursesOfFaculty.get(0).isMaxUpgraded()) {
+				int upgradeResult = this.withdrawMoney(coursesOfFaculty.get(0).getUpgradeCost());
+				if (upgradeResult == 1) {	
+					for (Course course : coursesOfFaculty) {
+						course.addCourseLevel();
+					}
 				}
-				return 1;
+				return upgradeResult;
 			}
-			return -2;
+			return -3;
 		}
-		return -1;
+		return -4;
 	}
 
 	public void studentOut() {
@@ -238,4 +252,9 @@ public class Student {
 			}
 		}
 	}
+	
+	public abstract int studentInitialOption(UI UI);
+	public abstract void studentSellCourse(UI UI, CourseList courseList);
+	public abstract boolean studentBuyCourse(UI UI, Course aCourse);
+	public abstract String studentUpgradeFaculty(UI UI);
 }

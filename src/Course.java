@@ -95,7 +95,7 @@ public class Course extends Tile {
 	}
 
 	public int addCourseLevel() {
-		if (this.courseLevel < 4) {
+		if (!this.isMaxUpgraded()) {
 			if (this.courseLevel != 1) {
 				this.facultyUpgradeCost *= 1.3;
 			}
@@ -113,6 +113,10 @@ public class Course extends Tile {
 	public int getTileID() {
 		return super.getTileID();
 	}
+	
+	public boolean isMaxUpgraded() {
+		return (this.courseLevel == 3 ? true : false);
+	}
 
 	private int purchaseCourse(Student student, UI UI, CourseList courseList) {
 		int purchaseResult = student.purchaseCourse(this);
@@ -121,6 +125,7 @@ public class Course extends Tile {
 			UI.insufficientMoneyError();
 		} else if (purchaseResult == 1) {
 			courseList.addToCoursesOwned(this);
+			UI.displaySuccessfulPurchase(student, this);
 		}
 
 		return purchaseResult;
@@ -128,7 +133,7 @@ public class Course extends Tile {
 	
 	private int purchaseMenu(Student student, UI UI, CourseList courseList) {
 		if (student.getNetWorth() >= this.getBuyPrice()) {
-			boolean wantsToBuy = UI.displayPurchaseScreen(this);
+			boolean wantsToBuy = student.studentBuyCourse(UI, this);
 			if (wantsToBuy) {
 				return purchaseCourse(student, UI, courseList);
 			}
