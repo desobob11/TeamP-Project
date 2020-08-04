@@ -132,7 +132,7 @@ public class Course extends Tile {
 	
 	private int purchaseMenu(Student student, UI UI, CourseList courseList) {
 		if (student.getNetWorth() >= this.getBuyPrice()) {
-			boolean wantsToBuy = UI.displayPurchaseScreen(this);
+			boolean wantsToBuy = student.studentBuyCourse(UI, this);
 			if (wantsToBuy) {
 				return purchaseCourse(student, UI, courseList);
 			}

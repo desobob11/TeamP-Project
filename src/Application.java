@@ -87,15 +87,15 @@ public class Application {
 		}
 	}
 	
-	private void upgradeLevelMenu(Student student, ArrayList<ArrayList<Course>> upgradableFaculties) {
-		String faculty = UI.upgradeFacultyMenu(upgradableFaculties);
+	private void upgradeLevelMenu(Student student) {
+		String faculty = student.studentUpgradeFaculty(UI);
 		int upgradeResult = student.upgradeFacultyLevel(faculty);
 		if (upgradeResult == 1) {
 			UI.displaySuccessfulUpgrade(faculty);
 		} else if (upgradeResult == -2) {
 			UI.displayMustMortgageScreen(student);
-			sellCourseMenu(student);
-			this.upgradeLevelMenu(student, student.getUpgradableFaculties());
+			student.studentSellCourse(UI, courseList);
+			this.upgradeLevelMenu(student);
 		}
 	}
 	
@@ -202,9 +202,7 @@ public class Application {
 		UI.displayStudentStats(student);
 		Tile landingTile = courseList.getTileAt(student.getPlayerPosition());
 		UI.turnMainMenu(student);
-		boolean ownsProperty = student.doesStudentOwnProperty();
-		ArrayList<ArrayList<Course>> upgradableFaculties = student.getUpgradableFaculties();
-		int initialChoice = UI.initialOptions(ownsProperty, upgradableFaculties); 
+		int initialChoice = student.studentInitialOption(UI); 
 		if (initialChoice == 1) {
 			if (!student.isInJail()) {
 				UI.rollDiceMenu(student);
@@ -216,7 +214,7 @@ public class Application {
 			landingTile.setPerformedTileAction(true);
 			while (tileActionResult == -2) {
 				UI.displayMustMortgageScreen(student);
-				sellCourseMenu(student);
+				student.studentSellCourse(UI, courseList);
 				tileActionResult = landingTile.performTileAction(student, students, UI, courseList);
 			}
 			if (tileActionResult == -1) {
@@ -224,10 +222,10 @@ public class Application {
 			}
 			UI.updateBoard(student);
 		} else if (initialChoice == 2) {
-			sellCourseMenu(student);
+			student.studentSellCourse(UI, courseList);
 			completeTurn(student, 2);
 		} else {
-			upgradeLevelMenu(student, upgradableFaculties);
+			upgradeLevelMenu(student);
 			completeTurn(student, 2);
 		}
 
@@ -246,7 +244,7 @@ public class Application {
 		int turn = 0;
 
 		for (int i = 1; i <= numStudents; i++) {
-			students.add(new Student(i, startingMoney));
+			students.add(new HumanStudent(i, startingMoney));
 			UI.updateBoard(students.get(i - 1));
 		}
 

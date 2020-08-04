@@ -10,7 +10,7 @@ import java.lang.Math;
  *
  */
 
-public class Student {
+public abstract class Student {
 	private int playerNumber;
 	private int playerMoney;
 	private int playerPosition = 0;
@@ -252,4 +252,9 @@ public class Student {
 			}
 		}
 	}
+	
+	public abstract int studentInitialOption(UI UI);
+	public abstract void studentSellCourse(UI UI, CourseList courseList);
+	public abstract boolean studentBuyCourse(UI UI, Course aCourse);
+	public abstract String studentUpgradeFaculty(UI UI);
 }
