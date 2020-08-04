@@ -95,7 +95,7 @@ public class Course extends Tile {
 	}
 
 	public int addCourseLevel() {
-		if (this.isMaxUpgraded()) {
+		if (!this.isMaxUpgraded()) {
 			if (this.courseLevel != 1) {
 				this.facultyUpgradeCost *= 1.3;
 			}
@@ -125,6 +125,7 @@ public class Course extends Tile {
 			UI.insufficientMoneyError();
 		} else if (purchaseResult == 1) {
 			courseList.addToCoursesOwned(this);
+			UI.displaySuccessfulPurchase(student, this);
 		}
 
 		return purchaseResult;

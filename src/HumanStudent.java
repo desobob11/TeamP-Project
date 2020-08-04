@@ -20,6 +20,7 @@ public class HumanStudent extends Student {
 			if (Objects.nonNull(courseToSell)) {
 				this.sellCourse(courseToSell);
 				courseList.removeFromCoursesOwned(courseToSell);
+				UI.displaySuccessfulSell(this, courseToSell);
 				return true;
 			}
 			return false;

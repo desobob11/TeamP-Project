@@ -27,9 +27,11 @@ public class ComputerStudent extends Student {
 	@Override
 	public void studentSellCourse(UI UI, CourseList courseList) {
 		// TODO Auto-generated method stub
-		for (Course course : this.getCoursesOwned()) {
-			course.resetCourseLevel();
+		while (!this.getCoursesOwned().isEmpty()) {
+			Course course = this.getCoursesOwned().get(0);
+			this.sellCourse(course);
 			courseList.removeFromCoursesOwned(course);
+			UI.displaySuccessfulSell(this, course);
 		}
 	}
 

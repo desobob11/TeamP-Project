@@ -136,9 +136,9 @@ public abstract class Student {
 	public ArrayList<ArrayList<Course>> getUpgradableFaculties() {
 		ArrayList<ArrayList<Course>> upgradableFaculties = new ArrayList<ArrayList<Course>>();
 		for (String faculty : ownsFaculty.keySet()) {
-			ArrayList<Course> coursesOwnedOfFaculty = this.coursesOwnedOfFaculty.get(faculty);
-			if (ownsFaculty.get(faculty) && this.getNetWorth() >= coursesOwnedOfFaculty.get(0).getUpgradeCost() && !coursesOwnedOfFaculty.get(0).isMaxUpgraded()) {
-				upgradableFaculties.add(coursesOwnedOfFaculty);
+			ArrayList<Course> coursesOwnedOfAFaculty = this.coursesOwnedOfFaculty.get(faculty);
+			if (ownsFaculty.get(faculty) && this.getNetWorth() >= coursesOwnedOfAFaculty.get(0).getUpgradeCost() && !coursesOwnedOfAFaculty.get(0).isMaxUpgraded()) {
+				upgradableFaculties.add(coursesOwnedOfAFaculty);
 			}
 		}
 		return upgradableFaculties;

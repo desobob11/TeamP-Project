@@ -8,6 +8,8 @@ public interface UI {
 	void displayAlreadyOwned(Student student, Course theCourse);
 	void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed);
 	void displayTutorialPaidScreen(Student ower, Student owner, int amountOwed);
+	void displaySuccessfulSell(Student student, Course aCourse);
+	void displaySuccessfulPurchase(Student student, Course aCourse);
 	void displaySuccessfulUpgrade(String faculty);
 	void displayBankruptcyScreen(Student student);
 	void removePlayerFromUI(Student student);
@@ -32,6 +34,7 @@ public interface UI {
 	void displayStudentStats(Student student);
 	void displayOnGo(int goAmount);
 	int askForNumPlayers();
+	boolean isStudentHuman();
 	void displayTurnComplete();
 	void continuePlaying();
 	void displayWinner(Student student);

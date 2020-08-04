@@ -244,7 +244,11 @@ public class Application {
 		int turn = 0;
 
 		for (int i = 1; i <= numStudents; i++) {
-			students.add(new HumanStudent(i, startingMoney));
+			if (UI.isStudentHuman()) {	
+				students.add(new HumanStudent(i, startingMoney));
+			} else {
+				students.add(new ComputerStudent(i, startingMoney));
+			}
 			UI.updateBoard(students.get(i - 1));
 		}
 
