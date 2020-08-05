@@ -1,4 +1,6 @@
+package model;
 import java.util.ArrayList;
+import application.*;
 
 /**
  * This is the course class, the most important child of Tile. It handles

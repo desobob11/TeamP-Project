@@ -1,4 +1,6 @@
+package application;
 import java.util.*;
+import model.*;
 
 /**
  * This is the text-based UI class. It trusts Application with all of the logic

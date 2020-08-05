@@ -1,4 +1,6 @@
+package model;
 import java.util.ArrayList;
+import application.*;
 
 /**
  * This is a parking tile, which forces the student to pay a fixed fee and ends their turn.

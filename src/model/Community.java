@@ -1,5 +1,7 @@
+package model;
 import java.util.ArrayList;
 import java.util.Random;
+import application.*;
 
 /**
  * This is a Community Tile that randomly chooses something for the student to do.

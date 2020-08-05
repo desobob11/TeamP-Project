@@ -1,5 +1,7 @@
+package model;
 import java.util.*;
 import java.lang.Math;
+import application.*;
 
 /**
  * Student - this class is the actual player of the game, and it handles

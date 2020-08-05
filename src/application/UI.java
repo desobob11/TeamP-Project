@@ -1,4 +1,6 @@
+package application;
 import java.util.ArrayList;
+import model.*;
 
 public interface UI {
 	void showRoll(int roll);

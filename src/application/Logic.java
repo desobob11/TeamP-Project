@@ -1,4 +1,13 @@
+package application;
 import java.util.*;
+
+import model.ComputerStudent;
+import model.Course;
+import model.CourseList;
+import model.Dice;
+import model.HumanStudent;
+import model.Student;
+import model.Tile;
 
 /**
  * This is the class that has all of the game's ruleset/logic. It takes from all
@@ -8,17 +17,18 @@ import java.util.*;
  * @author Arnuv Mayank
  *
  */
-public class Application {
+public class Logic {
 	int numStudents;
 	final int startingMoney = 1000;
 	ArrayList<Student> students;
 	CourseList courseList;
-	TextVisualizer UI = new TextVisualizer();
+	UI UI;
 	Dice dice = new Dice();
 
-	public Application() {
+	public Logic(UI UI) {
 		students = new ArrayList<Student>();
 		courseList = new CourseList();
+		this.UI = UI;
 	}
 
 	public CourseList getCourseList() {

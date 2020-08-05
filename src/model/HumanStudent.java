@@ -1,4 +1,6 @@
+package model;
 import java.util.Objects;
+import application.*;
 
 public class HumanStudent extends Student {
 
