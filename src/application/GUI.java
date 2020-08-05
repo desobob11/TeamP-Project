@@ -287,13 +287,13 @@ public class GUI extends Application implements UI {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Pane pane = new Pane();
-		Stage stage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Parent root = loader.load(new FileInputStream(FXML_FILES_LOCATION + "PlayerView.fxml")); 
-		stage.setTitle("Player View"); 
-		stage.setScene(new Scene(root, 600, 900)); 
-		stage.show();
+		Scene scene = new Scene(loader.load(new FileInputStream(FXML_FILES_LOCATION + "PlayerView.fxml"))); 
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		
+		
 		
 	}
 
