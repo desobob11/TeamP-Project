@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * all changes to course ownership and enables the Application to know where
  * each student is.
  * 
- * @author Arnuv Mayank and Victor Manuel Campos Goitia Campos
+ * @author Arnuv Mayank 
+ * @author Victor Manuel Campos Goitia Campos
  *
  */
 

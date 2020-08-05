@@ -8,15 +8,15 @@ import java.util.*;
  * @author Arnuv Mayank
  *
  */
-public class Application {
+public class GamePlay {
 	int numStudents;
 	final int startingMoney = 1000;
 	ArrayList<Student> students;
 	CourseList courseList;
 	TextVisualizer UI = new TextVisualizer();
-	Dice dice = new Dice();
+	int dice;
 
-	public Application() {
+	public GamePlay() {
 		students = new ArrayList<Student>();
 		courseList = new CourseList();
 	}
@@ -46,14 +46,35 @@ public class Application {
 		return purchaseResult;
 	}
 	*/
-
-	private Tile rollDice(Student student) {
-		int roll = dice.rollDice();
+	
+	/*
+	 * Fetches the current dice value and returns it as an integer.
+	 */
+	public int getDice() {
+		return dice;
+	}
+	
+	/*
+	 * Generates a random integer for the dice and sets the dice value.
+	 */
+	public void rollDice() {
+		int random = new Random().nextInt(6) + 1;
+		dice = random;
+	}
+	
+	/*
+	 * 
+	 */
+	private Tile movePlayer(Student student) {
+		int roll = getDice();
 		student.moveForward(roll, courseList.getBoardSize());
 		UI.showRoll(roll);
 		return courseList.getTileAt(student.getPlayerPosition());
 	}
 
+	/*
+	 * 
+	 */
 	private void removeStudentFromGame(Student student) {
 		for (Course course : student.getCoursesOwned()) {
 			course.resetCourseLevel();
@@ -195,7 +216,7 @@ public class Application {
 		if (!initialChoice) {
 			if (!student.isInJail()) {
 				UI.rollDiceMenu(student);
-				landingTile = rollDice(student);
+				landingTile = movePlayer(student);
 				UI.updateBoard(student);
 				UI.displayBoard();
 			}

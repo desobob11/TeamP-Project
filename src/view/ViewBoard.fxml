@@ -6,17 +6,46 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoardController">
    <children>
       <AnchorPane prefHeight="1220.0" prefWidth="1133.0">
          <children>
-            <ImageView fitHeight="473.0" fitWidth="523.0" layoutX="428.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="1180.0" fitWidth="1438.0" layoutX="-16.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/Full_Screen.png" />
+                  <Image url="@../Images/Full_Screen.png" /> 
                </image>
             </ImageView>
             <Button layoutX="799.0" layoutY="54.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="251.0" text="Roll Dice" />
+            <ImageView fx:id="dice1" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Dice1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice2" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Dice2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice3" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Dice3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice4" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Dice4.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice5" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Dice5.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dice6" fitHeight="150.0" fitWidth="200.0" layoutX="825.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Dice6.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
