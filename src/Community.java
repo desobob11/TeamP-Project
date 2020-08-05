@@ -3,7 +3,8 @@ import java.util.Random;
 
 /**
  * This is a Community Tile that randomly chooses something for the student to do.
- * @author Arnuv Mayank and Victor Manuel Campos Goitia Campos
+ * @author Arnuv Mayank 
+ * @author Victor Manuel Campos Goitia Campos
  *
  */
 
@@ -17,14 +18,31 @@ public class Community extends Tile {
 	
 	private int randCommunity;
 	
+	/*
+	 * Creates a Tile object called Community.
+	 * 
+	 * @param position Tile number on board.
+	 */
 	public Community(int position) {
 		super(position, "Community");
 	}
 	
+	/*
+	 * Fetches all strings of text telling user what card they've gotten 
+	 * 
+	 * @return The string array with community options.
+	 */
 	public String[] getCommunityOptions() {
 		return communityOptions;
 	}
-		
+	
+	/*
+	 * Calls the appropriate methods to act on each community
+	 * 
+	 * @param selection The number referencing which card case should be used.
+	 * @param studentOn The student currently invoking Community.
+	 * @param allStudents The list of all students.
+	 */
 	public int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents) {
 		switch (selection) {
 		case 0:
@@ -49,9 +67,11 @@ public class Community extends Tile {
 	
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
+		//randomly shuffles the Community string options
 		if (!this.getPerformedTileAction()) {
 			randCommunity = new Random().nextInt(this.getCommunityOptions().length);
 		}
+		//returns the community option chosen
 		UI.displayCommunityOption(this, randCommunity);
 		return this.performCommunityOption(randCommunity, student, students);
 	}
