@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="598.0" prefWidth="927.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ChanceCardController">
+   <children>
+      <ImageView fitHeight="658.0" fitWidth="1174.0" layoutX="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Chance%20Card.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="chanceLabel" layoutX="292.0" layoutY="231.0" prefHeight="250.0" prefWidth="343.0" textAlignment="CENTER" wrapText="true" />
+   </children>
+</AnchorPane>
