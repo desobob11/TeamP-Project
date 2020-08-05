@@ -34,9 +34,11 @@ public class BoardController {
     @FXML
     private Button rollDiceButton;
 
+
     /*
      * Allows user to roll the dice on their turn.
      */
+    @FXML
     void rollDiceCLick(ActionEvent event) {
     	dice1.setVisible(false);
     	dice2.setVisible(false);
@@ -65,4 +67,8 @@ public class BoardController {
     		dice6.setVisible(true);
     	}
     }
+    	
+    	
+    
+    
 }

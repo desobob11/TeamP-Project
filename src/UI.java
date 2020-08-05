@@ -1,3 +1,9 @@
+import java.io.FileInputStream;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public interface UI {
 	void showRoll(int roll);
@@ -17,7 +23,21 @@ public interface UI {
 	void turnMainMenu(Student student);
 	boolean chooseToSell(boolean ownsProperty);
 	void displayCommunityOption(Community communityOn, int communityOption);
-	void displayBoard();
+	
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			AnchorPane root = loader.load(new FileInputStream("/view/BoardController.fxml"));
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}
+		catch (Exception e) {
+			
+		}
+	}
 	void updateBoard(Student student);
 	void displayChanceOption(Chance chanceOn, int chanceOption);
 	void displayLandedInProbation(Student student);

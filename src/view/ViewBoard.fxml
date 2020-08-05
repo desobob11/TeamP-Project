@@ -15,7 +15,7 @@
                   <Image url="@../Images/Full_Screen.png" /> 
                </image>
             </ImageView>
-            <Button layoutX="799.0" layoutY="54.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="251.0" text="Roll Dice" />
+            <Button fx:id="rollDiceButton" layoutX="800.0" layoutY="49.0" mnemonicParsing="false" onAction="#rollDiceClick" prefHeight="77.0" prefWidth="251.0" text="Roll Dice" />
             <ImageView fx:id="dice1" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/Dice1.png" />
@@ -41,7 +41,7 @@
                   <Image url="@../Images/Dice5.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="dice6" fitHeight="150.0" fitWidth="200.0" layoutX="825.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dice6" fitHeight="150.0" fitWidth="200.0" layoutX="850.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/Dice6.png" />
                </image>
