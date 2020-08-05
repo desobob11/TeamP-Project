@@ -1,4 +1,12 @@
+package application;
 import java.util.*;
+
+import model.Chance;
+import model.Community;
+import model.Course;
+import model.Parking;
+import model.Probation;
+import model.Student;
 
 /**
  * This is the text-based UI class. It trusts Application with all of the logic

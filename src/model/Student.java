@@ -1,4 +1,8 @@
+package model;
 import java.util.*;
+
+import application.UI;
+
 import java.lang.Math;
 
 /**

@@ -1,4 +1,7 @@
+package model;
 import java.util.ArrayList;
+
+import application.UI;
 
 public class ComputerStudent extends Student {
 

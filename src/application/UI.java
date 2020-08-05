@@ -1,4 +1,12 @@
+package application;
 import java.util.ArrayList;
+
+import model.Chance;
+import model.Community;
+import model.Course;
+import model.Parking;
+import model.Probation;
+import model.Student;
 
 public interface UI {
 	void showRoll(int roll);

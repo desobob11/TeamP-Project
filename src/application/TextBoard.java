@@ -1,5 +1,8 @@
+package application;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import model.Student;
 
 /**
  * This is the text visualization of the board. It uses a 6x6 array to create
