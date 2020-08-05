@@ -3,10 +3,10 @@ import java.util.Random;
 
 /**
  * This is a Chance Tile that randomly chooses something for the student to do.
- * @author Arnuv Mayank and Victor Manuel Campos Goitia Campos
+ * @author Arnuv Mayank
+ * @author Victor Manuel Campos Goitia Campos
  *
  */
-
 public class Chance extends Tile {
 	String[] chanceOptions = { "SU Donation: Pay $100", "Grants have been doubled everyone collect $300",
 			"Your offered a ride from your friend, move to the nearest free parking",
@@ -16,14 +16,33 @@ public class Chance extends Tile {
 
 	private int randChance;
 	
+	/*
+	 * Creates a Tile object called Chance.
+	 * 
+	 * @param position Tile number on the board.
+	 */
 	public Chance(int position) {
 		super(position, "Chance");
 	}
 
+	/*
+	 * Fetches all strings of text telling user what card they've gotten.
+	 * 
+	 * @return The string array with chance messages.
+	 */
 	public String[] getChanceOptions() {
 		return chanceOptions;
 	}
 
+	/*
+	 * Calls the appropriate methods to act on each chance
+	 * 
+	 * @param selection The number referencing which card case should be used.
+	 * @param studentOn The student currently invoking Chance.
+	 * @param allStudents The list of all students.
+	 * @param parkingTiles The list of @Tiles of type "Parking".
+	 * @param probationTile The @Tile of type "Probation".
+	 */
 	public int performChanceOption(int selection, Student studentOn, ArrayList<Student> allStudents,
 			ArrayList<Parking> parkingTiles, Probation probationTile) {
 		switch (selection) {
