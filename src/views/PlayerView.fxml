@@ -7,19 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane focusTraversable="false" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane focusTraversable="false" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"  fx:controller="application.PlayerViewController">
   <!-- TODO Add Nodes -->
   <children>
-    <Pane fx:id="playerViewPane" layoutX="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0">
+    <Pane fx:id="playerViewPane" layoutX="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1">
       <children>
         <GridPane fx:id="coursesOwnedGrid" layoutX="26.0" layoutY="526.0" prefHeight="341.0" prefWidth="553.0">
-          <children>
-            <ImageView id="STAT213.png" fitHeight="155.9930877685547" fitWidth="110.6551991119718" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
-              <image>
-                <Image url="@../images/STAT213.png" preserveRatio="true" smooth="true" />
-              </image>
-            </ImageView>
-          </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -3,6 +3,7 @@ import java.util.*;
 
 import application.TextVisualizer;
 import application.UI;
+import model.*;
 
 /**
  * This is the class that has all of the game's ruleset/logic. It takes from all
@@ -18,7 +19,7 @@ public class Logic {
 	ArrayList<Student> students;
 	CourseList courseList;
 	UI UI;
-	Dice dice = new Dice();
+	//Dice dice = new Dice();
 
 	public Logic(UI UI) {
 		students = new ArrayList<Student>();
@@ -53,7 +54,7 @@ public class Logic {
 	*/
 
 	private Tile rollDice(Student student) {
-		int roll = dice.rollDice();
+		int roll = new Random().nextInt(6) + 1;
 		student.moveForward(roll, courseList.getBoardSize());
 		UI.showRoll(roll);
 		return courseList.getTileAt(student.getPlayerPosition());

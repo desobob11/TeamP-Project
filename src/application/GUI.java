@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
+import java.util.*;
 
 import model.*;
 import java.io.ByteArrayOutputStream;
@@ -21,7 +22,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
 public class GUI extends Application implements UI {
-
+	Scanner input = new Scanner(System.in);
 	public static final String FXML_FILES_LOCATION = "src/views/";
 	
 	public static final CountDownLatch latch = new CountDownLatch(1);
@@ -245,14 +246,18 @@ public class GUI extends Application implements UI {
 
 	@Override
 	public int askForNumPlayers() {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("How many players will be in this game? ");
+		int userinp = Integer.parseInt(input.nextLine());
+
+		return userinp;
 	}
 
 	@Override
 	public boolean isStudentHuman() {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("Is this player a [h]uman or a [c]omputer? ");
+		String userinp = input.nextLine();
+
+		return (userinp.equals("h") ? true : false);
 	}
 
 	@Override
