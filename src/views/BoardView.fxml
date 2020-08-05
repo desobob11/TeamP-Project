@@ -14,7 +14,7 @@
       <children>
         <ImageView fx:id="board" fitHeight="772.0" fitWidth="772.0" layoutX="114.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../../../../../Desktop/BoardImage.png" />
+            <Image url="src/views/BoardImage.png" />
           </image>
         </ImageView>
         <GridPane id="goGrid" fx:id="grid0" layoutX="471.0" layoutY="539.0" prefHeight="52.0" prefWidth="58.0">
@@ -224,3 +224,4 @@
     </Pane>
   </children>
 </AnchorPane>
+
