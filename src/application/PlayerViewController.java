@@ -73,19 +73,14 @@ public class PlayerViewController {
       
     	
     }
+    
+    void setPlayerMoneyText(int money) {
+    	this.playerMoneyText.setText(money + "");
+    }
 
     @FXML
     void initialize() {
-        assert appText != null : "fx:id=\"appText\" was not injected: check your FXML file 'PlayerView.fxml'.";
-        assert button1 != null : "fx:id=\"button1\" was not injected: check your FXML file 'PlayerView.fxml'.";
-        assert button2 != null : "fx:id=\"button2\" was not injected: check your FXML file 'PlayerView.fxml'.";
-        assert button3 != null : "fx:id=\"button3\" was not injected: check your FXML file 'PlayerView.fxml'.";
-        assert coursesOwnedGrid != null : "fx:id=\"coursesOwnedGrid\" was not injected: check your FXML file 'PlayerView.fxml'.";
-        assert playerLocationText != null : "fx:id=\"playerLocationText\" was not injected: check your FXML file 'PlayerView.fxml'.";
-        assert playerMoneyText != null : "fx:id=\"playerMoneyText\" was not injected: check your FXML file 'PlayerView.fxml'.";
-        assert playerNameText != null : "fx:id=\"playerNameText\" was not injected: check your FXML file 'PlayerView.fxml'.";
-        assert playerNetWorthText != null : "fx:id=\"playerNetWorthText\" was not injected: check your FXML file 'PlayerView.fxml'.";
-
+    	
         System.out.println("Hello");
     }
 

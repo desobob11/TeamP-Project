@@ -204,8 +204,8 @@ public class TextVisualizer implements UI {
 		return userinp;
 	}
 
-	public boolean isStudentHuman() {
-		System.out.println("Is this player a [h]uman or a [c]omputer? ");
+	public boolean isStudentHuman(int i) {
+		System.out.println("Is Student " + i + " a [h]uman or a [c]omputer? ");
 		String userinp = input.nextLine();
 
 		return (userinp.equals("h") ? true : false);

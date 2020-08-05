@@ -17,16 +17,15 @@ public class Main {
 		}
 		else {
 			
-			GUI gui = new GUI();
 			new Thread() {
 	            @Override
 	            public void run() {
-	                javafx.application.Application.launch(GUI.class);
+	                javafx.application.Application.launch(GUI.class, args);
 	            }
 	        }.start();
 	        GUI startUpTest = GUI.waitForStartUpTest();
 	        startUpTest.printSomething();
-			Logic logic = new Logic(gui);
+			Logic logic = new Logic(startUpTest);
 			logic.run();
 		}
 	}

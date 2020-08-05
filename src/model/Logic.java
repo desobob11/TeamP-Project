@@ -250,7 +250,7 @@ public class Logic {
 		int turn = 0;
 
 		for (int i = 1; i <= numStudents; i++) {
-			if (UI.isStudentHuman()) {	
+			if (UI.isStudentHuman(i)) {	
 				students.add(new HumanStudent(i, startingMoney));
 			} else {
 				students.add(new ComputerStudent(i, startingMoney));

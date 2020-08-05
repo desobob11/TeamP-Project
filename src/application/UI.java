@@ -42,7 +42,7 @@ public interface UI {
 	void displayStudentStats(Student student);
 	void displayOnGo(int goAmount);
 	int askForNumPlayers();
-	boolean isStudentHuman();
+	boolean isStudentHuman(int i);
 	void displayTurnComplete();
 	void continuePlaying();
 	void displayWinner(Student student);
