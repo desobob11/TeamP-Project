@@ -61,6 +61,7 @@ public class CourseList {
 		sortByTilePosition(allTiles);
 	}
 
+	//buyPrice, sellPrice, landPrice
 	public void initializeCourses() {
 		Course course1 = new Course(1, "SOCI 201", "Arts", 150, 50, 50);
 		courseList.add(course1);
@@ -92,10 +93,10 @@ public class CourseList {
 		Course course10 = new Course(16, "ENGG 599", "Engineering", 450, 140, 100);
 		courseList.add(course10);
 
-		Course course11 = new Course(17, "ENMG 301", "Engineering", 475, 150, 110);
+		Course course11 = new Course(17, "ENGG 501", "Engineering", 475, 150, 110);
 		courseList.add(course11);
 
-		Course course12 = new Course(19, "MGMT 311", "Engineering", 500, 160, 120);
+		Course course12 = new Course(19, "ENGG 683", "Engineering", 500, 160, 120);
 		courseList.add(course12);
 	}
 

@@ -2,7 +2,8 @@ import java.util.*;
 
 /**
  * This is the text-based UI class. It trusts Application with all of the logic and only handles UI and I/O.
- * @author Desmond O'Brien and Arnuv Mayank
+ * @author Desmond O'Brien
+ * @author Arnuv Mayank
  *
  */
 
