@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * This is a Chance Tile that randomly chooses something for the student to do.
  * This is a Chance Tile, called when the player lands on the tile of type
  * "Chance". Draws a Chance card at random and with a specific impact on the
  * player's game.
@@ -19,7 +18,6 @@ public class Chance extends Tile {
 			"You have been caught for cheating, move to academic probation", };
 
 	private int randChance;
-	
 
 	/*
 	 * Creates a Tile object called Chance.
@@ -40,7 +38,6 @@ public class Chance extends Tile {
 	}
 
 	/*
-	 * Calls the appropriate methods to act on each chance
 	 * Calls the appropriate methods to act on each possible Chance card.
 	 * 
 	 * @param selection The number referencing which card case should be used.
@@ -48,8 +45,6 @@ public class Chance extends Tile {
 	 * @param studentOn The student currently invoking Chance.
 	 * 
 	 * @param allStudents The list of all students.
-	 * @param parkingTiles The list of @Tiles of type "Parking".
-	 * @param probationTile The @Tile of type "Probation".
 	 * 
 	 * @param parkingTiles The list of Tiles of type "Parking".
 	 * 
@@ -69,7 +64,6 @@ public class Chance extends Tile {
 			}
 			return 1;
 		case 2:
-			int tileToMoveTo = studentOn.moveToClosestParking(parkingTiles.get(0).getTileID(), parkingTiles.get(1).getTileID());
 			int tileToMoveTo = studentOn.moveToClosestParking(parkingTiles.get(0).getTileID(),
 					parkingTiles.get(1).getTileID());
 			return parkingTiles.get(tileToMoveTo).payParkingFee(studentOn);
@@ -105,7 +99,6 @@ public class Chance extends Tile {
 			randChance = new Random().nextInt(this.getChanceOptions().length);
 		}
 		UI.displayChanceOption(this, randChance);
-		return this.performChanceOption(randChance, student, students, courseList.getParkingTiles(), courseList.getProbation());
 		return this.performChanceOption(randChance, student, students, courseList.getParkingTiles(),
 				courseList.getProbation());
 	}
