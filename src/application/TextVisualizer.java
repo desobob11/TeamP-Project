@@ -134,7 +134,7 @@ public class TextVisualizer implements UI {
 			String userinp = input.nextLine();
 			return Integer.parseInt(userinp);
 		} else {
-			System.out.println("You have no courses to sell. ");
+			displayNoProperty();
 			return 1;
 		}
 	}
