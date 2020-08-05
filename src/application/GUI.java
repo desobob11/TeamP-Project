@@ -24,6 +24,7 @@ import javafx.scene.layout.Pane;
 public class GUI extends Application implements UI {
 	Scanner input = new Scanner(System.in);
 	public static final String FXML_FILES_LOCATION = "src/views/";
+	private BoardViewController board = new BoardViewController();
 	
 	public static final CountDownLatch latch = new CountDownLatch(1);
     public static GUI gui = null;
@@ -49,8 +50,8 @@ public class GUI extends Application implements UI {
     public void printSomething() {
         System.out.println("You called a method on the application");
     }
-
-	
+    
+    
 	
 	@Override
 	public void showRoll(int roll) {
@@ -287,13 +288,15 @@ public class GUI extends Application implements UI {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader();
-		Scene scene = new Scene(loader.load(new FileInputStream(FXML_FILES_LOCATION + "PlayerView.fxml"))); 
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/BoardView.fxml"));
+		Parent root = (Parent) loader.load();
+		board = loader.getController();
+		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
 		
-		
+	 
 		
 	}
 

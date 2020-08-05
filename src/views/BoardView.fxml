@@ -14,7 +14,7 @@
       <children>
         <ImageView fx:id="board" fitHeight="772.0" fitWidth="772.0" layoutX="114.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="src/views/BoardImage.png" />
+            <Image url="@../images/BoardImage.png" />
           </image>
         </ImageView>
         <GridPane id="goGrid" fx:id="grid0" layoutX="471.0" layoutY="539.0" prefHeight="52.0" prefWidth="58.0">
@@ -30,7 +30,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane id="s" fx:id="grid2" layoutX="401.0" layoutY="498.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane id="s" fx:id="grid1" layoutX="401.0" layoutY="498.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,7 +40,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane fx:id="grid3" layoutX="343.0" layoutY="459.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id="grid2" layoutX="343.0" layoutY="459.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -50,7 +50,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane fx:id="grid4" layoutX="285.0" layoutY="420.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id="grid3" layoutX="285.0" layoutY="420.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,7 +60,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane fx:id="grid5" layoutX="227.0" layoutY="381.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id="grid4" layoutX="227.0" layoutY="381.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,7 +70,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="176.0" layoutY="329.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid5" layoutX="176.0" layoutY="329.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -80,7 +80,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="234.0" layoutY="277.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid6" layoutX="234.0" layoutY="277.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -90,7 +90,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="292.0" layoutY="240.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid7" layoutX="292.0" layoutY="240.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -100,7 +100,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="350.0" layoutY="198.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid8"  layoutX="350.0" layoutY="198.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -110,7 +110,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="401.0" layoutY="160.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid9"  layoutX="401.0" layoutY="160.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -120,7 +120,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="471.0" layoutY="108.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid10"  layoutX="471.0" layoutY="108.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -130,7 +130,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="540.0" layoutY="160.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid11"  layoutX="540.0" layoutY="160.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -140,7 +140,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="588.0" layoutY="198.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid12"  layoutX="588.0" layoutY="198.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -150,7 +150,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="646.0" layoutY="240.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid13"  layoutX="646.0" layoutY="240.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -160,7 +160,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="704.0" layoutY="277.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid14"  layoutX="704.0" layoutY="277.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -170,7 +170,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="762.0" layoutY="329.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid15"  layoutX="762.0" layoutY="329.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -180,7 +180,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="704.0" layoutY="368.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid16"  layoutX="704.0" layoutY="368.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -190,7 +190,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="655.0" layoutY="407.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid17"  layoutX="655.0" layoutY="407.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -200,7 +200,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="598.0" layoutY="459.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid18"  layoutX="598.0" layoutY="459.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -210,7 +210,7 @@
             <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane layoutX="548.0" layoutY="498.0" prefHeight="52.0" prefWidth="58.0">
+        <GridPane fx:id = "grid19"  layoutX="548.0" layoutY="498.0" prefHeight="52.0" prefWidth="58.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
