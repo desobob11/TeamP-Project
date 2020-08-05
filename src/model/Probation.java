@@ -1,4 +1,7 @@
+package model;
 import java.util.ArrayList;
+
+import Application.UI;
 
 /**
  * This is a probation tile, which traps the user in probation for 3 turns and forces them to pay $250 per turn.

@@ -1,4 +1,7 @@
+package model;
 import java.util.ArrayList;
+
+import Application.UI;
 
 /**
  * This is the Go tile, the simplest child of Tile. It simply gives the student

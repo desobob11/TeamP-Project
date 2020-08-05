@@ -1,4 +1,7 @@
+package model;
 import java.util.ArrayList;
+
+import Application.UI;
 
 /**
  * Tile - this represents a piece on the board. There will never be an instance

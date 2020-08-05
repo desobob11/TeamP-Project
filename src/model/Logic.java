@@ -1,4 +1,8 @@
+package model;
 import java.util.*;
+
+import Application.TextVisualizer;
+import Application.UI;
 
 /**
  * This is the class that has all of the game's ruleset/logic. It takes from all
@@ -8,7 +12,7 @@ import java.util.*;
  * @author Arnuv Mayank
  *
  */
-public class Application {
+public class Logic {
 	int numStudents;
 	final int startingMoney = 1000;
 	ArrayList<Student> students;
@@ -16,7 +20,7 @@ public class Application {
 	TextVisualizer UI = new TextVisualizer();
 	Dice dice = new Dice();
 
-	public Application() {
+	public Logic() {
 		students = new ArrayList<Student>();
 		courseList = new CourseList();
 	}

@@ -1,5 +1,8 @@
+package model;
 import java.util.ArrayList;
 import java.util.Random;
+
+import Application.UI;
 
 /**
  * This is a Chance Tile that randomly chooses something for the student to do.
