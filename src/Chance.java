@@ -19,7 +19,7 @@ public class Chance extends Tile {
 
 	private int randChance;
 
-	/*
+	/**
 	 * Creates a Tile object called Chance.
 	 * 
 	 * @param position Tile number on the board.
@@ -28,7 +28,7 @@ public class Chance extends Tile {
 		super(position, "Chance");
 	}
 
-	/*
+	/**
 	 * Fetches all strings of text telling user what card they've gotten.
 	 * 
 	 * @return The string array with chance messages.
@@ -37,7 +37,7 @@ public class Chance extends Tile {
 		return chanceOptions;
 	}
 
-	/*
+	/**
 	 * Calls the appropriate methods to act on each possible Chance card.
 	 * 
 	 * @param selection The number referencing which card case should be used.
@@ -78,7 +78,7 @@ public class Chance extends Tile {
 		return 1;
 	}
 
-	/*
+	/**
 	 * Invokes the performChanceOption method to perform the Tile action of the Tile
 	 * type "Chance".
 	 * 

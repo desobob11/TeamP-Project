@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 
 /**
- * CourseList - this is effectively the "board" class and acts as a container
- * for all the tiles, with separate containers for each type of tile. It handles
- * all changes to course ownership and enables the Application to know where
- * each student is.
+ * The Class holding all data for the entire Board. Acts as a container for all
+ * the tiles, with separate containers for each type of tile. It handles all
+ * changes to course ownership and enables the Application to know where each
+ * student is.
  * 
- * @author Arnuv Mayank and Victor Manuel Campos Goitia Campos
+ * @author Arnuv Mayank
+ * @author Victor Manuel Campos Goitia Campos
  *
  */
 
@@ -21,6 +22,9 @@ public class CourseList {
 	private Go goTile;
 	int boardSize = 20;
 
+	/**
+	 * Class constructor.
+	 */
 	public CourseList() {
 		board = new ArrayList<Tile>();
 		courseList = new ArrayList<Course>();
@@ -41,6 +45,11 @@ public class CourseList {
 		sortByTilePosition(allTiles);
 	}
 
+	/**
+	 * Class constructor specifying the list of Courses to create.
+	 * 
+	 * @param courseList
+	 */
 	public CourseList(ArrayList<Course> courseList) {
 		this.courseList = courseList;
 		board = new ArrayList<Tile>();
@@ -61,6 +70,9 @@ public class CourseList {
 		sortByTilePosition(allTiles);
 	}
 
+	/**
+	 * Creates instances of Courses with appropriate data to fill the board.
+	 */
 	public void initializeCourses() {
 		Course course1 = new Course(1, "SOCI 201", "Arts", 150, 50, 50);
 		courseList.add(course1);
@@ -99,6 +111,10 @@ public class CourseList {
 		courseList.add(course12);
 	}
 
+	/**
+	 * Creates instances of non-course tiles: Parking, Chance, Community, and Probation.
+	 * Sets appropriate instance variables to fill the board.
+	 */
 	public void initializeUnbuyableTiles() {
 		int parking1Pos = 10;
 		int parking2Pos = 15;
@@ -127,6 +143,7 @@ public class CourseList {
 		communityTiles.add(community2);
 	}
 
+	
 	public int getBoardSize() {
 		return boardSize;
 	}
