@@ -63,6 +63,8 @@ public class Logic {
 	private void removeStudentFromGame(Student student) {
 		for (Course course : student.getCoursesOwned()) {
 			course.resetCourseLevel();
+			course.setOwnedStatus(false);
+			course.setOwner(null);
 			courseList.removeFromCoursesOwned(course);
 		}
 		students.remove(student);
@@ -107,7 +109,7 @@ public class Logic {
 	
 	private void displayStudentStats() {
 		for (Student aStudent : students) {
-			UI.displayStudentStats(aStudent);
+			//UI.displayStudentStats(aStudent);
 		}
 	}
 	
@@ -225,8 +227,8 @@ public class Logic {
 			}
 			if (tileActionResult == -1) {
 				removeStudentFromGame(student);
+				UI.updateBoard(student);
 			}
-			UI.updateBoard(student);
 		} else if (initialChoice == 2) {
 			student.studentSellCourse(UI, courseList);
 			completeTurn(student, 2);

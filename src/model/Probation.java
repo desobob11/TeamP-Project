@@ -39,7 +39,11 @@ public class Probation extends Tile {
 		if (student.isInJail()) {
 			UI.displayStillInJail(student);
 		} else {
-			UI.displayLandedInProbation(student);
+			if (!this.getPerformedTileAction())	{
+				UI.displayLandedInProbation(student);
+			} else {
+				return student.withdrawMoney(probationCost);
+			}
 		}
 		UI.displayInProbation(student, this);
 		

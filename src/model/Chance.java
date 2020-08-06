@@ -28,7 +28,7 @@ public class Chance extends Tile {
 	}
 
 	public int performChanceOption(int selection, Student studentOn, ArrayList<Student> allStudents,
-			ArrayList<Parking> parkingTiles, Probation probationTile) {
+			ArrayList<Parking> parkingTiles, Probation probationTile, UI UI) {
 		switch (selection) {
 		case 0:
 			return studentOn.withdrawMoney(100);
@@ -39,6 +39,7 @@ public class Chance extends Tile {
 			return 1;
 		case 2:
 			int tileToMoveTo = studentOn.moveToClosestParking(parkingTiles.get(0).getTileID(), parkingTiles.get(1).getTileID());
+			UI.updateBoard(studentOn);
 			return parkingTiles.get(tileToMoveTo).payParkingFee(studentOn);
 		case 3:
 			return studentOn.withdrawMoney(250);
@@ -46,6 +47,7 @@ public class Chance extends Tile {
 			return studentOn.withdrawMoney(150);
 		case 5:
 			studentOn.moveToProbation(probationTile.getTileID());
+			UI.updateBoard(studentOn);
 			return 1;
 		}
 		return 1;
@@ -57,7 +59,7 @@ public class Chance extends Tile {
 			randChance = new Random().nextInt(this.getChanceOptions().length);
 		}
 		UI.displayChanceOption(this, randChance);
-		return this.performChanceOption(randChance, student, students, courseList.getParkingTiles(), courseList.getProbation());
+		return this.performChanceOption(randChance, student, students, courseList.getParkingTiles(), courseList.getProbation(), UI);
 	}
 
 }

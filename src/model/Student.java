@@ -18,7 +18,7 @@ public abstract class Student {
 	private int playerNumber;
 	private int playerMoney;
 	private int playerPosition = 0;
-	private int previousPlayerPosition = 0;
+	private int previousPlayerPosition = -1;
 	private ArrayList<Course> coursesOwned;
 	private HashMap<String, ArrayList<Course>> coursesOwnedOfFaculty;
 	private HashMap<String, Boolean> ownsFaculty;
@@ -153,27 +153,30 @@ public abstract class Student {
 	}
 
 	public int purchaseCourse(Course aCourse) {
-		if (!aCourse.getOwnedStatus()) {
-			int withdrawResult = withdrawMoney(aCourse.getBuyPrice());
-			if (withdrawResult == 1) {
-				aCourse.setOwnedStatus(true);
-				aCourse.setOwner(this);
-				this.addCourse(aCourse);
-
-				String courseFaculty = aCourse.getFaculty();
-				ArrayList<Course> courseOfFaculty = coursesOwnedOfFaculty.get(courseFaculty);
-				courseOfFaculty.add(aCourse);
-				coursesOwnedOfFaculty.put(courseFaculty, courseOfFaculty);
-				if (courseOfFaculty.size() == 3) {
-					ownsFaculty.put(courseFaculty, true);
-					for (Course course : courseOfFaculty) {
-						course.addCourseLevel();
+		if (!aCourse.equals(null)) {	
+			if (!aCourse.getOwnedStatus()) {
+				int withdrawResult = withdrawMoney(aCourse.getBuyPrice());
+				if (withdrawResult == 1) {
+					aCourse.setOwnedStatus(true);
+					aCourse.setOwner(this);
+					this.addCourse(aCourse);
+	
+					String courseFaculty = aCourse.getFaculty();
+					ArrayList<Course> courseOfFaculty = coursesOwnedOfFaculty.get(courseFaculty);
+					courseOfFaculty.add(aCourse);
+					coursesOwnedOfFaculty.put(courseFaculty, courseOfFaculty);
+					if (courseOfFaculty.size() == 3) {
+						ownsFaculty.put(courseFaculty, true);
+						for (Course course : courseOfFaculty) {
+							course.addCourseLevel();
+						}
 					}
 				}
+				return withdrawResult;
 			}
-			return withdrawResult;
+			return -3;
 		}
-		return -3;
+		return -4;
 	}
 
 	public int sellCourse(Course aCourse) {

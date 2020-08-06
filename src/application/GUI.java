@@ -35,7 +35,7 @@ public class GUI extends Application implements UI {
 	public static final CountDownLatch latch = new CountDownLatch(1);
     public static GUI gui = null;
     
-    private PlayerViewController player1View = new PlayerViewController();
+    private BoardViewController boardView = new BoardViewController();
 
     public static GUI waitForStartUpTest() {
         try {
@@ -53,10 +53,6 @@ public class GUI extends Application implements UI {
 
     public GUI() {
         setStartUpTest(this);
-    }
-
-    public void printSomething() {
-        System.out.println("You called a method on the application");
     }
 
 	
@@ -219,7 +215,8 @@ public class GUI extends Application implements UI {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Course Already Owned");
 				alert.setHeaderText(null);
-				alert.setContentText("Student " + ower.getPlayerNumber() + " has landed on Student " + owner.getPlayerNumber() + "'s course and owes them $" + amountOwed + " for a tutorial.");
+				alert.setContentText("Student " + ower.getPlayerNumber() + " has paid Student " + owner.getPlayerNumber() + " $"
+						+ amountOwed + " for the tutorial.");
 
 				alert.showAndWait();
 				latch.countDown();
@@ -448,7 +445,36 @@ public class GUI extends Application implements UI {
 	@Override
 	public String upgradeFacultyMenu(ArrayList<ArrayList<Course>> upgradableFaculties) {
 		// TODO Auto-generated method stub
-		return null;
+		final CountDownLatch latch = new CountDownLatch(1);
+		ArrayList<String> choices = new ArrayList<String>();
+		for (int i = 0; i < upgradableFaculties.size(); i++) {
+			choices.add(upgradableFaculties.get(i).get(0).getFaculty());
+		}
+		
+		final StringProperty stpResult = new SimpleStringProperty();
+		
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				ChoiceDialog<String> dialog = new ChoiceDialog<> ("", choices);
+				dialog.setTitle("Upgrade Faculty");
+				dialog.setHeaderText(null);
+				dialog.setContentText("Which faculty do you want to upgrade? ");
+				Optional<String> result = dialog.showAndWait();
+				stpResult.set(dialog.getSelectedItem());
+				latch.countDown();
+			}
+			
+		});
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return stpResult.get();
 	}
 
 	@Override
@@ -608,7 +634,7 @@ public class GUI extends Application implements UI {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == buttonTypeProceed) {
 					stpResult.set("1");
-				} else if (result.get() == buttonTypeFaculty){
+				} else if (result.get() == buttonTypeSell){
 					stpResult.set("2");
 				} else {
 					stpResult.set("3");
@@ -663,9 +689,18 @@ public class GUI extends Application implements UI {
 	@Override
 	public void updateBoard(Student student) {
 		// TODO Auto-generated method stub
+		final CountDownLatch latch = new CountDownLatch(1);
 		Platform.runLater(() -> {
-			player1View.setPlayerMoneyText(student.getPlayerMoney());
+			boardView.updateBoard(student);
+			latch.countDown();
 		});
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return;
 	}
 
 	@Override
@@ -1041,9 +1076,9 @@ public class GUI extends Application implements UI {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/PlayerView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/BoardView.fxml"));
 		Parent root = (Parent) loader.load();
-		player1View = loader.getController();
+		boardView = loader.getController();
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();

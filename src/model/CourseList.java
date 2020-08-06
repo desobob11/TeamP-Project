@@ -93,10 +93,10 @@ public class CourseList {
 		Course course10 = new Course(16, "ENGG 599", "Engineering", 450, 140, 100);
 		courseList.add(course10);
 
-		Course course11 = new Course(17, "ENMG 301", "Engineering", 475, 150, 110);
+		Course course11 = new Course(18, "ENMG 501", "Engineering", 475, 150, 110);
 		courseList.add(course11);
 
-		Course course12 = new Course(19, "MGMT 311", "Engineering", 500, 160, 120);
+		Course course12 = new Course(19, "ENGG 683", "Engineering", 500, 160, 120);
 		courseList.add(course12);
 	}
 
@@ -121,7 +121,7 @@ public class CourseList {
 		Community community1 = new Community(2);
 		communityTiles.add(community1);
 
-		Chance chance2 = new Chance(18);
+		Chance chance2 = new Chance(17);
 		chanceTiles.add(chance2);
 
 		Community community2 = new Community(12);
