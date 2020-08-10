@@ -32,7 +32,7 @@ public class PlayerViewController {
 	Image ENMG301Image = new Image("/images/ENMG301.png");
 	Image MGMT311Image = new Image("/images/MGMT311.png");
 	Image ENGG599Image = new Image("/images/ENGG599.png");
-	Image ENGG501Image = new Image("/images/ENMG301 ENGG.png");
+	Image ENGG501Image = new Image("/images/ENGG501.png");
 	Image ENGG683Image = new Image("/images/ENGG683.png");
  	ImageView SOCI201ImageView = new ImageView();
 	ImageView POLI201ImageView = new ImageView();
