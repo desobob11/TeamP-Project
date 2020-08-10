@@ -62,6 +62,7 @@ public class CourseList {
 	}
 
 	private void initializeCourses() {
+		//Course constructor format: (position, name, faculty, buy price, sell price, tutorial price)
 		Course course1 = new Course(1, "SOCI 201", "Arts", 150, 50, 50);
 		courseList.add(course1);
 
@@ -100,9 +101,9 @@ public class CourseList {
 	}
 
 	public void initializeUnbuyableTiles() {
-		int parking1Pos = 10;
-		int parking2Pos = 15;
-		int probationPos = 5;
+		final int parking1Pos = 10;
+		final int parking2Pos = 15;
+		final int probationPos = 5;
 
 		probationTile = new Probation(probationPos);
 
@@ -140,7 +141,9 @@ public class CourseList {
 	}
 
 	public Parking getParkingAt(int position) {
+		//iterates through parking tiles
 		for (Parking parking : parkingTiles) {
+			//matches the tile IDs
 			if (parking.getTileID() == position) {
 				return parking;
 			}
@@ -169,8 +172,11 @@ public class CourseList {
 	}
 
 	public int addToCoursesOwned(Course aCourse) {
+		//should only add the course if it's in the course list (safety check) (-1)
 		if (inCourseList(aCourse)) {
+			//should only add the course if it's not already owned (safety check) (-2)
 			if (!inCoursesOwned(aCourse)) {
+				//add the course
 				coursesOwned.add(aCourse);
 				return 1;
 			}
@@ -180,8 +186,11 @@ public class CourseList {
 	}
 
 	public int removeFromCoursesOwned(Course aCourse) {
+		//should only remove the course if it's in the course list (safety check) (-1)
 		if (inCourseList(aCourse)) {
+			//should only remove the course if it's already owned (safety check) (-2)
 			if (inCoursesOwned(aCourse)) {
+				//remove the course
 				coursesOwned.remove(aCourse);
 				aCourse.setOwner(null);
 			}
@@ -192,9 +201,13 @@ public class CourseList {
 
 	private void sortByTilePosition(ArrayList<Tile> allTiles) {
 		board = new ArrayList<Tile>();
+		//iterate through all of the Tile IDs
 		for (int i = 0; i < boardSize; i++) {
+			//iterate through the tile list
 			for (Tile tile : allTiles) {
+				//match the IDs
 				if (tile.getTileID() == i) {
+					//add to official board list
 					board.add(tile);
 					break;
 				}
