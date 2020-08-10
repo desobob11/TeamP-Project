@@ -66,13 +66,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Roll Screen");
-				alert.setHeaderText(null);
-				alert.setContentText("Student rolled a " + roll);
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student rolled a " + roll);
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -94,13 +90,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Insufficient Money Error");
-				alert.setHeaderText(null);
-				alert.setContentText("Student does not have sufficient money to purchase this course. ");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student does not have sufficient money to purchase this course. ");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -128,13 +120,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Roll the Die");
-				alert.setHeaderText(null);
-				alert.setContentText("Press OK for Student " + student.getPlayerNumber() + " to roll the die:");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Click ROLL for Student " + student.getPlayerNumber() + " to roll the die: ");
+				boardView.setButtonText("ROLL");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -156,13 +144,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + student.getPlayerNumber() + " already owns this course.");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student " + student.getPlayerNumber() + " already owns this course.");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -184,13 +168,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + ower.getPlayerNumber() + " has landed on Student " + owner.getPlayerNumber() + "'s course and owes them $" + amountOwed + " for a tutorial.");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student " + ower.getPlayerNumber() + " has landed on Student " + owner.getPlayerNumber() + "'s course and owes them $" + amountOwed + " for a tutorial.");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -212,14 +192,10 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + ower.getPlayerNumber() + " has paid Student " + owner.getPlayerNumber() + " $"
+				boardView.setLabelText("Student " + ower.getPlayerNumber() + " has paid Student " + owner.getPlayerNumber() + " $"
 						+ amountOwed + " for the tutorial.");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -241,16 +217,11 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + student.getPlayerNumber() + " has successfully sold " + aCourse.getTileName()
+				boardView.setLabelText("Student " + student.getPlayerNumber() + " has successfully sold " + aCourse.getTileName()
 				+ " for $" + aCourse.getSellPrice());
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
-			
 		});
 		try {
 			latch.await();
@@ -270,14 +241,10 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + student.getPlayerNumber() + " has successfully bought " + aCourse.getTileName()
+				boardView.setLabelText("Student " + student.getPlayerNumber() + " has successfully bought " + aCourse.getTileName()
 				+ " for $" + aCourse.getBuyPrice());
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -299,13 +266,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("The " + faculty + " faculty was successfully upgraded.");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("The " + faculty + " faculty was successfully upgraded.");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -327,13 +290,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText(student.getPlayerNumber() + " is bankrupt! No money, no education, you're expelled!");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText(student.getPlayerNumber() + " is bankrupt! No money, no education, you're expelled!");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -355,13 +314,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + student.getPlayerNumber() + " has been removed from the game");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student " + student.getPlayerNumber() + " has been removed from the game");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -383,14 +338,10 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + student.getPlayerNumber()
+				boardView.setLabelText("Student " + student.getPlayerNumber()
 				+ " does not have enough available assets, please mortgage some courses");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -526,13 +477,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student has no property to sell. ");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student has no property to sell. ");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -554,14 +501,10 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + student.getPlayerNumber()
+				boardView.setLabelText("Student " + student.getPlayerNumber()
 				+ " has insufficient assets to purchase the following course: " + theCourse.getTileName());
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -583,13 +526,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("It is now Student " + student.getPlayerNumber() + "'s turn");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("It is now Student " + student.getPlayerNumber() + "'s turn");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -661,13 +600,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("You have landed on a community tile!" + "\n" + communityOn.getCommunityOptions()[communityOption]);
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("You have landed on a community tile!" + "\n" + communityOn.getCommunityOptions()[communityOption]);
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -712,13 +647,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student has landed on a chance tile!" + "\n" + chanceOn.getChanceOptions()[chanceOption]);
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student has landed on a chance tile!" + "\n" + chanceOn.getChanceOptions()[chanceOption]);
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -740,13 +671,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student has landed in probation.");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student has landed in probation.");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -768,14 +695,10 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("You are stuck for " + (3 - student.getDurationInProbation()) + " turn(s) and owe $"
+				boardView.setLabelText("You are stuck for " + (3 - student.getDurationInProbation()) + " turn(s) and owe $"
 						+ probation.getProbationCost() + " every turn.");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -797,13 +720,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student has landed in parking. You owe $" + parking.getParkingCost());
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student has landed in parking. You owe $" + parking.getParkingCost());
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -825,13 +744,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + student.getPlayerNumber() + " is still in jail and cannot move.");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student " + student.getPlayerNumber() + " is still in jail and cannot move.");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -913,13 +828,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student has landed on Go! Collect $200");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student has landed on Go! Collect $200");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -1014,13 +925,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Turn complete: ");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Turn complete: ");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});
@@ -1048,13 +955,9 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText("Student " + student.getPlayerNumber() + " is the winner!");
-
-				alert.showAndWait();
-				latch.countDown();
+				boardView.setLabelText("Student " + student.getPlayerNumber() + " is the winner!");
+				boardView.setButtonText("OK");
+				boardView.waitForButtonPress(latch);
 			}
 			
 		});

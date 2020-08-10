@@ -3,7 +3,13 @@ package application;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -89,6 +95,12 @@ public class BoardViewController {
 
 	    @FXML
 	    private GridPane grid9;
+	    
+	    @FXML
+	    private Label boardLabel;
+	    
+	    @FXML
+	    private Button boardButton;
 
 	    private void setImage(int playerNumber, int playerPosition) {
 		    if (playerPosition != -1) {	
@@ -97,8 +109,6 @@ public class BoardViewController {
 		    	GridPane.setRowIndex(pic, (playerNumber == 1 | playerNumber == 4 ? 0 : 1));
 		    	GridPane.setColumnIndex(pic, (playerNumber == 1 | playerNumber == 2 ? 0: 1));
 		    	grid.getChildren().addAll(pic);
-
-		    	//grid.add(imageMap.get(playerNumber), (playerNumber == 1 | playerNumber == 4 ? 0 : 1), (playerNumber == 1 | playerNumber == 2 ? 0: 1));
 		    }
 	    }
 	    
@@ -114,31 +124,31 @@ public class BoardViewController {
 	    	clearImage(student.getPlayerNumber(), student.getPreviousPlayerPosition());
 	    	setImage(student.getPlayerNumber(), student.getPlayerPosition());    	
 	    }
+	    
+	    public void setLabelText(String string) {
+	    	this.boardLabel.setText(string);
+	    }
+	    
+	    public void setButtonText(String string) {
+	    	this.boardButton.setText(string);
+	    }
+	    
+	    public void waitForButtonPress(CountDownLatch latch) {
+	    	this.boardButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					// TODO Auto-generated method stub
+					latch.countDown();
+					boardButton.removeEventHandler(ActionEvent.ACTION, this);
+				}
+	    		
+	    	});
+	    }
 	     
 	    @FXML
 	    void initialize() {
-	        assert board != null : "fx:id=\"board\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid0 != null : "fx:id=\"grid0\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid1 != null : "fx:id=\"grid1\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid10 != null : "fx:id=\"grid10\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid11 != null : "fx:id=\"grid11\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid12 != null : "fx:id=\"grid12\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid13 != null : "fx:id=\"grid13\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid14 != null : "fx:id=\"grid14\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid15 != null : "fx:id=\"grid15\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid16 != null : "fx:id=\"grid16\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid17 != null : "fx:id=\"grid17\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid18 != null : "fx:id=\"grid18\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid19 != null : "fx:id=\"grid19\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid2 != null : "fx:id=\"grid2\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid3 != null : "fx:id=\"grid3\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid4 != null : "fx:id=\"grid4\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid5 != null : "fx:id=\"grid5\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid6 != null : "fx:id=\"grid6\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid7 != null : "fx:id=\"grid7\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid8 != null : "fx:id=\"grid8\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid9 != null : "fx:id=\"grid9\" was not injected: check your FXML file 'BoardView.fxml'.";	    
-	        tileMap.put(0, grid0);
+            tileMap.put(0, grid0);
 	        tileMap.put(1, grid1);
 	        tileMap.put(2, grid2);
 	        tileMap.put(3, grid3);

@@ -220,6 +220,14 @@
             <RowConstraints maxHeight="34.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
+            <Label fx:id="boardLabel" alignment="CENTER" layoutX="161.0" layoutY="834.0" prefHeight="137.0" prefWidth="835.0" text="Label" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Raleway" size="18.0" />
+               </font></Label>
+            <Button fx:id="boardButton" layoutX="1031.0" layoutY="868.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="122.0" text="OK">
+               <font>
+                  <Font name="Raleway" size="18.0" />
+               </font></Button>
       </children>
     </Pane>
   </children>
