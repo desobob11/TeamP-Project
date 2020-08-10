@@ -61,12 +61,14 @@ public class Chance extends Tile {
 	 */
 	private int performChanceOption(int selection, Student studentOn, ArrayList<Student> allStudents,
 			ArrayList<Parking> parkingTiles, Probation probationTile, UI UI) {
+		//based on the random selection, it performs the corresponding task to the chance option, as listed above
 		switch (selection) {
 		case 0:
 			return studentOn.withdrawMoney(100);
 		case 1:
 			for (Student student : allStudents) {
 				student.depositMoney(300);
+				//must update the UI here for each player as this is the only access point to all students
 				UI.updatePlayer(student);
 			}
 			return 1;
@@ -103,6 +105,7 @@ public class Chance extends Tile {
 	 */
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
+		//only pick a new random number if this is the first time the method is being invoked this turn
 		if (!this.getPerformedTileAction()) {
 			randChance = new Random().nextInt(this.getChanceOptions().length);
 		}
