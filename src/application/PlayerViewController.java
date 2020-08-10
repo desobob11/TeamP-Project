@@ -88,7 +88,7 @@ public class PlayerViewController {
     }
     
     private void updateCourses(Student student) {
-    	int rowCounter = 0;
+    	int rowCounter = -1;
     	this.coursesOwnedGrid.getChildren().clear();
     	ArrayList<Course> studentCourses = student.getCoursesOwned();
     	for (int i = 0; i < studentCourses.size(); i++) {
