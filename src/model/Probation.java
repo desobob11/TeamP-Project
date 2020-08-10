@@ -22,7 +22,9 @@ public class Probation extends Tile {
 	}
 	
 	private int probationPayment(Student student) {
+		//puts them in jail in case they just arrived
 		student.goToJail();
+		//should only increment the students turns in probation once per turn
 		if (!this.getPerformedTileAction()) {	
 			student.incrementTurnsInProbation();
 		}
@@ -36,9 +38,11 @@ public class Probation extends Tile {
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
 		// TODO Auto-generated method stub
+		//if they were already in jail and the start of the turn, then tell them they're still in jail
 		if (student.isInJail()) {
 			UI.displayStillInJail(student);
 		} else {
+			//otherwise, we must check if they just arrived at jail or are exiting this turn if they can pay
 			if (!this.getPerformedTileAction())	{
 				UI.displayLandedInProbation(student);
 			} else {
