@@ -37,9 +37,12 @@ public class ComputerStudent extends Student {
 	 */
 	@Override
 	public int studentInitialOption(UI UI) {
+		//AI algorithm: never sell courses unless you need to, but if you have enough money to upgrade a faculty, always do it
 		ArrayList<ArrayList<Course>> upgradableFaculties = this.getUpgradableFaculties();
+		//checking if there are faculties to upgrade
 		if (upgradableFaculties.size() != 0) {
 			for (ArrayList<Course> facultyList : upgradableFaculties) {
+				//checking if they have sufficient money to upgrade a faculty
 				if (facultyList.get(0).getUpgradeCost() <= this.getPlayerMoney()) {
 					return 3;
 				}
@@ -58,6 +61,8 @@ public class ComputerStudent extends Student {
 	@Override
 	public void studentSellCourse(UI UI, CourseList courseList) {
 		// TODO Auto-generated method stub
+		//AI algorithm: only brought to this menu if FORCED to sell courses
+		//if this is the case, sell all of them
 		while (!this.getCoursesOwned().isEmpty()) {
 			Course course = this.getCoursesOwned().get(0);
 			this.sellCourse(course);
@@ -75,6 +80,7 @@ public class ComputerStudent extends Student {
 	@Override
 	public boolean studentBuyCourse(UI UI, Course aCourse) {
 		// TODO Auto-generated method stub
+		//AI algorithm: only buy a course if you have sufficient money, never sell a course to buy another
 		return (this.getPlayerMoney() >= aCourse.getBuyPrice() ? true : false);
 	}
 
@@ -83,12 +89,17 @@ public class ComputerStudent extends Student {
 	 * Chooses whether AI upgrades faculties in its possession.
 	 * 
 	 * @param UI The UI to modify.
+	 *
+	 * @return String of faculty name to upgrade or "-1" if they choose not to upgrade
 	 */
 	@Override
 	public String studentUpgradeFaculty(UI UI) {
 		// TODO Auto-generated method stub
+		//AI algorithm: if you have sufficient money to upgrade a faculty do it
 		ArrayList<ArrayList<Course>> upgradableFaculties = this.getUpgradableFaculties();
+		//initial options in Logic already confirms that there are upgradable faculties
 		for (ArrayList<Course> facultyList : upgradableFaculties) {
+			//checking if there is enough money to upgrade the faculty
 			if (facultyList.get(0).getUpgradeCost() <= this.getPlayerMoney()) {
 				return facultyList.get(0).getFaculty();
 			}
