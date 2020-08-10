@@ -18,17 +18,22 @@ public class HumanStudent extends Student {
 
 	private boolean sellACourse(UI UI, CourseList courseList) {
 		boolean ownsProperty = this.doesStudentOwnProperty();
+		//can only sell a course if they own it
 		if (ownsProperty) {
 			Course courseToSell = UI.sellCourseMenu(this);
+			//the UI will return a null Course if they opt to not sell any courses at the menu
+			//so it must ensure that they have chosen a course to sell
 			if (Objects.nonNull(courseToSell)) {
 				this.sellCourse(courseToSell);
 				courseList.removeFromCoursesOwned(courseToSell);
+				//their assets have changed, so the UI must update as well
 				UI.updatePlayer(this);
 				UI.displaySuccessfulSell(this, courseToSell);
 				return true;
 			}
 			return false;
 		} else {
+			//if they don't have any courses, then it will let them know they have nothing to sell
 			UI.displayNoProperty();
 			return false;
 		}
@@ -37,6 +42,7 @@ public class HumanStudent extends Student {
 	@Override
 	public void studentSellCourse(UI UI, CourseList courseList) {
 		// TODO Auto-generated method stub
+		//will continue to prompt them to sell courses until they choose to stop or they have no more courses left to sell
 		while (sellACourse(UI, courseList)) {
 			;
 		}
