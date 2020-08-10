@@ -22,30 +22,30 @@ import model.*;
 
 public class PlayerViewController {
 
-	Image SOCI201Image = new Image("/images/SOCI201.png");
-	Image POLI201Image = new Image("/images/POLI201.png");
-	Image PSYC201Image = new Image("/images/PSYC201.png");
-	Image CPSC231Image = new Image("/images/CPSC231.png");
-	Image CPSC219Image = new Image("/images/CPSC219.png");
-	Image CPSC233Image = new Image("/images/CPSC233.png");
-	Image STAT213Image = new Image("/images/STAT213.png");
-	Image ENMG301Image = new Image("/images/ENMG301.png");
-	Image MGMT311Image = new Image("/images/MGMT311.png");
-	Image ENGG599Image = new Image("/images/ENGG599.png");
-	Image ENGG501Image = new Image("/images/ENGG501.png");
-	Image ENGG683Image = new Image("/images/ENGG683.png");
- 	ImageView SOCI201ImageView = new ImageView();
-	ImageView POLI201ImageView = new ImageView();
- 	ImageView PSYC201ImageView = new ImageView();
-	ImageView CPSC231ImageView = new ImageView();
-	ImageView CPSC219ImageView = new ImageView();
-	ImageView CPSC233ImageView = new ImageView();
-	ImageView STAT213ImageView = new ImageView();
-	ImageView ENMG301ImageView = new ImageView();
-	ImageView MGMT311ImageView = new ImageView();
-	ImageView ENGG599ImageView = new ImageView();
-	ImageView ENGG501ImageView = new ImageView();
-	ImageView ENGG683ImageView = new ImageView();
+	private Image SOCI201Image = new Image("/images/SOCI201.png");
+	private Image POLI201Image = new Image("/images/POLI201.png");
+	private Image PSYC201Image = new Image("/images/PSYC201.png");
+	private Image CPSC231Image = new Image("/images/CPSC231.png");
+	private Image CPSC219Image = new Image("/images/CPSC219.png");
+	private Image CPSC233Image = new Image("/images/CPSC233.png");
+	private Image STAT213Image = new Image("/images/STAT213.png");
+	private Image ENMG301Image = new Image("/images/ENMG301.png");
+	private Image MGMT311Image = new Image("/images/MGMT311.png");
+	private Image ENGG599Image = new Image("/images/ENGG599.png");
+	private Image ENGG501Image = new Image("/images/ENGG501.png");
+	private Image ENGG683Image = new Image("/images/ENGG683.png");
+	private ImageView SOCI201ImageView = new ImageView();
+	private ImageView POLI201ImageView = new ImageView();
+	private ImageView PSYC201ImageView = new ImageView();
+	private ImageView CPSC231ImageView = new ImageView();
+	private ImageView CPSC219ImageView = new ImageView();
+	private ImageView CPSC233ImageView = new ImageView();
+	private ImageView STAT213ImageView = new ImageView();
+	private ImageView ENMG301ImageView = new ImageView();
+	private ImageView MGMT311ImageView = new ImageView();
+	private ImageView ENGG599ImageView = new ImageView();
+	private ImageView ENGG501ImageView = new ImageView();
+	private ImageView ENGG683ImageView = new ImageView();
 	private HashMap<String, ImageView> imageMap = new HashMap<String, ImageView>();
 	
 	

@@ -17,14 +17,14 @@ import model.Student;
 public class BoardViewController {
 	
 	private HashMap<Integer, GridPane> tileMap = new HashMap<Integer, GridPane>();
-	Image dino1 = new Image("/images/Yellow Dino.png");
-	Image dino2 = new Image("/images/Blue Dino.png");
-	Image dino3 = new Image("/images/Purple Dino.png");
-	Image dino4 = new Image("/images/Orange Dino.png");
- 	ImageView pic1 = new ImageView();
-	ImageView pic2 = new ImageView();
- 	ImageView pic3 = new ImageView();
-	ImageView pic4 = new ImageView();
+	private Image dino1 = new Image("/images/Yellow Dino.png");
+	private Image dino2 = new Image("/images/Blue Dino.png");
+	private Image dino3 = new Image("/images/Purple Dino.png");
+	private Image dino4 = new Image("/images/Orange Dino.png");
+	private ImageView pic1 = new ImageView();
+	private ImageView pic2 = new ImageView();
+	private ImageView pic3 = new ImageView();
+	private ImageView pic4 = new ImageView();
 	private HashMap<Integer, ImageView> imageMap = new HashMap<Integer, ImageView>();
 	
 	    @FXML
