@@ -29,7 +29,6 @@ import javafx.scene.layout.Pane;
 import javafx.beans.property.*;
 
 public class GUI extends Application implements UI {
-	Scanner input = new Scanner(System.in);
 	public static final String FXML_FILES_LOCATION = "src/views/";
 	
 	public static final CountDownLatch latch = new CountDownLatch(1);
@@ -978,7 +977,6 @@ public class GUI extends Application implements UI {
 	@Override
 	public void closeScanner() {
 		// TODO Auto-generated method stub
-		input.close();
 	}
 	
 	
