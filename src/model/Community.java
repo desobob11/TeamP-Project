@@ -28,7 +28,7 @@ public class Community extends Tile {
 		return communityOptions;
 	}
 		
-	public int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents) {
+	private int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents, UI UI) {
 		switch (selection) {
 		case 0:
 			studentOn.depositMoney(400);
@@ -39,6 +39,7 @@ public class Community extends Tile {
 		case 2:
 			for (Student student: allStudents) {
 				student.depositMoney(200);
+				UI.updatePlayer(student);
 			}
 			return 1;
 		case 3:
@@ -56,6 +57,6 @@ public class Community extends Tile {
 			randCommunity = new Random().nextInt(this.getCommunityOptions().length);
 		}
 		UI.displayCommunityOption(this, randCommunity);
-		return this.performCommunityOption(randCommunity, student, students);
+		return this.performCommunityOption(randCommunity, student, students, UI);
 	}
 }

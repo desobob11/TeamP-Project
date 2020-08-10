@@ -20,7 +20,7 @@ public class CourseList {
 	private ArrayList<Parking> parkingTiles;
 	private Probation probationTile;
 	private Go goTile;
-	int boardSize = 20;
+	private int boardSize = 20;
 
 	public CourseList() {
 		board = new ArrayList<Tile>();
@@ -45,7 +45,6 @@ public class CourseList {
 	public CourseList(ArrayList<Course> courseList) {
 		this.courseList = courseList;
 		board = new ArrayList<Tile>();
-		courseList = new ArrayList<Course>();
 		coursesOwned = new ArrayList<Course>();
 		chanceTiles = new ArrayList<Chance>();
 		communityTiles = new ArrayList<Community>();
@@ -62,7 +61,7 @@ public class CourseList {
 		sortByTilePosition(allTiles);
 	}
 
-	public void initializeCourses() {
+	private void initializeCourses() {
 		Course course1 = new Course(1, "SOCI 201", "Arts", 150, 50, 50);
 		courseList.add(course1);
 
@@ -136,39 +135,8 @@ public class CourseList {
 		return board.get(position);
 	}
 
-	public Course getCourseAt(int position) {
-		for (Course course : courseList) {
-			if (course.getTileID() == position) {
-				return course;
-			}
-		}
-		return null;
-	}
-
 	public Probation getProbation() {
 		return probationTile;
-	}
-
-	public Go getGo() {
-		return goTile;
-	}
-
-	public Chance getChanceAt(int position) {
-		for (Chance chance : chanceTiles) {
-			if (chance.getTileID() == position) {
-				return chance;
-			}
-		}
-		return null;
-	}
-
-	public Community getCommunityAt(int position) {
-		for (Community community : communityTiles) {
-			if (community.getTileID() == position) {
-				return community;
-			}
-		}
-		return null;
 	}
 
 	public Parking getParkingAt(int position) {

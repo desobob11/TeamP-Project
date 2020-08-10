@@ -13,6 +13,8 @@ public interface UI {
 	void insufficientMoneyError();
 	void displayPurchasedScreen(Course theCourse);
 	void rollDiceMenu(Student student);
+	void createPlayer(Student student);
+	void updatePlayer(Student student);
 	void displayAlreadyOwned(Student student, Course theCourse);
 	void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed);
 	void displayTutorialPaidScreen(Student ower, Student owner, int amountOwed);

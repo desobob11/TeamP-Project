@@ -11,7 +11,7 @@ import application.UI;
  */
 
 public class Chance extends Tile {
-	String[] chanceOptions = { "SU Donation: Pay $100", "Grants have been doubled everyone collect $300",
+	private String[] chanceOptions = { "SU Donation: Pay $100", "Grants have been doubled everyone collect $300",
 			"Your offered a ride from your friend, move to the nearest free parking",
 			"Your student loans have caught up with you, pay $250",
 			"You withdrew from a course, past the deadline! Pay $150",
@@ -27,7 +27,7 @@ public class Chance extends Tile {
 		return chanceOptions;
 	}
 
-	public int performChanceOption(int selection, Student studentOn, ArrayList<Student> allStudents,
+	private int performChanceOption(int selection, Student studentOn, ArrayList<Student> allStudents,
 			ArrayList<Parking> parkingTiles, Probation probationTile, UI UI) {
 		switch (selection) {
 		case 0:
@@ -35,6 +35,7 @@ public class Chance extends Tile {
 		case 1:
 			for (Student student : allStudents) {
 				student.depositMoney(300);
+				UI.updatePlayer(student);
 			}
 			return 1;
 		case 2:

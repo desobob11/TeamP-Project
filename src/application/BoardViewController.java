@@ -3,7 +3,13 @@ package application;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -11,15 +17,22 @@ import model.Student;
 public class BoardViewController {
 	
 	private HashMap<Integer, GridPane> tileMap = new HashMap<Integer, GridPane>();
-	Image dino1 = new Image("/images/Yellow Dino.png");
-	Image dino2 = new Image("/images/Blue Dino.png");
-	Image dino3 = new Image("/images/Purple Dino.png");
-	Image dino4 = new Image("/images/Orange Dino.png");
- 	ImageView pic1 = new ImageView();
-	ImageView pic2 = new ImageView();
- 	ImageView pic3 = new ImageView();
-	ImageView pic4 = new ImageView();
+	private Image dino1 = new Image("/images/Yellow Dino.png");
+	private Image dino2 = new Image("/images/Blue Dino.png");
+	private Image dino3 = new Image("/images/Purple Dino.png");
+	private Image dino4 = new Image("/images/Orange Dino.png");
+	private Image dice1 = new Image("/images/dice1.png");
+	private Image dice2 = new Image("/images/dice2.png");
+	private Image dice3 = new Image("/images/dice3.png");
+	private Image dice4 = new Image("/images/dice4.png");
+	private Image dice5 = new Image("/images/dice5.png");
+	private Image dice6 = new Image("/images/dice6.png");
+	private ImageView pic1 = new ImageView();
+	private ImageView pic2 = new ImageView();
+	private ImageView pic3 = new ImageView();
+	private ImageView pic4 = new ImageView();
 	private HashMap<Integer, ImageView> imageMap = new HashMap<Integer, ImageView>();
+	private HashMap<Integer, Image> diceMap = new HashMap<Integer, Image>();
 	
 	    @FXML
 	    private ResourceBundle resources;
@@ -89,6 +102,15 @@ public class BoardViewController {
 
 	    @FXML
 	    private GridPane grid9;
+	    
+	    @FXML
+	    private Label boardLabel;
+	    
+	    @FXML
+	    private Button boardButton;
+	    
+	    @FXML
+	    private ImageView diceImage;
 
 	    private void setImage(int playerNumber, int playerPosition) {
 		    if (playerPosition != -1) {	
@@ -97,8 +119,6 @@ public class BoardViewController {
 		    	GridPane.setRowIndex(pic, (playerNumber == 1 | playerNumber == 4 ? 0 : 1));
 		    	GridPane.setColumnIndex(pic, (playerNumber == 1 | playerNumber == 2 ? 0: 1));
 		    	grid.getChildren().addAll(pic);
-
-		    	//grid.add(imageMap.get(playerNumber), (playerNumber == 1 | playerNumber == 4 ? 0 : 1), (playerNumber == 1 | playerNumber == 2 ? 0: 1));
 		    }
 	    }
 	    
@@ -114,31 +134,36 @@ public class BoardViewController {
 	    	clearImage(student.getPlayerNumber(), student.getPreviousPlayerPosition());
 	    	setImage(student.getPlayerNumber(), student.getPlayerPosition());    	
 	    }
+	    
+	    public void setLabelText(String string) {
+	    	this.boardLabel.setText(string);
+	    }
+	    
+	    public void setButtonText(String string) {
+	    	this.boardButton.setVisible(true);
+	    	this.boardButton.setText(string);
+	    }
+	    
+	    public void waitForButtonPress(CountDownLatch latch) {
+	    	this.boardButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					// TODO Auto-generated method stub
+					latch.countDown();
+					boardButton.removeEventHandler(ActionEvent.ACTION, this);
+				}
+	    		
+	    	});
+	    }
+	    
+	    public void setDiceImage(int roll) {
+	    	diceImage.setImage(diceMap.get(roll));
+	    }
 	     
 	    @FXML
 	    void initialize() {
-	        assert board != null : "fx:id=\"board\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid0 != null : "fx:id=\"grid0\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid1 != null : "fx:id=\"grid1\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid10 != null : "fx:id=\"grid10\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid11 != null : "fx:id=\"grid11\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid12 != null : "fx:id=\"grid12\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid13 != null : "fx:id=\"grid13\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid14 != null : "fx:id=\"grid14\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid15 != null : "fx:id=\"grid15\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid16 != null : "fx:id=\"grid16\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid17 != null : "fx:id=\"grid17\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid18 != null : "fx:id=\"grid18\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid19 != null : "fx:id=\"grid19\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid2 != null : "fx:id=\"grid2\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid3 != null : "fx:id=\"grid3\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid4 != null : "fx:id=\"grid4\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid5 != null : "fx:id=\"grid5\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid6 != null : "fx:id=\"grid6\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid7 != null : "fx:id=\"grid7\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid8 != null : "fx:id=\"grid8\" was not injected: check your FXML file 'BoardView.fxml'.";
-	        assert grid9 != null : "fx:id=\"grid9\" was not injected: check your FXML file 'BoardView.fxml'.";	    
-	        tileMap.put(0, grid0);
+            tileMap.put(0, grid0);
 	        tileMap.put(1, grid1);
 	        tileMap.put(2, grid2);
 	        tileMap.put(3, grid3);
@@ -158,14 +183,14 @@ public class BoardViewController {
 	        tileMap.put(17, grid17);
 	        tileMap.put(18, grid18);
 	        tileMap.put(19, grid19);
-	        pic1.setFitHeight(40);
-	        pic1.setFitWidth(40);
-	        pic2.setFitHeight(40);
-	        pic2.setFitWidth(40);
-	        pic3.setFitHeight(40);
-	        pic3.setFitWidth(40);
-	        pic4.setFitHeight(40);
-	        pic4.setFitWidth(40);
+	        pic1.setFitHeight(50);
+	        pic1.setFitWidth(50);
+	        pic2.setFitHeight(50);
+	        pic2.setFitWidth(50);
+	        pic3.setFitHeight(50);
+	        pic3.setFitWidth(50);
+	        pic4.setFitHeight(50);
+	        pic4.setFitWidth(50);
 	        pic1.setImage(dino1);
 	        pic2.setImage(dino2);
 	        pic3.setImage(dino3);
@@ -174,6 +199,15 @@ public class BoardViewController {
 	        imageMap.put(2, pic2);
 	        imageMap.put(3, pic3);
 	        imageMap.put(4, pic4);
+	        diceMap.put(1, dice1);
+	        diceMap.put(2, dice2);
+	        diceMap.put(3, dice3);
+	        diceMap.put(4, dice4);
+	        diceMap.put(5, dice5);
+	        diceMap.put(6, dice6);
+	        
+	        
+	        this.boardButton.setVisible(false);
 	    }
 
 }

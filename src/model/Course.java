@@ -35,7 +35,7 @@ public class Course extends Tile {
 		initializeUpgradeCost();
 	}
 
-	public void initializeUpgradeCost() {
+	private void initializeUpgradeCost() {
 		if (this.faculty == "Arts") {
 			this.facultyUpgradeCost = 150;
 			this.initialFacultyUpgradeCost = 150;
@@ -153,6 +153,8 @@ public class Course extends Tile {
 		int withdrawalResult = student.withdrawMoney(amountOwed);
 		if (withdrawalResult == 1) {
 			this.getOwner().depositMoney(amountOwed);
+			UI.updatePlayer(student);
+			UI.updatePlayer(this.getOwner());
 			UI.displayTutorialPaidScreen(student, this.getOwner(), amountOwed);
 		}
 		
