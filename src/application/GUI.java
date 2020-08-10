@@ -67,6 +67,7 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				boardView.setDiceImage(roll);
 				boardView.setLabelText("Student rolled a " + roll);
 				boardView.setButtonText("OK");
 				boardView.waitForButtonPress(latch);

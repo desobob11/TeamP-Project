@@ -21,11 +21,18 @@ public class BoardViewController {
 	private Image dino2 = new Image("/images/Blue Dino.png");
 	private Image dino3 = new Image("/images/Purple Dino.png");
 	private Image dino4 = new Image("/images/Orange Dino.png");
+	private Image dice1 = new Image("/images/dice1.png");
+	private Image dice2 = new Image("/images/dice2.png");
+	private Image dice3 = new Image("/images/dice3.png");
+	private Image dice4 = new Image("/images/dice4.png");
+	private Image dice5 = new Image("/images/dice5.png");
+	private Image dice6 = new Image("/images/dice6.png");
 	private ImageView pic1 = new ImageView();
 	private ImageView pic2 = new ImageView();
 	private ImageView pic3 = new ImageView();
 	private ImageView pic4 = new ImageView();
 	private HashMap<Integer, ImageView> imageMap = new HashMap<Integer, ImageView>();
+	private HashMap<Integer, Image> diceMap = new HashMap<Integer, Image>();
 	
 	    @FXML
 	    private ResourceBundle resources;
@@ -101,6 +108,9 @@ public class BoardViewController {
 	    
 	    @FXML
 	    private Button boardButton;
+	    
+	    @FXML
+	    private ImageView diceImage;
 
 	    private void setImage(int playerNumber, int playerPosition) {
 		    if (playerPosition != -1) {	
@@ -146,6 +156,10 @@ public class BoardViewController {
 	    		
 	    	});
 	    }
+	    
+	    public void setDiceImage(int roll) {
+	    	diceImage.setImage(diceMap.get(roll));
+	    }
 	     
 	    @FXML
 	    void initialize() {
@@ -185,6 +199,13 @@ public class BoardViewController {
 	        imageMap.put(2, pic2);
 	        imageMap.put(3, pic3);
 	        imageMap.put(4, pic4);
+	        diceMap.put(1, dice1);
+	        diceMap.put(2, dice2);
+	        diceMap.put(3, dice3);
+	        diceMap.put(4, dice4);
+	        diceMap.put(5, dice5);
+	        diceMap.put(6, dice6);
+	        
 	        
 	        this.boardButton.setVisible(false);
 	    }

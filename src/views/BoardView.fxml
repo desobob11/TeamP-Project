@@ -226,5 +226,10 @@
              <font>
                 <Font name="Raleway" size="18.0" />
              </font></Button>
+      <ImageView fx:id="diceImage" fitHeight="150.0" fitWidth="200.0" layoutX="730.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../images/dice1.png" />
+        </image>
+      </ImageView>
     </children>
 </Pane>
