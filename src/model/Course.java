@@ -176,7 +176,9 @@ public class Course extends Tile {
 	 *         -1 if the Course was maxed out.
 	 */
 	public int addCourseLevel() {
+		//can only upgrade it if it's not fully upgraded
 		if (!this.isMaxUpgraded()) {
+			//the faculty upgrade cost increases after you upgrade it once
 			if (this.courseLevel != 1) {
 				this.facultyUpgradeCost *= 1.3;
 			}
@@ -226,7 +228,10 @@ public class Course extends Tile {
 	 */
 	private int purchaseCourse(Student student, UI UI, CourseList courseList) {
 		int purchaseResult = student.purchaseCourse(this);
-
+		
+		//purchaseMenu already confirms that the student has sufficient net worth,
+		//so the only possible options are that they can buy it outright or
+		//sell some courses to get the required money
 		if (purchaseResult == -2) {
 			UI.insufficientMoneyError();
 		} else if (purchaseResult == 1) {
@@ -248,7 +253,9 @@ public class Course extends Tile {
 	 * @return Numerical confirmation of the purchase.
 	 */
 	private int purchaseMenu(Student student, UI UI, CourseList courseList) {
+		//only given option to buy if their net worth is more than the buy price
 		if (student.getNetWorth() >= this.getBuyPrice()) {
+			//once this condition is met, then they get to choose if they'd like to buy it
 			boolean wantsToBuy = student.studentBuyCourse(UI, this);
 			if (wantsToBuy) {
 				return purchaseCourse(student, UI, courseList);
@@ -297,14 +304,19 @@ public class Course extends Tile {
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
 		// TODO Auto-generated method stub
+		//first checks if it's owned or not
 		if (this.getOwnedStatus()) {
+			//if it is owned, then it's either owned this student or someone else
 			if (!this.getOwner().equals(student)) {
+				//if someone else, then you owe them the tutorial fee
 				return tutorialPayment(student, UI);
 			} else {
+				//otherwise, nothing happens
 				UI.displayAlreadyOwned(student, this);
 				return 1;
 			}
 		} else {
+			//if it's not owned, then you potentially have the option of buying the course
 			return purchaseMenu(student, UI, courseList);
 		}
 	}
