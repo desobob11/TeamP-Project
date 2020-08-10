@@ -115,7 +115,7 @@ public abstract class Student {
 		return -1;
 	}
 
-	public int getAssetsValue() {
+	private int getAssetsValue() {
 		int mortgageValue = 0;
 
 		for (Course courseOwned : coursesOwned) {

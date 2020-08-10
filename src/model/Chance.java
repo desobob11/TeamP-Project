@@ -27,7 +27,7 @@ public class Chance extends Tile {
 		return chanceOptions;
 	}
 
-	public int performChanceOption(int selection, Student studentOn, ArrayList<Student> allStudents,
+	private int performChanceOption(int selection, Student studentOn, ArrayList<Student> allStudents,
 			ArrayList<Parking> parkingTiles, Probation probationTile, UI UI) {
 		switch (selection) {
 		case 0:

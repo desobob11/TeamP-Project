@@ -19,7 +19,6 @@ public class Logic {
 	ArrayList<Student> students;
 	CourseList courseList;
 	UI UI;
-	//Dice dice = new Dice();
 
 	public Logic(UI UI) {
 		students = new ArrayList<Student>();

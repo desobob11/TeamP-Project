@@ -21,7 +21,7 @@ public class Probation extends Tile {
 		this.probationCost = probationCost;
 	}
 	
-	public int probationPayment(Student student) {
+	private int probationPayment(Student student) {
 		student.goToJail();
 		if (!this.getPerformedTileAction()) {	
 			student.incrementTurnsInProbation();

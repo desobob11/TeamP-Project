@@ -28,7 +28,7 @@ public class Community extends Tile {
 		return communityOptions;
 	}
 		
-	public int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents, UI UI) {
+	private int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents, UI UI) {
 		switch (selection) {
 		case 0:
 			studentOn.depositMoney(400);

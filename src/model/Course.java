@@ -35,7 +35,7 @@ public class Course extends Tile {
 		initializeUpgradeCost();
 	}
 
-	public void initializeUpgradeCost() {
+	private void initializeUpgradeCost() {
 		if (this.faculty == "Arts") {
 			this.facultyUpgradeCost = 150;
 			this.initialFacultyUpgradeCost = 150;
