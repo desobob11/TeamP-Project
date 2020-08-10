@@ -47,6 +47,7 @@ public class Community extends Tile {
 	 * @param UI The UI to be modified.
 	 */
 	private int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents, UI UI) {
+		//upon receiving the randomly chosen selection, it performs the task corresponding to the community option, as listed above
 		switch (selection) {
 		case 0:
 			studentOn.depositMoney(400);
@@ -57,6 +58,7 @@ public class Community extends Tile {
 		case 2:
 			for (Student student: allStudents) {
 				student.depositMoney(200);
+				//must update player money here, since this is the only access point to all of the students
 				UI.updatePlayer(student);
 			}
 			return 1;
@@ -81,7 +83,7 @@ public class Community extends Tile {
 	 */
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
-		//randomly chooses one of the Community string options
+		//only chooses a random option if this is the first time the tile action is being invoked this turn
 		if (!this.getPerformedTileAction()) {
 			randCommunity = new Random().nextInt(this.getCommunityOptions().length);
 		}
