@@ -14,11 +14,11 @@ import model.*;
  *
  */
 public class Logic {
-	int numStudents;
-	final int startingMoney = 1000;
-	ArrayList<Student> students;
-	CourseList courseList;
-	UI UI;
+	private int numStudents;
+	private final int startingMoney = 1000;
+	private ArrayList<Student> students;
+	private CourseList courseList;
+	private UI UI;
 
 	public Logic(UI UI) {
 		students = new ArrayList<Student>();
@@ -56,28 +56,6 @@ public class Logic {
 		UI.removePlayerFromUI(student);
 		student.studentOut();
 		UI.updateBoard(student);
-	}
-
-	private boolean sellCourse(Student student) {
-		boolean ownsProperty = student.doesStudentOwnProperty();
-		if (ownsProperty) {
-			Course courseToSell = UI.sellCourseMenu(student);
-			if (Objects.nonNull(courseToSell)) {
-				student.sellCourse(courseToSell);
-				courseList.removeFromCoursesOwned(courseToSell);
-				return true;
-			}
-			return false;
-		} else {
-			UI.displayNoProperty();
-			return false;
-		}
-	}
-
-	private void sellCourseMenu(Student student) {
-		while (sellCourse(student)) {
-			;
-		}
 	}
 	
 	private void upgradeLevelMenu(Student student) {
