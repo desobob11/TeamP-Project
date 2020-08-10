@@ -37,6 +37,7 @@ public class GUI extends Application implements UI {
     
     private BoardViewController boardView = new BoardViewController();
     private PlayerViewController[] playerViews = {new PlayerViewController(), new PlayerViewController(), new PlayerViewController(), new PlayerViewController()};
+    private ArrayList<Stage> playerStages = new ArrayList<Stage>();
 
     public static GUI waitForStartUpTest() {
         try {
@@ -152,6 +153,7 @@ public class GUI extends Application implements UI {
 					playerView.updatePlayerView(student);
 					Stage newStage = new Stage();
 					newStage.setScene(new Scene(newRoot));
+					playerStages.add(newStage);
 					newStage.show();
 					latch.countDown();
 				} catch (IOException e) {
@@ -359,6 +361,8 @@ public class GUI extends Application implements UI {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				playerStages.get(student.getPlayerNumber() - 1).close();
+				
 				boardView.setLabelText("Student " + student.getPlayerNumber() + " has been removed from the game");
 				boardView.setButtonText("OK");
 				boardView.waitForButtonPress(latch);
