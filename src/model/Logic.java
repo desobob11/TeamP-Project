@@ -215,15 +215,18 @@ public class Logic {
 			if (!student.isInJail()) {
 				UI.rollDiceMenu(student);
 				landingTile = rollDice(student);
+				UI.updatePlayer(student);
 				UI.updateBoard(student);
 				UI.displayBoard();
 			}
 			int tileActionResult = landingTile.performTileAction(student, students, UI, courseList);
+			UI.updatePlayer(student);
 			landingTile.setPerformedTileAction(true);
 			while (tileActionResult == -2) {
 				UI.displayMustMortgageScreen(student);
 				student.studentSellCourse(UI, courseList);
 				tileActionResult = landingTile.performTileAction(student, students, UI, courseList);
+				UI.updatePlayer(student);
 			}
 			if (tileActionResult == -1) {
 				removeStudentFromGame(student);
@@ -257,6 +260,7 @@ public class Logic {
 			} else {
 				students.add(new ComputerStudent(i, startingMoney));
 			}
+			UI.createPlayer(students.get(i - 1));
 			UI.updateBoard(students.get(i - 1));
 		}
 

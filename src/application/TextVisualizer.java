@@ -40,6 +40,10 @@ public class TextVisualizer implements UI {
 		System.out.println("Enter any character to roll the die");
 		input.nextLine();
 	}
+	
+	public void createPlayer(Student student) {};
+	
+	public void updatePlayer(Student student) {};
 
 	public void displayAlreadyOwned(Student student, Course theCourse) {
 		System.out.println("You already own " + theCourse.getTileName());

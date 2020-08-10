@@ -153,6 +153,8 @@ public class Course extends Tile {
 		int withdrawalResult = student.withdrawMoney(amountOwed);
 		if (withdrawalResult == 1) {
 			this.getOwner().depositMoney(amountOwed);
+			UI.updatePlayer(student);
+			UI.updatePlayer(this.getOwner());
 			UI.displayTutorialPaidScreen(student, this.getOwner(), amountOwed);
 		}
 		

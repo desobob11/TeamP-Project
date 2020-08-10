@@ -35,6 +35,7 @@ public class Chance extends Tile {
 		case 1:
 			for (Student student : allStudents) {
 				student.depositMoney(300);
+				UI.updatePlayer(student);
 			}
 			return 1;
 		case 2:

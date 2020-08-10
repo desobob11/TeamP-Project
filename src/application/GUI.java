@@ -36,6 +36,7 @@ public class GUI extends Application implements UI {
     public static GUI gui = null;
     
     private BoardViewController boardView = new BoardViewController();
+    private PlayerViewController[] playerViews = {new PlayerViewController(), new PlayerViewController(), new PlayerViewController(), new PlayerViewController()};
 
     public static GUI waitForStartUpTest() {
         try {
@@ -135,6 +136,50 @@ public class GUI extends Application implements UI {
 		return;
 	}
 
+	@Override
+	public void createPlayer(Student student) {
+		final CountDownLatch latch = new CountDownLatch(1);
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					FXMLLoader newLoader = new FXMLLoader(getClass().getResource("../views/PlayerView.fxml"));
+					Parent newRoot = (Parent) newLoader.load();
+					playerViews[student.getPlayerNumber() - 1] = newLoader.getController();
+					PlayerViewController playerView = playerViews[student.getPlayerNumber() - 1];
+					playerView.updatePlayerView(student);
+					Stage newStage = new Stage();
+					newStage.setScene(new Scene(newRoot));
+					newStage.show();
+					latch.countDown();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		});
+	}
+	
+	@Override
+	public void updatePlayer(Student student) {
+		final CountDownLatch latch = new CountDownLatch(1);
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				PlayerViewController playerView = playerViews[student.getPlayerNumber() - 1];
+				playerView.updatePlayerView(student);
+				latch.countDown();
+			}
+			
+		});
+	}
+	
 	@Override
 	public void displayAlreadyOwned(Student student, Course theCourse) {
 		// TODO Auto-generated method stub
