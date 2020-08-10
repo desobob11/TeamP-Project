@@ -6,10 +6,10 @@ import application.UI;
 
 /**
  * This is a Community Tile that randomly chooses something for the student to do.
- * @author Arnuv Mayank and Victor Manuel Campos Goitia Campos
+ * @author Arnuv Mayank 
+ * @author Victor Manuel Campos Goitia Campos
  *
  */
-
 public class Community extends Tile {
 	private String[] communityOptions = {
             "Your good grades have been rewarded, you collect 400$ from scholarships",
@@ -20,14 +20,32 @@ public class Community extends Tile {
 	
 	private int randCommunity;
 	
+	/**
+	 * Creates a Tile object called Community.
+	 * 
+	 * @param position Tile number on board.
+	 */
 	public Community(int position) {
 		super(position, "Community");
 	}
 	
+	/**
+	 * Fetches all strings of text telling user what card they've gotten 
+	 * 
+	 * @return The string array with community options.
+	 */
 	public String[] getCommunityOptions() {
 		return communityOptions;
 	}
-		
+	
+	/**
+	 * Calls the appropriate methods to act on each community
+	 * 
+	 * @param selection The number referencing which card case should be used.
+	 * @param studentOn The student currently invoking Community.
+	 * @param allStudents The list of all students.
+	 * @param UI The UI to be modified.
+	 */
 	private int performCommunityOption(int selection, Student studentOn, ArrayList<Student> allStudents, UI UI) {
 		switch (selection) {
 		case 0:
@@ -51,8 +69,19 @@ public class Community extends Tile {
 		return 1;
 	}
 	
+	/**
+	 * Randomly chooses a community card and performs the appropriate action.
+	 * 
+	 * @param student The student who landed on Community.
+	 * @param students The list of students in the game.
+	 * @param UI The UI to be modified.
+	 * @param courseList The list of all course names.
+	 * 
+	 * @return The result of the Community option chosen.
+	 */
 	@Override
 	public int performTileAction(Student student, ArrayList<Student> students, UI UI, CourseList courseList) {
+		//randomly chooses one of the Community string options
 		if (!this.getPerformedTileAction()) {
 			randCommunity = new Random().nextInt(this.getCommunityOptions().length);
 		}
