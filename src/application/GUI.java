@@ -816,53 +816,9 @@ public class GUI extends Application implements UI {
 	public void displayStudentMoney(Student student) {
 		// TODO Auto-generated method stub
 	}
-
-	private String strStudentCoursesOwned(Student student) {
-		ArrayList<Course> coursesOwned = student.getCoursesOwned();
-		String changeableStr = "Courses owned: \n";
-		
-		for (int i = 0; i < coursesOwned.size(); i++) {
-			changeableStr += ((i + 1) + ") " + coursesOwned.get(i).getTileName());
-			changeableStr += "\n";
-		}
-		
-		return changeableStr;
-	}
-	
-	private String strStudentMoney(Student student) {
-		return "Money: " + student.getPlayerMoney() + "\n";
-	}
 	
 	@Override
-	public void displayStudentStats(Student student) {
-		// TODO Auto-generated method stub
-		final String outputStr = "Student " + student.getPlayerNumber() + "'s assets: \n"
-				+ strStudentMoney(student) + strStudentCoursesOwned(student);
-		
-		final CountDownLatch latch = new CountDownLatch(1);
-		Platform.runLater(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Course Already Owned");
-				alert.setHeaderText(null);
-				alert.setContentText(outputStr);
-
-				alert.showAndWait();
-				latch.countDown();
-			}
-			
-		});
-		try {
-			latch.await();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return;
-	}
+	public void displayStudentStats(Student student) {}
 
 	@Override
 	public void displayOnGo(int goAmount) {
