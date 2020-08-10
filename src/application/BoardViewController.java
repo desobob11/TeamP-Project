@@ -130,6 +130,7 @@ public class BoardViewController {
 	    }
 	    
 	    public void setButtonText(String string) {
+	    	this.boardButton.setVisible(true);
 	    	this.boardButton.setText(string);
 	    }
 	    
@@ -184,6 +185,8 @@ public class BoardViewController {
 	        imageMap.put(2, pic2);
 	        imageMap.put(3, pic3);
 	        imageMap.put(4, pic4);
+	        
+	        this.boardButton.setVisible(false);
 	    }
 
 }
