@@ -37,20 +37,6 @@ public class Logic {
 	public ArrayList<Student> getStudents() {
 		return students;
 	}
-	
-	/*
-	private int purchaseCourse(Student student, Course aCourse) {
-		int purchaseResult = student.purchaseCourse(aCourse);
-
-		if (purchaseResult == -2) {
-			UI.insufficientMoneyError();
-		} else if (purchaseResult == 1) {
-			courseList.addToCoursesOwned(aCourse);
-		}
-
-		return purchaseResult;
-	}
-	*/
 
 	private Tile rollDice(Student student) {
 		int roll = new Random().nextInt(6) + 1;
