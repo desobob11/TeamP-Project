@@ -26,18 +26,6 @@ public class Logic {
 		this.UI = UI;
 	}
 
-	public CourseList getCourseList() {
-		return courseList;
-	}
-	
-	public UI getUI() {
-		return UI;
-	}
-	
-	public ArrayList<Student> getStudents() {
-		return students;
-	}
-
 	private Tile rollDice(Student student) {
 		int roll = new Random().nextInt(6) + 1;
 		student.moveForward(roll, courseList.getBoardSize());
