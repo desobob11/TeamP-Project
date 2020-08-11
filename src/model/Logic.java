@@ -20,12 +20,25 @@ public class Logic {
 	private CourseList courseList;
 	private UI UI;
 
+	/**
+	 * Constructs a new Logic with the specified UI.
+	 * 
+	 * @param UI the desired UI to modify.
+	 */
 	public Logic(UI UI) {
 		students = new ArrayList<Student>();
 		courseList = new CourseList();
 		this.UI = UI;
 	}
 
+	/**
+	 * Produces a random number from 1 to 6 and calls {@code showRoll} to display
+	 * result. Moves the player to the appropriate tile.
+	 * 
+	 * @param student the Student invoking the roll Dice action.
+	 * 
+	 * @return the new Tile the roller has landed on.
+	 */
 	private Tile rollDice(Student student) {
 		int roll = new Random().nextInt(6) + 1;
 		student.moveForward(roll, courseList.getBoardSize());
@@ -33,6 +46,11 @@ public class Logic {
 		return courseList.getTileAt(student.getPlayerPosition());
 	}
 
+	/**
+	 * Removes a student from the board and list of players and resets the courses they owned.
+	 * 
+	 * @param student the student to remove.
+	 */
 	private void removeStudentFromGame(Student student) {
 		//first must make all adjustments to the course and courseList
 		for (Course course : student.getCoursesOwned()) {
@@ -49,12 +67,20 @@ public class Logic {
 		UI.updateBoard(student);
 	}
 	
+	/**
+	 * Fetches eligible Faculties owned by specified student that can be upgraded and
+	 * calls {@code upgradeFacultyLevel} to complete upgrade.
+	 * 
+	 * @param student the Student who wants to upgrade
+	 */
 	private void upgradeLevelMenu(Student student) {
 		String faculty = student.studentUpgradeFaculty(UI);
 		int upgradeResult = student.upgradeFacultyLevel(faculty);
-		//this method can only be called if the student has a faculty to potentially upgrade
-		//but they still might not have enough money, so it handles this case as well and lets
-		//them sell courses to get that money
+		/*
+		 * this method can only be called if the student has a faculty to potentially
+		 * upgrade but they still might not have enough money, so it handles this case
+		 * as well and lets them sell courses to get that money
+		 */
 		if (upgradeResult == 1) {
 			UI.displaySuccessfulUpgrade(faculty);
 		} else if (upgradeResult == -2) {
@@ -64,12 +90,22 @@ public class Logic {
 		}
 	}
 	
+	/**
+	 * Fetches the current student Statistics and displays in the UI.
+	 */
 	private void displayStudentStats() {
 		for (Student aStudent : students) {
 			UI.displayStudentStats(aStudent);
 		}
 	}
 
+	/**
+	 * Calls all of the appropriate methods to allow a Student player to complete a
+	 * turn.
+	 * 
+	 * @param student the Student who's playing their turn.
+	 * @param counter the actions completed previously.
+	 */
 	private void completeTurn(Student student, int counter) {
 		UI.displayBoard();
 		UI.displayStudentStats(student);
@@ -129,6 +165,11 @@ public class Logic {
 		landingTile.setPerformedTileAction(false);
 	}
 
+	/**
+	 * Runs the application. Prompts user for number of players and type of players,
+	 * calls {@code completeTurn} until game is finished and then displays the
+	 * winner.
+	 */
 	public void run() {
 		numStudents = UI.askForNumPlayers();
 		students = new ArrayList<Student>();
