@@ -69,13 +69,19 @@ public class TextBoard {
 	}
 
 	public void updateBoard(Student student) {
-		//changes the old player position from their number to an underscore
-		String toModify = boardList[position[student.getPreviousPlayerPosition()][0]][position[student
-				.getPreviousPlayerPosition()][1]];
-		String modified = toModify.substring(0, student.getPlayerNumber() - 1) + "_"
-				+ toModify.substring(student.getPlayerNumber());
-		boardList[position[student.getPreviousPlayerPosition()][0]][position[student
-				.getPreviousPlayerPosition()][1]] = modified;
+		String toModify;
+		String modified;
+		
+		//this is for when the game has just started, so they didn't have a previous position to remove
+		if (student.getPreviousPlayerPosition() != -1) {	
+			//changes the old player position from their number to an underscore
+			toModify = boardList[position[student.getPreviousPlayerPosition()][0]][position[student
+					.getPreviousPlayerPosition()][1]];
+			modified = toModify.substring(0, student.getPlayerNumber() - 1) + "_"
+					+ toModify.substring(student.getPlayerNumber());
+			boardList[position[student.getPreviousPlayerPosition()][0]][position[student
+					.getPreviousPlayerPosition()][1]] = modified;
+		}
 		
 		//if they're out then they shouldn't be moved to a new location
 		if (student.getPlayerPosition() != -1) {
