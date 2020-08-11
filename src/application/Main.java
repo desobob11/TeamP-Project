@@ -5,6 +5,12 @@ import java.util.*;
 import model.Logic;
 import javafx.application.Application;
 
+/**
+ * Main method -- starts the entire program
+ * 
+ * @author Arnuv Mayank
+ *
+ */
 public class Main {
 	
 	/**
