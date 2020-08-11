@@ -7,7 +7,13 @@ import javafx.application.Application;
 
 public class Main {
 	
+	/**
+	 * the main method that starts the main thread, and consequently the whole program
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
+		//asks if they want the text-based or GUI version, then makes the appropriate game
 		System.out.println("Would you like to play the Text-Based version, or the GUI-based version? '1' / '2'");
 		Scanner input = new Scanner(System.in);
 		int versionInt = Integer.parseInt(input.nextLine());
@@ -16,6 +22,7 @@ public class Main {
 			logic.run();
 		}
 		else {	
+			//for the GUI, a new Thread needs to be created to run JavaFX, and then it is started
 			new Thread() {
 	            @Override
 	            public void run() {
