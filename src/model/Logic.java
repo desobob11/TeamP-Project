@@ -61,6 +61,7 @@ public class Logic {
 		}
 		//then makes adjustments to the student
 		students.remove(student);
+		UI.displayBankruptcyScreen(student);
 		UI.removePlayerFromUI(student);
 		student.studentOut();
 		//removes them from the board
