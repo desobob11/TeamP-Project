@@ -28,6 +28,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.beans.property.*;
 
+/**
+ * GUI class - implements all methods from UI interface and defines them
+ * extends Application from JavaFX
+ * 
+ * @author Arnuv Mayank
+ *
+ */
 public class GUI extends Application implements UI {
     
     public static final String FXML_FILES_LOCATION = "src/views/";

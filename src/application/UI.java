@@ -8,6 +8,12 @@ import model.Parking;
 import model.Probation;
 import model.Student;
 
+/**
+ * UI interface - all abstract methods needed to be implemented by GUI and TextVisualizer
+ * 
+ * @author Arnuv Mayank
+ *
+ */
 public interface UI {
 	/**
 	 * Shows what the student rolled
