@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import model.Student;
 public class BoardViewController {
 	
+	//initializing all images and hashmaps for the images
 	private HashMap<Integer, GridPane> tileMap = new HashMap<Integer, GridPane>();
 	private Image dino1 = new Image("/images/Yellow Dino.png");
 	private Image dino2 = new Image("/images/Blue Dino.png");
@@ -113,16 +114,19 @@ public class BoardViewController {
 	    private ImageView diceImage;
 
 	    private void setImage(int playerNumber, int playerPosition) {
+		    //if the player position is -1 then they're out of the game so it should not update
 		    if (playerPosition != -1) {	
 		    	GridPane grid = tileMap.get(playerPosition);
 		    	ImageView pic = imageMap.get(playerNumber);
-		    	GridPane.setRowIndex(pic, (playerNumber == 1 | playerNumber == 4 ? 0 : 1));
+		    	//set the location on the grid pane to add the player, then add them
+			GridPane.setRowIndex(pic, (playerNumber == 1 | playerNumber == 4 ? 0 : 1));
 		    	GridPane.setColumnIndex(pic, (playerNumber == 1 | playerNumber == 2 ? 0: 1));
 		    	grid.getChildren().addAll(pic);
 		    }
 	    }
 	    
 	    private void clearImage(int playerNumber, int previousPosition) {
+		 //the previous position is -1 right when the game starts, so there's nothing to remove
 	    	 if (previousPosition != -1) {
 	    		 GridPane grid = tileMap.get(previousPosition);
 	    		 grid.getChildren().remove(imageMap.get(playerNumber)); 
@@ -131,6 +135,7 @@ public class BoardViewController {
 	     }
 	   
 	    public void updateBoard(Student student) {
+		//to update the board, you clear the image in their previous position and add the image in their new position
 	    	clearImage(student.getPlayerNumber(), student.getPreviousPlayerPosition());
 	    	setImage(student.getPlayerNumber(), student.getPlayerPosition());    	
 	    }
@@ -145,11 +150,13 @@ public class BoardViewController {
 	    }
 	    
 	    public void waitForButtonPress(CountDownLatch latch) {
+		//when GUI needs to wait for a button press, we add a new event listener for that press
 	    	this.boardButton.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
 					// TODO Auto-generated method stub
+					//upon click, we remove the event handler and return to the main thread
 					latch.countDown();
 					boardButton.removeEventHandler(ActionEvent.ACTION, this);
 				}
@@ -163,7 +170,8 @@ public class BoardViewController {
 	     
 	    @FXML
 	    void initialize() {
-            tileMap.put(0, grid0);
+            	//initializing the values for all of the hashmaps and pictures
+		tileMap.put(0, grid0);
 	        tileMap.put(1, grid1);
 	        tileMap.put(2, grid2);
 	        tileMap.put(3, grid3);
@@ -206,7 +214,7 @@ public class BoardViewController {
 	        diceMap.put(5, dice5);
 	        diceMap.put(6, dice6);
 	        
-	        
+	        //only set it to visible once the game has officially started
 	        this.boardButton.setVisible(false);
 	    }
 
