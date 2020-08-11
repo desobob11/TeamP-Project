@@ -91,6 +91,8 @@ public class HumanStudent extends Student {
 	 * @param UI Logic's instance of UI for this to use
 	 * 
 	 * @param aCourse the course that they've landed on
+	 * 
+	 * @return true if they want to buy the course, false if not
 	 */
 	@Override
 	public boolean studentBuyCourse(UI UI, Course aCourse) {
