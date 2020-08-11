@@ -16,12 +16,14 @@ import model.Student;
  *
  */
 public class TextBoard {
+	//using a 2x2 array to display the board, and mapping ever spot to a coordinate in this array
 	private String[][] boardList = new String[6][6];
 	private int[][] position = { { 0, 0 }, { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 }, { 1, 5 }, { 2, 5 },
 			{ 3, 5 }, { 4, 5 }, { 5, 5 }, { 5, 4 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 0 }, { 4, 0 }, { 3, 0 },
 			{ 2, 0 }, { 1, 0 } };
 
 	public TextBoard() {
+		//spots on the board are initialized with underscores, otherwise it is blank
 		boardList[0][0] = "____";
 		boardList[0][1] = "____";
 		boardList[0][2] = "____";
@@ -67,14 +69,17 @@ public class TextBoard {
 	}
 
 	public void updateBoard(Student student) {
+		//changes the old player position from their number to an underscore
 		String toModify = boardList[position[student.getPreviousPlayerPosition()][0]][position[student
 				.getPreviousPlayerPosition()][1]];
 		String modified = toModify.substring(0, student.getPlayerNumber() - 1) + "_"
 				+ toModify.substring(student.getPlayerNumber());
 		boardList[position[student.getPreviousPlayerPosition()][0]][position[student
 				.getPreviousPlayerPosition()][1]] = modified;
-
+		
+		//if they're out then they shouldn't be moved to a new location
 		if (student.getPlayerPosition() != -1) {
+			//replace the underscore in the new location with their number
 			toModify = boardList[position[student.getPlayerPosition()][0]][position[student.getPlayerPosition()][1]];
 			modified = toModify.substring(0, student.getPlayerNumber() - 1) + student.getPlayerNumber()
 					+ toModify.substring(student.getPlayerNumber());
