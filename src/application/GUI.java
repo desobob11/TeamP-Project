@@ -121,12 +121,6 @@ public class GUI extends Application implements UI {
 	}
 
 	@Override
-	public void displayPurchasedScreen(Course theCourse) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void rollDiceMenu(Student student) {
 		// TODO Auto-generated method stub
 		final CountDownLatch latch = new CountDownLatch(1);

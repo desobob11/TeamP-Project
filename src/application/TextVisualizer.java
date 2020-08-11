@@ -32,10 +32,6 @@ public class TextVisualizer implements UI {
 		System.out.println("You do not have the required funds to purchase that course!");
 	}
 
-	public void displayPurchasedScreen(Course theCourse) {
-		System.out.println("Congratulations! You have purchased the following course: " + theCourse.getTileName());
-	}
-
 	public void rollDiceMenu(Student student) {
 		System.out.println("Enter any character to roll the die");
 		input.nextLine();
