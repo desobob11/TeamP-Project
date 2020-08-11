@@ -7,10 +7,10 @@ import java.util.ArrayList;
  * all changes to course ownership and enables the Application to know where
  * each student is.
  * 
- * @author Arnuv Mayank and Victor Manuel Campos Goitia Campos
+ * @author Arnuv Mayank
+ * @author Victor Manuel Campos Goitia Campos
  *
  */
-
 public class CourseList {
 	private ArrayList<Tile> board;
 	private ArrayList<Course> courseList;
@@ -21,7 +21,10 @@ public class CourseList {
 	private Probation probationTile;
 	private Go goTile;
 	private int boardSize = 20;
-
+	
+	/**
+	 * Construct a new CourseList, initializes the list with all tile types.
+	 */
 	public CourseList() {
 		board = new ArrayList<Tile>();
 		courseList = new ArrayList<Course>();
@@ -42,6 +45,12 @@ public class CourseList {
 		sortByTilePosition(allTiles);
 	}
 
+	/**
+	 * Constructs a new CourseList with specified ArrayList of courses. Initializes
+	 * all types of tiles.
+	 * 
+	 * @param courseList the list of courses to add.
+	 */
 	public CourseList(ArrayList<Course> courseList) {
 		this.courseList = courseList;
 		board = new ArrayList<Tile>();
@@ -61,7 +70,12 @@ public class CourseList {
 		sortByTilePosition(allTiles);
 	}
 
+	/**
+	 * Initializes all courses needed for a new board using the (@code Course)
+	 * constructor.
+	 */
 	private void initializeCourses() {
+		//Course constructor format: (position, name, faculty, buy price, sell price, tutorial price)
 		Course course1 = new Course(1, "SOCI 201", "Arts", 150, 50, 50);
 		courseList.add(course1);
 
@@ -99,10 +113,13 @@ public class CourseList {
 		courseList.add(course12);
 	}
 
+	/**
+	 * Initializes non-course tiles and adds them to their respective lists.
+	 */
 	public void initializeUnbuyableTiles() {
-		int parking1Pos = 10;
-		int parking2Pos = 15;
-		int probationPos = 5;
+		final int parking1Pos = 10;
+		final int parking2Pos = 15;
+		final int probationPos = 5;
 
 		probationTile = new Probation(probationPos);
 
@@ -127,20 +144,44 @@ public class CourseList {
 		communityTiles.add(community2);
 	}
 
+	/**
+	 * Fetches the number of tiles on the board.
+	 * 
+	 * @return Number of tiles.
+	 */
 	public int getBoardSize() {
 		return boardSize;
 	}
 
+	/**
+	 * Returns the Tile assigned to a specified position.
+	 * 
+	 * @param position the position on the board.
+	 * @return Tile object at position.
+	 */
 	public Tile getTileAt(int position) {
 		return board.get(position);
 	}
 
+	/**
+	 * Fetches the tile of type Probation.
+	 * 
+	 * @return Probation object.
+	 */
 	public Probation getProbation() {
 		return probationTile;
 	}
 
+	/**
+	 * Fetches the Parking at a specified position.
+	 * 
+	 * @param position the position of desired Parking tile.
+	 * @return Parking object.
+	 */
 	public Parking getParkingAt(int position) {
+		//iterates through parking tiles
 		for (Parking parking : parkingTiles) {
+			//matches the tile IDs
 			if (parking.getTileID() == position) {
 				return parking;
 			}
@@ -148,29 +189,71 @@ public class CourseList {
 		return null;
 	}
 
+	/**
+	 * Fetches the position of a Parking tile called by number.
+	 * 
+	 * @param parkingNumber The parking number.
+	 * @return the tile number.
+	 */
 	public int getParkingPosition(int parkingNumber) {
 		return parkingTiles.get(parkingNumber - 1).getTileID();
 	}
 
+	/**
+	 * Fetches the position of the probation number.
+	 * 
+	 * @return the tile number.
+	 */
 	public int getProbationPosition() {
 		return probationTile.getTileID();
 	}
 
+	/**
+	 * Fetches the list of Parking tiles.
+	 * 
+	 * @return ArrayList of Parking objects.
+	 */
 	public ArrayList<Parking> getParkingTiles() {
 		return parkingTiles;
 	}
 
+	/**
+	 * Checks if a specified course is stored in the CourseList.
+	 * 
+	 * @param aCourse the Course to check.
+	 * 
+	 * @return truth value of check.
+	 */
 	public boolean inCourseList(Course aCourse) {
 		return (courseList.contains(aCourse) ? true : false);
 	}
 
+	/**
+	 * Checks if a specified Course is owned by a player.
+	 * 
+	 * @param aCourse the Course to check.
+	 * 
+	 * @return truth value of check.
+	 */
 	public boolean inCoursesOwned(Course aCourse) {
 		return (coursesOwned.contains(aCourse) ? true : false);
 	}
 
+	/**
+	 * Adds a {@code Course} to the list of courses owned by players.
+	 * 
+	 * @param aCourse the Course to add.
+	 * 
+	 * @return numerical confirmation of addition: (1) if Course is successfully
+	 *         added, (-2) if Course is already owned or (-1) if Course is not in
+	 *         CourseList.
+	 */
 	public int addToCoursesOwned(Course aCourse) {
+		//should only add the course if it's in the course list (safety check) (-1)
 		if (inCourseList(aCourse)) {
+			//should only add the course if it's not already owned (safety check) (-2)
 			if (!inCoursesOwned(aCourse)) {
+				//add the course
 				coursesOwned.add(aCourse);
 				return 1;
 			}
@@ -179,9 +262,20 @@ public class CourseList {
 		return -1;
 	}
 
+	/**
+	 * Removes a {@code Course} from the list of courses owned by players.
+	 * 
+	 * @param aCourse the Course to remove.
+	 * 
+	 * @return numerical confirmation of removal: (-2) if Course was not in list of
+	 *         Courses owned, or (-1) if Course is not in the CourseList.
+	 */
 	public int removeFromCoursesOwned(Course aCourse) {
+		//should only remove the course if it's in the course list (safety check) (-1)
 		if (inCourseList(aCourse)) {
+			//should only remove the course if it's already owned (safety check) (-2)
 			if (inCoursesOwned(aCourse)) {
+				//remove the course
 				coursesOwned.remove(aCourse);
 				aCourse.setOwner(null);
 			}
@@ -190,11 +284,20 @@ public class CourseList {
 		return -1;
 	}
 
+	/**
+	 * Reformats the ArrayList of Tiles to put them in the order they appear on the board.
+	 * 
+	 * @param allTiles the unorganized list of Tiles.
+	 */
 	private void sortByTilePosition(ArrayList<Tile> allTiles) {
 		board = new ArrayList<Tile>();
+		//iterate through all of the Tile IDs
 		for (int i = 0; i < boardSize; i++) {
+			//iterate through the tile list
 			for (Tile tile : allTiles) {
+				//match the IDs
 				if (tile.getTileID() == i) {
+					//add to official board list
 					board.add(tile);
 					break;
 				}
