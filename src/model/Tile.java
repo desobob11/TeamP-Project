@@ -24,7 +24,7 @@ public abstract class Tile {
 	}
 
 	/**
-	 * Construccts a new Tile with a specified tile ID and tile name.
+	 * Constructs a new Tile with a specified tile ID and tile name.
 	 *
 	 * @param tileID the desired ID of the tile.
 	 * @param tileName the desired name of the tile.
