@@ -13,6 +13,7 @@ import model.Student;
  * their number is removed from the board entirely.
  * 
  * @author Desmond O'Brien
+ * @author Arnuv Mayank
  *
  */
 public class TextBoard {
@@ -22,6 +23,9 @@ public class TextBoard {
 			{ 3, 5 }, { 4, 5 }, { 5, 5 }, { 5, 4 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 0 }, { 4, 0 }, { 3, 0 },
 			{ 2, 0 }, { 1, 0 } };
 
+	/**
+	 * Constructor for TextBoard - initializes the board before any players are on it
+	 */
 	public TextBoard() {
 		//spots on the board are initialized with underscores, otherwise it is blank
 		boardList[0][0] = "____";
@@ -62,12 +66,22 @@ public class TextBoard {
 		boardList[5][5] = "____";
 	}
 
+	/**
+	 * Converts the array to a formatted string that is good for displaying
+	 * 
+	 * @return the formatted string
+	 */
 	public String stringConverter() {
 		String a = Arrays.deepToString(boardList).replace("], ", "]\n");
 		String formattedString = a.replace(",", "").replace("[", "").replace("]", "").trim();
 		return formattedString;
 	}
 
+	/**
+	 * Updates a student's location on the board
+	 * 
+	 * @param student the student whose location needs to be updated
+	 */
 	public void updateBoard(Student student) {
 		String toModify;
 		String modified;
