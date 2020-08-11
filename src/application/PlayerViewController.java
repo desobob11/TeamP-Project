@@ -19,7 +19,13 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.*;
 
-
+/**
+ * Controller for PlayerView.fxml
+ * 
+ * @author Arnuv Mayank
+ * @author Michaela Kasongo
+ *
+ */
 public class PlayerViewController {
 
 	//initializng all of the images and hashmaps necessary
@@ -84,30 +90,11 @@ public class PlayerViewController {
     private Label playerNetWorthText;
 
     
+    /**
+     * Updates this player view based on the student's stats
+     * @param student the student who we're updating
+     */
     public void updatePlayerView(Student student) {
-    	updateFields(student);
-    }
-    
-    private void updateCourses(Student student) {
-    	int rowCounter = -1;
-	//first clear all of the courses on the view
-    	this.coursesOwnedGrid.getChildren().clear();
-    	ArrayList<Course> studentCourses = student.getCoursesOwned();
-	//run through the student courses owned
-    	for (int i = 0; i < studentCourses.size(); i++) {
-    		Course course = studentCourses.get(i);
-    		ImageView coursePic = imageMap.get(course.getTileName());
-		//there are 4 courses per row, so once i exceeds a multiple of 4, we increment row counter
-    		rowCounter = (i % 4 == 0 ? rowCounter + 1 : rowCounter);
-		//set the index of the grid pane for where we'll add the course image
-    		GridPane.setRowIndex(coursePic, rowCounter);
-    		GridPane.setColumnIndex(coursePic, i % 4);
-		//add the image corresponding to the course
-        	coursesOwnedGrid.getChildren().addAll(coursePic);
-    	}
-    }
-    
-    private void updateFields(Student student) {
     	this.playerNameText.setText("Student " + student.getPlayerNumber());
     	this.playerMoneyText.setText("" + student.getPlayerMoney());
     	this.playerNetWorthText.setText("" + student.getNetWorth());
@@ -115,16 +102,40 @@ public class PlayerViewController {
     	updateCourses(student);
     }
     
-    void setPlayerMoneyText(int money) {
-    	this.playerMoneyText.setText(money + "");
+    /**
+     * Updates all the images of the courses based on the student's courses owned
+     * 
+     * @param student the student who we're updating
+     */
+    private void updateCourses(Student student) {
+    	int rowCounter = -1;
+    	//first clear all of the courses on the view
+    	this.coursesOwnedGrid.getChildren().clear();
+    	ArrayList<Course> studentCourses = student.getCoursesOwned();
+    	//run through the student courses owned
+    	for (int i = 0; i < studentCourses.size(); i++) {
+    		Course course = studentCourses.get(i);
+    		ImageView coursePic = imageMap.get(course.getTileName());
+    		//there are 4 courses per row, so once i exceeds a multiple of 4, we increment row counter
+    		rowCounter = (i % 4 == 0 ? rowCounter + 1 : rowCounter);
+    		//set the index of the grid pane for where we'll add the course image
+    		GridPane.setRowIndex(coursePic, rowCounter);
+    		GridPane.setColumnIndex(coursePic, i % 4);
+    		//add the image corresponding to the course
+        	coursesOwnedGrid.getChildren().addAll(coursePic);
+    	}
     }
 
+    /**
+     * Mandatory FXML method that is called once all JavaFX elements are added
+     * This initializes all of the necessary values for the controller to function
+     */
     @FXML
     void initialize() {
      	final double height = 500/3;
      	final double width = 400/3;
     	
-	//configuring images and image hashmaps
+     	//configuring images and image hashmaps
     	SOCI201ImageView.setFitHeight(height);
      	SOCI201ImageView.setFitWidth(width);
      	SOCI201ImageView.setImage(SOCI201Image);
