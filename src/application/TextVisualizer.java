@@ -88,6 +88,7 @@ public class TextVisualizer implements UI {
 
 	public String upgradeFacultyMenu(ArrayList<ArrayList<Course>> upgradableFaculties) {
 		System.out.println("Which faculty would you like to upgrade? Enter -1 if you don't want to upgrade any: ");
+		//iterate through the courses in their upgradable faculties and grab and display the faculties that they can upgrade
 		for (int i = 0; i < upgradableFaculties.size(); i++) {
 			System.out.println(i + ") " + upgradableFaculties.get(i).get(0).getFaculty());
 		}
@@ -128,7 +129,9 @@ public class TextVisualizer implements UI {
 	}
 
 	public int initialOptions(boolean ownsProperty, ArrayList<ArrayList<Course>> upgradableFaculties) {
+		//if they own property, then they have the option of selling it
 		if (ownsProperty) {
+			//if they have upgradable faculties, then they have the option of upgrading it
 			if (upgradableFaculties.size() != 0) {
 				System.out.println(
 						"Would you like to proceed with your turn (1), sell some courses (2), or upgrade a faculty (3)?");
@@ -181,6 +184,7 @@ public class TextVisualizer implements UI {
 		ArrayList<Course> coursesOwned = student.getCoursesOwned();
 
 		System.out.println("Courses owned: ");
+		//iterate through the courses owned and display the course name like this: 1) SOCI 201
 		for (int i = 0; i < coursesOwned.size(); i++) {
 			System.out.println((i + 1) + ") " + coursesOwned.get(i).getTileName());
 		}
