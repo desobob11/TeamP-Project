@@ -78,7 +78,6 @@ public class HumanStudent extends Student {
 	 */
 	@Override
 	public void studentSellCourse(UI UI, CourseList courseList) {
-		// TODO Auto-generated method stub
 		//will continue to prompt them to sell courses until they choose to stop or they have no more courses left to sell
 		while (sellACourse(UI, courseList)) {
 			;
@@ -107,7 +106,6 @@ public class HumanStudent extends Student {
 	 */
 	@Override
 	public String studentUpgradeFaculty(UI UI) {
-		// TODO Auto-generated method stub
 		return UI.upgradeFacultyMenu(this.getUpgradableFaculties());
 	}
 
