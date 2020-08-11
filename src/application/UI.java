@@ -41,6 +41,7 @@ public interface UI {
 	 * Displays a message that the student already owns this course
 	 * 
 	 * @param student the student who landed on the course
+	 * 
 	 * @param theCourse the course on which they landed
 	 */
 	void displayAlreadyOwned(Student student, Course theCourse);
@@ -48,7 +49,9 @@ public interface UI {
 	 * Displays a message that the course the student has landed on is owned by someone else, so they owe them a tutorial fee
 	 * 
 	 * @param ower the student who owes money
+	 * 
 	 * @param owner the student who will receive the money
+	 * 
 	 * @param amountOwed the amount owed
 	 */
 	void displayCourseOwnedMenu(Student ower, Student owner, int amountOwed);
@@ -56,7 +59,9 @@ public interface UI {
 	 * Displays a message that the ower successfully paid the owner the tutorial fee
 	 * 
 	 * @param ower the student who owed money
+	 * 
 	 * @param owner the student who received the money
+	 * 
 	 * @param amountOwed the amount transferred
 	 */
 	void displayTutorialPaidScreen(Student ower, Student owner, int amountOwed);
@@ -64,6 +69,7 @@ public interface UI {
 	 * Displays a message that the student has successfully sold a course
 	 * 
 	 * @param student the student who sold the course
+	 * 
 	 * @param aCourse the course they sold
 	 */
 	void displaySuccessfulSell(Student student, Course aCourse);
@@ -71,11 +77,12 @@ public interface UI {
 	 * Displays a message that the student has successfully bought a course
 	 * 
 	 * @param student the student who bought the course
+	 * 
 	 * @param aCourse the course they bought
 	 */
 	void displaySuccessfulPurchase(Student student, Course aCourse);
 	/**
-	 * Displays a message that a faculty has succesfully been upgraded
+	 * Displays a message that a faculty has successfully been upgraded
 	 * 
 	 * @param faculty the faculty that was upgraded
 	 */
@@ -194,6 +201,7 @@ public interface UI {
 	 * Displays that the student is in parking and how much they owe
 	 * 
 	 * @param student the student in parking
+	 * 
 	 * @param parking the Parking tile that triggered this call
 	 */
 	void displayInParking(Student student, Parking parking);
