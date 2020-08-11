@@ -14,6 +14,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import model.Student;
+
+/**
+ * This is the controller for the BoardView.fxml file
+ * 
+ * @author Arnuv Mayank
+ * @author Jamie MacDonald
+ *
+ */
 public class BoardViewController {
 	
 	//initializing all images and hashmaps for the images
@@ -113,20 +121,34 @@ public class BoardViewController {
 	    @FXML
 	    private ImageView diceImage;
 
+	    /**
+	     * Adds a player's image to a position on the grid
+	     * 
+	     * @param playerNumber the number of the player who's being added
+	     * 
+	     * @param playerPosition the position on the board to add them to
+	     */
 	    private void setImage(int playerNumber, int playerPosition) {
 		    //if the player position is -1 then they're out of the game so it should not update
 		    if (playerPosition != -1) {	
 		    	GridPane grid = tileMap.get(playerPosition);
 		    	ImageView pic = imageMap.get(playerNumber);
 		    	//set the location on the grid pane to add the player, then add them
-			GridPane.setRowIndex(pic, (playerNumber == 1 | playerNumber == 4 ? 0 : 1));
+		    	GridPane.setRowIndex(pic, (playerNumber == 1 | playerNumber == 4 ? 0 : 1));
 		    	GridPane.setColumnIndex(pic, (playerNumber == 1 | playerNumber == 2 ? 0: 1));
 		    	grid.getChildren().addAll(pic);
 		    }
 	    }
 	    
+	    /**
+	     * Removes a player's image from their previous position on the grid
+	     * 
+	     * @param playerNumber the number of the player who's being removed
+	     * 
+	     * @param previousPosition the position on the board to remove them from
+	     */
 	    private void clearImage(int playerNumber, int previousPosition) {
-		 //the previous position is -1 right when the game starts, so there's nothing to remove
+	    	 //the previous position is -1 right when the game starts, so there's nothing to remove
 	    	 if (previousPosition != -1) {
 	    		 GridPane grid = tileMap.get(previousPosition);
 	    		 grid.getChildren().remove(imageMap.get(playerNumber)); 
@@ -134,23 +156,43 @@ public class BoardViewController {
 	    	 } 
 	     }
 	   
+	    /**
+	     * Updates the student's location on the board
+	     * 
+	     * @param student the student whose location is being updated
+	     */
 	    public void updateBoard(Student student) {
-		//to update the board, you clear the image in their previous position and add the image in their new position
+	    	//to update the board, you clear the image in their previous position and add the image in their new position
 	    	clearImage(student.getPlayerNumber(), student.getPreviousPlayerPosition());
 	    	setImage(student.getPlayerNumber(), student.getPlayerPosition());    	
 	    }
 	    
+	    /**
+	     * Sets the board label to a given string
+	     * 
+	     * @param string the string that the label will display
+	     */
 	    public void setLabelText(String string) {
 	    	this.boardLabel.setText(string);
 	    }
 	    
+	    /**
+	     * Sets the button's text to a given string
+	     * 
+	     * @param string the string that the button will display
+	     */
 	    public void setButtonText(String string) {
 	    	this.boardButton.setVisible(true);
 	    	this.boardButton.setText(string);
 	    }
 	    
+	    /**
+	     * Waits until the user clicks the button to move forward
+	     * 
+	     * @param latch the latch from GUI that allows us to move back into the main thread upon click
+	     */
 	    public void waitForButtonPress(CountDownLatch latch) {
-		//when GUI needs to wait for a button press, we add a new event listener for that press
+	    	//when GUI needs to wait for a button press, we add a new event listener for that press
 	    	this.boardButton.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -164,14 +206,23 @@ public class BoardViewController {
 	    	});
 	    }
 	    
+	    /**
+	     * sets the dice image to that corresponding to what they rolled
+	     * 
+	     * @param roll what they rollled (1-6)
+	     */
 	    public void setDiceImage(int roll) {
 	    	diceImage.setImage(diceMap.get(roll));
 	    }
-	     
+	    
+	    /**
+	     * Mandatory FXML method that is called once all FXML elements are added
+	     * This initializes all the necessary values for the controller to function
+	     */
 	    @FXML
 	    void initialize() {
-            	//initializing the values for all of the hashmaps and pictures
-		tileMap.put(0, grid0);
+            //initializing the values for all of the hashmaps and pictures
+	    	tileMap.put(0, grid0);
 	        tileMap.put(1, grid1);
 	        tileMap.put(2, grid2);
 	        tileMap.put(3, grid3);
